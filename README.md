@@ -1,7 +1,7 @@
 # 16memo
 なかよし第五公園プロジェクト「16memo」のフロントエンドリポジトリ
 
-バックエンドは[こちら](https://github.com/pppeyo38/16memo_backend）
+バックエンドは[こちら](https://github.com/pppeyo38/16memo_backend)
 
 
 ## setup
@@ -24,10 +24,14 @@ http://localhost:3000 にアクセス🚀
 
 
 
+
+
 ## CSSの書き方
 
 本プロジェクトでは、CSS in JSを採用しています。
 使用ライブラリ[styled-components](https://styled-components.com/)
+
+
 
 
 
@@ -38,22 +42,34 @@ http://localhost:3000 にアクセス🚀
 AtomicDesignについては[こちら](https://bradfrost.com/blog/post/atomic-web-design/)(日本語でもっとわかりやすいサイトもあるかもしれない、、)
 
 
+
+
 ### Lv1.原子（Atoms）
 
 UIを構成する最小単位の要素  ex.ボタン、入力フォーム、ラベル等
+
+
 
 ### Lv2.分子（Molecules）
 
 Atomsを組み合わせて作られるコンポーネントの単位　ex.フォーム（入力フォームとラベルとボタンで成り立ってるイメージ）
 
+
+
 ### Lv3.生体（Organisms）
 
 複数のMoleculesを組み合わせた、具体的な機能を持つ部分　ex.ヘッダー、フッター等
+
+
 
 ### Lv4.テンプレート（Templates）
 
 ページの設計図、構成図のようなワイヤーフレーム的なもの
 
+
+
 ### Lv5.ページ（Pages）
 
 ユーザーが最終的に使うもの・見るもの
+
+
