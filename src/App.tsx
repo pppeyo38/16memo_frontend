@@ -1,16 +1,16 @@
+import { BrowserRouter } from "react-router-dom"
 import { createGlobalStyle } from "styled-components"
 import reset from "styled-reset"
 
-import { HeaderLayout } from "./components/templates/HeaderLayout"
-import { ComponentCatalog } from "./components/pages/ComponentCatalog"
+import { Router } from "./router/Router"
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <HeaderLayout>
-        <ComponentCatalog />
-      </HeaderLayout>
+      <BrowserRouter basename="/">
+        <Router />
+      </BrowserRouter>
     </>
   )
 }
