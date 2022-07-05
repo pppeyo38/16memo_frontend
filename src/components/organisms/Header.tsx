@@ -7,6 +7,6 @@ export const Header = () => {
 }
 
 const HeaderWrap = styled.header`
-	height: 2rem;
+	height: 3rem;
 	background-color: #B0E3FF;
 `;
