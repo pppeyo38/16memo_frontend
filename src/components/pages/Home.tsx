@@ -7,7 +7,7 @@ export const Home: FC = memo(() => {
 
   useEffect(() => {
     const fetchMemos = async () => {
-      const data = await fetch(`${import.meta.env.VITE_APP_API_URL}/`)
+      const data = await fetch(`${import.meta.env.VITE_APP_API_URL}/memos`)
       const memos = await data.json()
       setMemos(memos)
     }

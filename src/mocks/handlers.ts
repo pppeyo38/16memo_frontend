@@ -2,7 +2,7 @@ import { rest } from 'msw'
 import { Memo } from '../types/model'
 
 export const handlers = [
-  rest.get('/', (_, res, ctx) => {
+  rest.get('/memos', (_, res, ctx) => {
     const data: Memo[] = [
       {
         id: '1',
