@@ -1,12 +1,12 @@
 import styled from "styled-components"
 
-export const InputText = () => {
+export const Input = () => {
 	return (
-		<InputT value={'tokage'}></InputT>
+		<StyledInput></StyledInput>
 	)
 }
 
-const InputT = styled.input`
+const StyledInput = styled.input`
 	color: #cccccc;
 	font-family: futura;
   padding: 9px 13px;
