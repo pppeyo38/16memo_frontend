@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import { worker } from './mocks/browser'
+import { worker } from './api/browser'
 
 if (import.meta.env.DEV) {
   worker.start({
