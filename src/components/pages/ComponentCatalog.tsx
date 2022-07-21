@@ -5,6 +5,7 @@ import { ColorThumb } from "../atoms/ColorThumb"
 import { Modal } from "../atoms/Modal"
 import { useState, useEffect } from "react"
 import { MemoType } from "../../api/handler/memo/type"
+import { API_URL } from "../../api/endpoint"
 
 export const ComponentCatalog = () => {
   const { data, error, loading } = useGetTokageMemos("とかげ")
@@ -48,8 +49,8 @@ const useGetTokageMemos = (tagName?: string) => {
   useEffect(() => {
     const fetchData = async () => {
       const url = tagName
-        ? `http://localhost:3000/memos/search?tagName=${tagName}`
-        : "http://localhost:3000/memos/search"
+        ? `${API_URL}/memos/search?tagName=${tagName}`
+        : `${API_URL}/memos/search`
 
       try {
         await new Promise((resolve) => setTimeout(resolve, 1000)) // 挙動確認の為に sleep
