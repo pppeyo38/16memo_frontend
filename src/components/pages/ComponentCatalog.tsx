@@ -34,7 +34,7 @@ export const ComponentCatalog = () => {
 			<h2 style={{ margin: '20px' }}>コンポーネントの使用例カタログ的なページ</h2>
 			<HeaderIcon />
 			<Input></Input>
-			<Button text="アイウエオ青" size="s" link="/signup"></Button>
+			<Button text="アイウエオ青" size="l" link="/signup"></Button>
 			{
 				memos.map((memo) => (
 					<ColorThumb key={memo.id} colorCode={memo.colorCode} link="/signup"></ColorThumb>
