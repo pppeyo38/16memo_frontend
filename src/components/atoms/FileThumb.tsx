@@ -29,7 +29,6 @@ const { Roboto, Noto } = Font.fontFamily;
 const { regular } = Font.fontWeight;
 
 const LinkWrapper = styled(Link)`
-  display: inline-block;
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -42,7 +41,7 @@ const ColorCodeBox = styled.div<Props>`
   width: 100%;
   height: 100%;
   background-color: ${props => `#${props.colorCode}`};
-`
+  `
 
 const WhiteBox = styled.div`
   position: absolute;

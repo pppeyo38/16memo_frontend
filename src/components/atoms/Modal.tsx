@@ -4,20 +4,22 @@ import { ColorTheme } from "../../style/ColorTheme";
 
 type Props = {
   children: ReactNode;
+  OpenModalBtn: ReactNode;
 }
 
 export const Modal:FC<Props> = (props) => {
-  const { children } = props;
+  const { children, OpenModalBtn } = props;
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const clickExitIcon = () => {
     setIsOpen(!isOpen);
   }
 
-
   return(
     <>
-      <button onClick={clickExitIcon}>modal window</button>
+      <div onClick={clickExitIcon}>
+        {OpenModalBtn}
+      </div>
       <BackgroundModal isOpen={isOpen}>
         <StyledModalWrapper isOpen={isOpen}>
           <StyledExitBtnWrapper>
