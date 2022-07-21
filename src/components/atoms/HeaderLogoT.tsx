@@ -7,6 +7,6 @@ export const HeaderLogoTitle = () => {
 }
 
 const HeaderTitle = styled.h1`
-	color: #231815;
+	font-color: #231815;
 	font-family: futura;
 `;

@@ -19,8 +19,4 @@ export default App
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
-  a {
-    cursor: pointer;
-    text-decoration: none;
-  }
 `
