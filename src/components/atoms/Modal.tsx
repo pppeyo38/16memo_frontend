@@ -23,7 +23,9 @@ export const Modal:FC<Props> = (props) => {
     left: 0px;
     width: 100%;
     height: calc(100vh - 48px);
-    display: ${props => props.isOpen ? "block" : "none"};
+    /* display: ${props => props.isOpen ? "block" : "none"}; */
+    opacity: ${props => props.isOpen ? 1 : 0};
+    pointer-events: ${props => props.isOpen ? "all" : "none"};
     background-color: rgba(0,0,0,0.5);
   `
   const StyledModalWrapper = styled.div<{isOpen:boolean}>`
@@ -36,7 +38,7 @@ export const Modal:FC<Props> = (props) => {
     border-top-right-radius: 30px;
     /* アニメーションつけたいなと思って↓ */
     transform: ${props => props.isOpen ? "translateY(0)" : "translateY(100%)"};
-    transition: 0.3s;
+    transition: all 0.3s;
   `
 
   const StyledBtnWrapper = styled.div`
@@ -73,13 +75,13 @@ export const Modal:FC<Props> = (props) => {
     <>
       <button onClick={clickExitIcon}>modal window</button>
       <BackgroundModal isOpen={isOpen}>
+      </BackgroundModal>
         <StyledModalWrapper isOpen={isOpen}>
           <StyledBtnWrapper>
             <button onClick={clickExitIcon}></button>
           </StyledBtnWrapper>
           {children}
         </StyledModalWrapper>
-      </BackgroundModal>
     </>
   )
 }
