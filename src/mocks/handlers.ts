@@ -6,7 +6,7 @@ export const handlers = [
     const data: Memo[] = [
       {
         id: '1',
-        colorCode: '888888',
+        colorCode: '123456',
         comment: 'とかげかわいい',
         URL: 'https://www.san-x.co.jp/sumikko/',
         tagName: 'とかげ',
