@@ -8,7 +8,7 @@ import { MemoType } from "../../api/handler/memo/type"
 import { API_URL } from "../../api/endpoint"
 
 export const ComponentCatalog = () => {
-  const { data, error, loading } = useGetTokageMemos("とかげ")
+  const { data, error, loading } = useGetMemos("とかげ")
 
   if (error) {
     return <p>error: {error.message}</p>
@@ -36,7 +36,7 @@ export const ComponentCatalog = () => {
   )
 }
 
-const useGetTokageMemos = (tagName?: string) => {
+const useGetMemos = (tagName?: string) => {
   const [state, setState] = useState<{
     data: MemoType[]
     loading: boolean
