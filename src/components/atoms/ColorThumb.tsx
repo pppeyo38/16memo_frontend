@@ -3,10 +3,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
-import { Memo } from "../../types/model";
 
 type Props = {
-  // memo: Memo[]; // Memo[]
   colorCode: string;
   link: string;
 }
@@ -15,10 +13,9 @@ export const ColorThumb: FC<Props> = (props) => {
   const { colorCode, link } = props;
 
   return(
-    <Link to={link}>
-      {/* <StyledMemo colorCode={colorCode} link={link}>{colorCode}</StyledMemo> */}
+    <StyledMemoWrapper to={link}>
       <StyledMemo {...props}>{colorCode}</StyledMemo>
-    </Link>
+    </StyledMemoWrapper>
   )
 }
 
@@ -26,10 +23,14 @@ export const ColorThumb: FC<Props> = (props) => {
 const { white, black } = ColorTheme.palette;
 const { regular } = Font.fontWeight;
 //bgColorとcolor変える(背景色によって見えやすさ変わるから、、)
+const StyledMemoWrapper = styled(Link)`
+  display: inline-block;
+  width: 48%;
+`
 const StyledMemo = styled.div<Props>`
   display: flex;
   align-items: center;
-  width: 165px;
+  width: calc(100% - 13px);
   height: 60px;
   background-color: ${(props) => `#${props.colorCode}`};
   color: ${black};
