@@ -1,4 +1,4 @@
-import { setupWorker } from "msw";
-import { handlers } from "./handler/memo/handler";
+import { setupWorker } from "msw"
+import * as handler from "./handler"
 
-export const worker = setupWorker(...handlers);
+export const worker = setupWorker(...Object.values(handler))
