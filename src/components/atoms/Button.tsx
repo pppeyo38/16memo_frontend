@@ -10,109 +10,84 @@ type Props = {
   link: string;
 }
 
+let theme = {};
+
 export const Button: FC<Props> = (props) => {
   const { text, size, link } = props;
-  // const { blueGreen, lightGray, white, black } = ColorTheme.palette;
-  // const { regular, medium } = Font.fontWeight;
 
-  //style
-  // let border:string = "none";
-  // let bgColor:string = blueGreen;
-  // let width:string = "170px";
-  // let height:string = "50px";
-  // let color:string = "#fff";
-  // let fontSize:string = "14px";
-  // let fontWeight:string = "300";
-
-  // switch(size){
-  //   case "s":
-  //     width = "170px";
-  //     height = "50px";
-  //     fontSize = "16px";
-  //     fontWeight = regular;
-  //     border = "none";
-  //     bgColor = blueGreen;
-  //     color = white;
-  //     break;
-  //   case "m":
-  //     width = "180px";
-  //     height = "35px";
-  //     fontSize = "14px";
-  //     fontWeight = regular;
-  //     border = `1px solid ${black}`;
-  //     bgColor = lightGray;
-  //     color = black;
-  //     break;
-  //   default : 
-  //     width = "340px";
-  //     height = "40px";
-  //     fontSize = "16px";
-  //     fontWeight = medium;
-  //     border = "none";
-  //     bgColor = blueGreen;
-  //     color = white;
-  // }
-
-  // const StyledBtn = styled(Link)`
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   font-family: 'Noto Sans JP', sans-serif;
-  //   font-weight: ${fontWeight};
-  //   font-size: ${fontSize};
-  //   width: ${width};
-  //   height: ${height};
-  //   background-color: ${bgColor};
-  //   color: ${color};
-  //   border: ${border};
-  //   border-radius: 100vh;
-  //   text-decoration: none;
-  // `
+  switch(size){
+    case "s":
+      theme = s;
+      break;
+    case "m":
+      theme = m;
+      break;
+    case "l":
+      theme = l;
+      break;
+  }
 
 	return (
-    <Link to={link}>
-      <StyledBtn size={size}>
+    <StyledBtnWrapper>
+      <StyledBtn to={link} theme={theme}>
         { text }
       </StyledBtn>
-    </Link>
+    </StyledBtnWrapper>
 	)
 }
 
 const { blueGreen, lightGray, white, black } = ColorTheme.palette;
 const { regular, medium } = Font.fontWeight;
-const baseStyle = css`
+const { Noto } = Font.fontFamily;
+
+const StyledBtnWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`
+
+const StyledBtn = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Noto Sans JP', sans-serif;
+  width: ${props => props.theme.width};
+  height: ${props => props.theme.height};
+  font-family: ${Noto};
+  font-size: ${props => props.theme.fs};
+  font-weight: ${props => props.theme.fw};
+  color: ${props => props.theme.color};
+  background-color: ${props => props.theme.bg};
   border-radius: 100vh;
   text-decoration: none;
+  border: ${props => props.theme.border};
 `
 
-const smallStyle = css`
-  font-weight: ${regular};
-  font-size: 16px;
-  width: 170px;
-  height: 50px;
-  background-color: ${blueGreen};
-  color: ${white};
-  border: none;
-`
-const mediumStyle = css`
-/* TODO */
-`
+const s = {
+  fw: regular,
+  fs: "16px",
+  width: "43%",
+  height: "50px",
+  bg: blueGreen,
+  color: white,
+  border: "none"
+};
 
-const largeStyle = css`
-/* TODO */
-`
+const m = {
+  fw: regular,
+  fs: "14px",
+  width: "52%",
+  height: "35px",
+  bg: lightGray,
+  color: black,
+  border: `1px solid ${black}`
+};
 
-type StyledBtnProps = {
-  size : "s" | "m" | "l";
-}
-const StyledBtn = styled.div<StyledBtnProps>`
-  ${baseStyle}
-
-  ${({size}) => size === "s" && smallStyle}
-  ${({size}) => size === "m" && mediumStyle}
-  ${({size}) => size === "l" && largeStyle}
-`
+const l = {
+  fw: medium,
+  fs: "16px",
+  width: "100%",
+  height: "40px",
+  bg: blueGreen,
+  color: white,
+  border: "none"
+};

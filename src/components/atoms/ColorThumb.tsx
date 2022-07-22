@@ -3,10 +3,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
-import { Memo } from "../../types/model";
 
 type Props = {
-  // memo: Memo[]; // Memo[]
   colorCode: string;
   link: string;
 }
@@ -15,27 +13,33 @@ export const ColorThumb: FC<Props> = (props) => {
   const { colorCode, link } = props;
 
   return(
-    <Link to={link}>
-      {/* <StyledMemo colorCode={colorCode} link={link}>{colorCode}</StyledMemo> */}
+    <StyledMemoWrapper to={link}>
       <StyledMemo {...props}>{colorCode}</StyledMemo>
-    </Link>
+    </StyledMemoWrapper>
   )
 }
 
 
-const { white, black } = ColorTheme.palette;
+const { black } = ColorTheme.palette;
 const { regular } = Font.fontWeight;
-//bgColorとcolor変える(背景色によって見えやすさ変わるから、、)
+const { Noto } = Font.fontFamily;
+
+const StyledMemoWrapper = styled(Link)`
+  display: inline-block;
+  width: 48%;
+`
 const StyledMemo = styled.div<Props>`
   display: flex;
   align-items: center;
-  width: 165px;
+  width: 100%;
   height: 60px;
   background-color: ${(props) => `#${props.colorCode}`};
   color: ${black};
   padding-left: 13px;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: ${Noto};
   font-size: 16px;
   font-weight: ${regular};
   border-bottom-right-radius: 13px;
+  box-shadow: 0px 2px 3px 2px rgba(22, 22, 22, 0.15);
+  box-sizing: border-box;
 `
