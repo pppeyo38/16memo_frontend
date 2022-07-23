@@ -14,25 +14,23 @@ export const FileThumb: FC<Props> = (props) => {
   const {name, colorNum, mainColors} = props;
 
   return(
-    <>
-      <FileThumbContainer to={`/${name}`}>
-        <MainColorsWrapper>
-          {
-            mainColors.map((mainColor, index) => (
-              <BgMainColor key={index} theme={{width: 100/mainColors.length, bgColor: mainColor}}></BgMainColor>
-            ))
-          }
-        </MainColorsWrapper>
-        <FileTextWrapper>
-          <FileTitle>
-            {name}
-          </FileTitle>
-          <ColorNum>
-            {colorNum}<span>色</span>
-          </ColorNum>
-        </FileTextWrapper>
-      </FileThumbContainer>
-    </>
+    <FileThumbContainer to={`/${name}`}>
+      <MainColorsWrapper>
+        {
+          mainColors.map((mainColor, index) => (
+            <BgMainColor key={index} theme={{width: 100/mainColors.length, bgColor: mainColor}}></BgMainColor>
+          ))
+        }
+      </MainColorsWrapper>
+      <FileTextWrapper>
+        <FileTitle>
+          {name}
+        </FileTitle>
+        <ColorNum>
+          {colorNum}<span>色</span>
+        </ColorNum>
+      </FileTextWrapper>
+    </FileThumbContainer>
   )
 }
 
