@@ -55,7 +55,6 @@ const WhiteBox = styled.div`
   box-sizing: border-box;
   font-weight: ${regular};
   h2 {
-    margin-bottom: 7px;
     color: ${black};
     font-size: 16px;
     font-family: ${Noto};

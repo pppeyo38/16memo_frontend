@@ -14,7 +14,7 @@ export const ColorThumb: FC<Props> = (props) => {
 
   return(
     <StyledMemoWrapper to={link}>
-      <StyledMemo {...props}>{colorCode}</StyledMemo>
+      <StyledMemo {...props}># {colorCode}</StyledMemo>
     </StyledMemoWrapper>
   )
 }
