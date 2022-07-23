@@ -5,15 +5,15 @@ import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 
 type Props = {
+  memoId: number;
   colorCode: string;
   tagName: string;
-  link: string;
 }
 
 export const ColorMemoThumb: FC<Props> = (props) => {
-  const { link, colorCode, tagName } = props;
+  const { memoId, colorCode, tagName } = props;
   return(
-    <LinkWrapper to={link}>
+    <LinkWrapper to={`/memo/${memoId}`}>
       <ColorCodeBox {...props}>
         <WhiteBox>
           <h2>{tagName}</h2>

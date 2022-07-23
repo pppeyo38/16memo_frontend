@@ -5,31 +5,40 @@ import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 
 type Props = {
-  colorCode: string;
-  tagName: string;
-  link: string;
+  name: string;
+  colorNum: number;
+  mainColors: string[];
 }
 
-export const ColorMemoThumb: FC<Props> = (props) => {
-  const { link, colorCode, tagName } = props;
+export const FileThumb: FC<Props> = (props) => {
+  const {name, colorNum, mainColors} = props;
+
   return(
-    <LinkWrapper to={link}>
-      <ColorCodeBox {...props}>
-        <WhiteBox>
-          <h2>{tagName}</h2>
-          <p>#{colorCode}</p>
-        </WhiteBox>
-      </ColorCodeBox>
-    </LinkWrapper>
+    <FileThumbContainer to={`/${name}`}>
+      <MainColorsWrapper>
+        {
+          mainColors.map((mainColor, index) => (
+            <BgMainColor key={index} theme={{width: 100/mainColors.length, bgColor: mainColor}}></BgMainColor>
+          ))
+        }
+      </MainColorsWrapper>
+      <FileTextWrapper>
+        <FileTitle>
+          {name}
+        </FileTitle>
+        <ColorNum>
+          {colorNum}<span>色</span>
+        </ColorNum>
+      </FileTextWrapper>
+    </FileThumbContainer>
   )
 }
 
-const { white, black } = ColorTheme.palette;
+const { black, gray } = ColorTheme.palette;
 const { Roboto, Noto } = Font.fontFamily;
-const { regular } = Font.fontWeight;
 
-const LinkWrapper = styled(Link)`
-  position: relative;
+const FileThumbContainer = styled(Link)`
+  display: inline-block;
   overflow: hidden;
   width: 100%;
   height: 60px;
@@ -37,31 +46,40 @@ const LinkWrapper = styled(Link)`
   box-shadow: 0px 2px 3px 2px rgba(22, 22, 22, 0.15);
 `
 
-const ColorCodeBox = styled.div<Props>`
+const MainColorsWrapper = styled.div`
   width: 100%;
-  height: 100%;
-  background-color: ${props => `#${props.colorCode}`};
-  `
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
-const WhiteBox = styled.div`
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  width: calc(100% - 60px);
-  height: 55px;
-  padding: 10px 13px;
-  background-color: ${white};
+const BgMainColor = styled.div`
+  width: ${({theme}) => `${theme.width}%`};
+  height: 20px;
+  background-color: ${({theme}) => `#${theme.bgColor}`};
+`
+
+const FileTextWrapper = styled.div`
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px;
   box-sizing: border-box;
-  font-weight: ${regular};
-  h2 {
-    margin-bottom: 7px;
-    color: ${black};
-    font-size: 16px;
+`
+
+const FileTitle = styled.h2`
+  color: ${black};
+  font-family: ${Noto};
+`
+
+const ColorNum = styled.p`
+  color: ${gray};
+  font-size: 14px;
+  font-family: ${Roboto};
+  span {
     font-family: ${Noto};
-  }
-  p {
-    color: #9b9b9b;
-    font-size: 13px; 
-    font-family: ${Roboto};
   }
 `

@@ -44,6 +44,7 @@ const BackgroundModal = styled.div<{isOpen:boolean}>`
   background-color: rgba(0,0,0,0.5);
   pointer-events: ${props => props.isOpen ? "all" : "none"};
   transition: 0.3s;
+  z-index: 10;
 `
 
 const StyledModalWrapper = styled.div<{isOpen:boolean}>`

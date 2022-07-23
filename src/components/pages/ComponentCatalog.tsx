@@ -6,19 +6,27 @@ import { useState, useEffect } from "react";
 import { MemoType } from "../../api/handler/memo/type";
 import { API_URL } from "../../api/endpoint";
 import { ColorMemoThumb } from "../atoms/ColorMemoThumb";
+import { FileWithMemoInfoType } from "../../api/handler/file/type";
+import { FileThumb } from "../atoms/FileThumb";
 import { Input } from '@chakra-ui/react';
 
 export const ComponentCatalog = () => {
   const { data, error, loading } = useGetMemos("とかげ");
+  const { filesData, filesError, filesLoading } = useGetFiles("すみっこ");
+
+  console.log(filesData);
+
 	
 	//モーダルを開くトリガーをOpenModalBtnに渡す
 	const OpenModalBtn = (<button>open modal</button>);
 
   if (error) {
     return <p>error: {error.message}</p>
+  }else if (filesError){
+    return <p>error: {filesError.message}</p>
   }
 
-	if(loading){
+	if(loading && filesLoading){
 		return <p>loading</p>;
 	}
 
@@ -33,7 +41,7 @@ export const ComponentCatalog = () => {
 			<Button text="アイウエオ青" size="s" link="/signup"></Button>
 			<div>
 				{data.map((memo) => (
-					<ColorThumb key={memo.id} colorCode={memo.colorCode} link="/signup" />
+					<ColorThumb key={memo.id} memoId={memo.id} colorCode={memo.colorCode}/>
 				))}
 			</div>
 			<Modal OpenModalBtn = {OpenModalBtn}>
@@ -41,13 +49,19 @@ export const ComponentCatalog = () => {
 			</Modal>
 			{
 				data.map((memo) => (
-					<ColorMemoThumb key={memo.id} colorCode={memo.colorCode} tagName={memo.tagName} link={`/memo/${memo.id}`}></ColorMemoThumb>
+					<ColorMemoThumb key={memo.id} memoId={memo.id} colorCode={memo.colorCode} tagName={memo.tagName}></ColorMemoThumb>
 				))
 			}
+      {
+        filesData.map((file) => (
+          <FileThumb key={file.id} name={file.name} colorNum={file.memo.colorNum} mainColors={file.memo.mainColor}></FileThumb>
+        ))
+      }
 		</>
   )
 }
 
+//メモ情報取得メモ情報取得
 const useGetMemos = (tagName?: string) => {
   const [state, setState] = useState<{
     data: MemoType[]
@@ -73,6 +87,41 @@ const useGetMemos = (tagName?: string) => {
         if (error instanceof Error) {
           const err = error
           setState((prev) => ({ ...prev, error: err, loading: false }))
+        }
+      }
+    }
+    fetchData()
+  }, [])
+
+  return state;
+}
+
+//ファイル情報取得
+const useGetFiles = (tagName?: string) => {
+  const [state, setState] = useState<{
+    filesData: FileWithMemoInfoType[]
+    filesLoading: boolean
+    filesError?: Error
+  }>({
+    filesData: [],
+    filesLoading: true,
+  })
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const url = tagName
+        ? `${API_URL}/files`
+        : `${API_URL}/files`
+
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 1000)) // 挙動確認の為に sleep
+        const res = await fetch(url)
+        const filesData = await res.json()
+        setState({ filesData, filesLoading: false })
+      } catch (filesError: unknown) {
+        if (filesError instanceof Error) {
+          const err = filesError
+          setState((prev) => ({ ...prev, filesError: err, loading: false }))
         }
       }
     }
