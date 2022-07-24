@@ -67,6 +67,7 @@ const FileTextWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 13px;
+  background-color: #fff;
   box-sizing: border-box;
 `
 
