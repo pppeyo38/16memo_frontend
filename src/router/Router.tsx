@@ -15,6 +15,7 @@ import { SettingDeactivate } from "../components/pages/SettingDeactivate"
 import { MemoAdd } from "../components/pages/MemoAdd"
 import { MemoEdit } from "../components/pages/MemoEdit"
 import { Login } from "../components/pages/Login"
+import { SearchResult } from "../components/pages/SearchResult"
 
 
 export const Router = memo(() => {
@@ -46,6 +47,10 @@ export const Router = memo(() => {
 				path="/search"
 				element={<HeaderLayout><Search /></HeaderLayout>}
 			/>
+			{/* <Route
+				path="/search2"
+				element={<HeaderLayout><SearchResult /></HeaderLayout>}
+			/> */}
 			<Route
 				path="/setting"
 				element={<HeaderLayout><Setting /></HeaderLayout>}

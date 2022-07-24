@@ -5,7 +5,7 @@ import { Font } from "../../style/Font";
 import search from "../../images/search.svg";
 
 export const SearchForm = () => {
-  const [text, setText] = useState<string>("");
+  let [text, setText] = useState<string>("");
   const onChangeText = (e: ChangeEvent<HTMLInputElement>) => setText(e.target.value);
 
   //Enterキー押した時の処理
@@ -13,9 +13,13 @@ export const SearchForm = () => {
     if (e.nativeEvent.isComposing || e.key !== 'Enter'){
       return
     }else{
+      let firstText = text.slice(0,1);
+      if(firstText === "#"){
+        //一文字目の#は削除する
+        text = text.slice(1);
+      }
+      window.location.href = `/search?q=${text}`;
       setText("");
-      //検索結果のURLどうするかをまだ話し合ってなかったので、ひとまず/searchに飛ぶようにした
-      window.location.href = '/search';
     }
   }
 
