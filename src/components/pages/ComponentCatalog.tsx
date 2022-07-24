@@ -9,6 +9,7 @@ import { ColorMemoThumb } from "../atoms/ColorMemoThumb";
 import { FileWithMemoInfoType } from "../../api/handler/file/type";
 import { FileThumb } from "../atoms/FileThumb";
 import { Input } from '@chakra-ui/react';
+import { SettingLink } from "../atoms/SettingLink";
 
 export const ComponentCatalog = () => {
   const { data, error, loading } = useGetMemos("とかげ");
@@ -18,7 +19,7 @@ export const ComponentCatalog = () => {
 
 	
 	//モーダルを開くトリガーをOpenModalBtnに渡す
-	const OpenModalBtn = (<button>open modal</button>);
+	const OpenModalBtn = (<HeaderIcon />);
 
   if (error) {
     return <p>error: {error.message}</p>
@@ -57,6 +58,7 @@ export const ComponentCatalog = () => {
           <FileThumb key={file.id} name={file.name} colorNum={file.memo.colorNum} mainColors={file.memo.mainColor}></FileThumb>
         ))
       }
+      <SettingLink label="ニックネーム" content="とかげかわいい" link="/setting/nickname" />
 		</>
   )
 }
