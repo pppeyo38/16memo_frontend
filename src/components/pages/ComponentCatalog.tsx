@@ -11,6 +11,7 @@ import { FileThumb } from "../atoms/FileThumb";
 import { Input } from '@chakra-ui/react';
 import { SearchForm } from "../atoms/SearchForm";
 import styled from "styled-components";
+import { SettingLink } from "../atoms/SettingLink";
 
 export const ComponentCatalog = () => {
   const { data, error, loading } = useGetMemos("とかげ");
@@ -20,7 +21,7 @@ export const ComponentCatalog = () => {
 
 	
 	//モーダルを開くトリガーをOpenModalBtnに渡す
-	const OpenModalBtn = (<button>open modal</button>);
+	const OpenModalBtn = (<HeaderIcon />);
 
   if (error) {
     return <p>error: {error.message}</p>
@@ -59,6 +60,8 @@ export const ComponentCatalog = () => {
       }
       <SearchForm />
 		</CatalogContainer>
+      <SettingLink label="ニックネーム" content="とかげかわいい" link="/setting/nickname" />
+		</>
   )
 }
 
