@@ -9,6 +9,8 @@ import { ColorMemoThumb } from "../atoms/ColorMemoThumb";
 import { FileWithMemoInfoType } from "../../api/handler/file/type";
 import { FileThumb } from "../atoms/FileThumb";
 import { Input } from '@chakra-ui/react';
+import { SearchForm } from "../atoms/SearchForm";
+import styled from "styled-components";
 import { SettingLink } from "../atoms/SettingLink";
 
 export const ComponentCatalog = () => {
@@ -32,25 +34,23 @@ export const ComponentCatalog = () => {
 	}
 
   return (
-		<>
+		<CatalogContainer>
 			<h2 style={{ margin: "20px" }}>
 				コンポーネントの使用例カタログ的なページ
 			</h2>
       <Input variant="white" size='md' placeholder="メールアドレス" />
-      <Input variant="filled" size='md' placeholder="#色名を入力" />
+      <Input variant="filled" size='md' placeholder="#色名を入力" focusBorderColor="none" />
 			<HeaderIcon />
-			<Button text="アイウエオ青" size="s" link="/signup"></Button>
-			<div>
-				{data.map((memo) => (
-					<ColorThumb key={memo.id} memoId={memo.id} colorCode={memo.colorCode}/>
-				))}
-			</div>
+			<Button text="アイウエオ青" size="s" link="/signup" />
+      {data.map((memo) => (
+        <ColorThumb key={memo.id} memoId={memo.id} colorCode={memo.colorCode}/>
+      ))}
 			<Modal OpenModalBtn = {OpenModalBtn}>
 				<p>「ファイルを選択」とかが入る</p>
 			</Modal>
 			{
 				data.map((memo) => (
-					<ColorMemoThumb key={memo.id} memoId={memo.id} colorCode={memo.colorCode} tagName={memo.tagName}></ColorMemoThumb>
+					<ColorMemoThumb key={memo.id} memoId={memo.id} colorCode={memo.colorCode} tagName={memo.tagName} />
 				))
 			}
       {
@@ -58,10 +58,18 @@ export const ComponentCatalog = () => {
           <FileThumb key={file.id} name={file.name} colorNum={file.memo.colorNum} mainColors={file.memo.mainColor}></FileThumb>
         ))
       }
+      <SearchForm />
+		</CatalogContainer>
       <SettingLink label="ニックネーム" content="とかげかわいい" link="/setting/nickname" />
 		</>
   )
 }
+
+const CatalogContainer = styled.div`
+  width: 100%;
+  background-color: #f2f2f2;
+  padding: 47px 0 133px 0;
+`
 
 //メモ情報取得メモ情報取得
 const useGetMemos = (tagName?: string) => {
