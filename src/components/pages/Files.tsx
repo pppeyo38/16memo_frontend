@@ -1,11 +1,7 @@
 import type { FC } from "react";
 
-type Props = {}
+type Props = {};
 
 export const Files: FC<Props> = (props) => {
-  return (
-    <div>
-      /
-    </div>
-  )
-}
+  return <div>/</div>;
+};

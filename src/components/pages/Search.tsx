@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 
-type Props = {}
+type Props = {};
 
 export const Search: FC<Props> = (props) => {
   const [searchParams] = useSearchParams();
@@ -14,4 +14,4 @@ export const Search: FC<Props> = (props) => {
       <h1> result {tagName}</h1>
     </>
   );
-}
+};

@@ -1,11 +1,7 @@
 import type { FC } from "react";
 
-type Props = {}
+type Props = {};
 
 export const Setting: FC<Props> = (props) => {
-  return (
-    <div>
-      /setting
-    </div>
-  )
-}
+  return <div>/setting</div>;
+};

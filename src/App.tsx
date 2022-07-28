@@ -1,8 +1,8 @@
-import { BrowserRouter } from "react-router-dom"
-import { createGlobalStyle } from "styled-components"
-import reset from "styled-reset"
+import { BrowserRouter } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
 
-import { Router } from "./router/Router"
+import { Router } from "./router/Router";
 
 function App() {
   return (
@@ -12,10 +12,10 @@ function App() {
         <Router />
       </BrowserRouter>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -23,4 +23,4 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
     text-decoration: none;
   }
-`
+`;

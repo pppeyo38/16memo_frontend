@@ -1,11 +1,7 @@
 import type { FC } from "react";
 
-type Props = {}
+type Props = {};
 
 export const SettingDeactivate: FC<Props> = (props) => {
-  return (
-    <div>
-      /setting/deactivate
-    </div>
-  )
-}
+  return <div>/setting/deactivate</div>;
+};
