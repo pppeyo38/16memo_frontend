@@ -2,11 +2,7 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
   ModalCloseButton,
-  Button,
 } from '@chakra-ui/react'
 import { useDisclosure } from '@chakra-ui/react'
 import { ReactNode, FC } from "react"
@@ -15,8 +11,8 @@ import { ColorTheme } from "../../style/ColorTheme"
 import { Font } from "../../style/Font"
 
 type Prop = {
-  memoId?: number;
-  fileId?: number;
+  memoId ?: number;
+  fileId ?: number;
   variant : "logout" | "fileDelete" | "memoDelete";
   children : ReactNode; //ポップアップが開くトリガー
 }
