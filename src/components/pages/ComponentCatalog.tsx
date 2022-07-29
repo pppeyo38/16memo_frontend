@@ -1,4 +1,4 @@
-import { HeaderIcon } from "../molecules/HeaderIcon";
+import { IromemoIcon } from "../atoms/IromemoIcon";
 import { Button } from "../atoms/Button";
 import { ColorThumb } from "../atoms/ColorThumb";
 import { Modal } from "../atoms/Modal";
@@ -20,7 +20,7 @@ export const ComponentCatalog = () => {
   console.log(filesData);
 
   //モーダルを開くトリガーをOpenModalBtnに渡す
-  const OpenModalBtn = <HeaderIcon />;
+  const OpenModalBtn = <IromemoIcon />;
 
   if (error) {
     return <p>error: {error.message}</p>;
@@ -45,7 +45,7 @@ export const ComponentCatalog = () => {
           placeholder="#色名を入力"
           focusBorderColor="none"
         />
-        <HeaderIcon />
+        <IromemoIcon />
         <Button text="アイウエオ青" size="s" link="/signup" />
         {data.map((memo) => (
           <ColorThumb

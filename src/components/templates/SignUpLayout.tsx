@@ -4,20 +4,14 @@ import { Stack, Input } from "@chakra-ui/react";
 import styled from "styled-components";
 import { Font } from "../../style/Font";
 import { Button } from "../atoms/Button";
-import { InputForm } from "../atoms/Input";
+import { IromemoIcon } from "../atoms/IromemoIcon";
 
 export const SignUpLayout = () => {
-  const [inputPW, setInputPW] = useState("");
-  const [inputMail, setInputMail] = useState("");
-
-  const handleInpuPWChange = (e) => setInputPW(e.target.value);
-  const handleInputMailChange = (e) => setInputMail(e.target.value);
-
   return (
     <Div100vh style={GridStyle}>
       <Container>
-        <Stack spacing="13px" alignItems="center">
-          <Logo></Logo>
+        <Stack spacing="23px" alignItems="center">
+          <IromemoIcon />
           <Heading>アカウントを作成</Heading>
         </Stack>
         <Stack spacing="13px" alignItems="center" mt="13px">
@@ -26,14 +20,12 @@ export const SignUpLayout = () => {
             size="md"
             style={{ width: "340px" }}
             placeholder="メールアドレス"
-            onChange={handleInputMailChange}
           />
           <Input
             variant="white"
             size="md"
             style={{ width: "340px" }}
             placeholder="パスワード"
-            onChange={handleInpuPWChange}
           />
         </Stack>
         <Stack spacing="13px" alignItems="center" mt="26px">
