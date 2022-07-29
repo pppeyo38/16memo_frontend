@@ -6,5 +6,6 @@ export const ColorTheme = {
     gray: '#9B9B9B',
 		white: '#FFFFFF',
 		black: '#161616',
+    red: '#FD4A4A'
   }
 }

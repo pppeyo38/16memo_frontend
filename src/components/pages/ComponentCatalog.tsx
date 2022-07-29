@@ -1,7 +1,6 @@
 import { HeaderIcon } from "../molecules/HeaderIcon";
 import { Button } from "../atoms/Button";
 import { ColorThumb } from "../atoms/ColorThumb";
-import { Modal } from "../atoms/Modal";
 import { useState, useEffect } from "react";
 import { MemoType } from "../../api/handler/memo/type";
 import { API_URL } from "../../api/endpoint";
@@ -12,15 +11,11 @@ import { Input } from "@chakra-ui/react";
 import { SearchForm } from "../atoms/SearchForm";
 import styled from "styled-components";
 import { SettingLink } from "../atoms/SettingLink";
+import { Popup } from "../molecules/Popup";
 
 export const ComponentCatalog = () => {
   const { data, error, loading } = useGetMemos("とかげ");
-  const { filesData, filesError, filesLoading } = useGetFiles("すみっこ");
-
-  console.log(filesData);
-
-  //モーダルを開くトリガーをOpenModalBtnに渡す
-  const OpenModalBtn = <HeaderIcon />;
+  const { filesData, filesError, filesLoading } = useGetFiles();
 
   if (error) {
     return <p>error: {error.message}</p>;
@@ -33,62 +28,35 @@ export const ComponentCatalog = () => {
   }
 
   return (
-    <>
-      <CatalogContainer>
-        <h2 style={{ margin: "20px" }}>
-          コンポーネントの使用例カタログ的なページ
-        </h2>
-        <Input variant="white" size="md" placeholder="メールアドレス" />
-        <Input
-          variant="filled"
-          size="md"
-          placeholder="#色名を入力"
-          focusBorderColor="none"
-        />
-        <HeaderIcon />
-        <Button text="アイウエオ青" size="s" link="/signup" />
-        {data.map((memo) => (
-          <ColorThumb
-            key={memo.id}
-            memoId={memo.id}
-            colorCode={memo.colorCode}
-          />
-        ))}
-        <Modal OpenModalBtn={OpenModalBtn}>
-          <p>「ファイルを選択」とかが入る</p>
-        </Modal>
-        {data.map((memo) => (
-          <ColorMemoThumb
-            key={memo.id}
-            memoId={memo.id}
-            colorCode={memo.colorCode}
-            tagName={memo.tagName}
-          />
-        ))}
-        {filesData.map((file) => (
-          <FileThumb
-            key={file.id}
-            name={file.name}
-            colorNum={file.memo.colorNum}
-            mainColors={file.memo.mainColor}
-          ></FileThumb>
-        ))}
-        <SearchForm />
-      </CatalogContainer>
-      <SettingLink
-        label="ニックネーム"
-        content="とかげかわいい"
-        link="/setting/nickname"
-      />
-    </>
-  );
-};
-
-const CatalogContainer = styled.div`
-  width: 100%;
-  background-color: #f2f2f2;
-  padding: 47px 0 133px 0;
-`;
+		<>
+			<h2 style={{ margin: "20px" }}>
+				コンポーネントの使用例カタログ的なページ
+			</h2>
+      <Input variant="white" size='md' placeholder="メールアドレス" />
+      <Input variant="filled" size='md' placeholder="#色名を入力" />
+			<HeaderIcon />
+			<Button text="アイウエオ青" size="s" link="/signup"></Button>
+			<div>
+				{data.map((memo) => (
+					<ColorThumb key={memo.id} memoId={memo.id} colorCode={memo.colorCode}/>
+				))}
+			</div>
+			{
+				data.map((memo) => (
+          <Popup key={memo.id} variant="logout">
+            <ColorMemoThumb key={memo.id} memoId={memo.id} colorCode={memo.colorCode} tagName={memo.tagName} deleteMode={true}></ColorMemoThumb>
+          </Popup>
+				))
+			}
+      {
+        filesData.map((file) => (
+            <FileThumb key={file.id} name={file.name} colorNum={file.memo.colorNum} mainColors={file.memo.mainColor}></FileThumb>
+        ))
+      }
+      <SettingLink label="ニックネーム" content="とかげかわいい" link="/setting/nickname" />
+		</>
+  )
+}
 
 //メモ情報取得メモ情報取得
 const useGetMemos = (tagName?: string) => {
@@ -104,8 +72,8 @@ const useGetMemos = (tagName?: string) => {
   useEffect(() => {
     const fetchData = async () => {
       const url = tagName
-        ? `${API_URL}/memos/search?tagName=${tagName}`
-        : `${API_URL}/memos/search`;
+        ? `${API_URL}/memos/search?tag_name=${tagName}`
+        : `${API_URL}/memos/search`
 
       try {
         await new Promise((resolve) => setTimeout(resolve, 1000)); // 挙動確認の為に sleep
@@ -126,7 +94,7 @@ const useGetMemos = (tagName?: string) => {
 };
 
 //ファイル情報取得
-const useGetFiles = (tagName?: string) => {
+const useGetFiles = () => {
   const [state, setState] = useState<{
     filesData: FileWithMemoInfoType[];
     filesLoading: boolean;
@@ -138,7 +106,7 @@ const useGetFiles = (tagName?: string) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = tagName ? `${API_URL}/files` : `${API_URL}/files`;
+      const url = `${API_URL}/files`
 
       try {
         await new Promise((resolve) => setTimeout(resolve, 1000)); // 挙動確認の為に sleep
