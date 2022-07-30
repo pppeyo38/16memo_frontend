@@ -1,12 +1,24 @@
 import { useState } from "react";
 import Div100vh from "react-div-100vh";
-import { Stack, Input } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import styled from "styled-components";
 import { Font } from "../../style/Font";
-import { Button } from "../atoms/Button";
 import { IromemoIcon } from "../atoms/IromemoIcon";
+import { MailPwForm } from "../organisms/Auth/MailPwForm";
+import { NameForm } from "../organisms/Auth/NameForm";
+
+import { useSignUpData } from "../../hooks/useSignUpData";
 
 export const SignUpLayout = () => {
+  const [isNext, setIsNext] = useState(false);
+  const { data, setData } = useSignUpData();
+  const onClickNext = () => {
+    setIsNext(true);
+  };
+  const onClickSignUp = () => {
+    console.log(data);
+  };
+
   return (
     <Div100vh style={GridStyle}>
       <Container>
@@ -14,31 +26,26 @@ export const SignUpLayout = () => {
           <IromemoIcon />
           <Heading>アカウントを作成</Heading>
         </Stack>
-        <Stack spacing="13px" alignItems="center" mt="13px">
-          <Input
-            variant="white"
-            size="md"
-            style={{ width: "340px" }}
-            placeholder="メールアドレス"
+        {isNext ? (
+          <NameForm
+            onClickSignUp={onClickSignUp}
+            setData={setData}
+            data={data}
           />
-          <Input
-            variant="white"
-            size="md"
-            style={{ width: "340px" }}
-            placeholder="パスワード"
+        ) : (
+          <MailPwForm
+            onClickNext={onClickNext}
+            setData={setData}
+            data={data}
+            isPwForget={true}
           />
-        </Stack>
-        <Stack spacing="13px" alignItems="center" mt="26px">
-          <Button text="次へ" size="l" link="/" />
-          <Button text="ログイン" size="m" link="/login" />
-        </Stack>
+        )}
       </Container>
     </Div100vh>
   );
 };
 
-const { Noto } = Font.fontFamily;
-const { bold } = Font.fontWeight;
+const { fontWeight, fontFamily } = Font;
 
 const GridStyle = {
   backgroundColor: "#F2F2F2",
@@ -54,14 +61,8 @@ const Container = styled.section`
   margin-top: 70px;
 `;
 
-const Logo = styled.div`
-  background-color: #d9d9d9;
-  width: 180px;
-  height: 180px;
-`;
-
 const Heading = styled.h1`
-  font-family: Noto;
-  font-weight: bold;
+  font-family: ${fontFamily.Noto};
+  font-weight: ${fontWeight.bold};
   font-size: 24px;
 `;
