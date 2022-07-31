@@ -11,12 +11,12 @@ import { useSignUpData } from "../../hooks/useSignUpData";
 
 export const SignUpLayout = () => {
   const [isNext, setIsNext] = useState(false);
-  const { data, setData } = useSignUpData();
+  const { data, setData, signup } = useSignUpData();
   const onClickNext = () => {
     setIsNext(true);
   };
   const onClickSignUp = () => {
-    console.log(data);
+    signup();
   };
 
   return (

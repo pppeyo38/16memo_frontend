@@ -17,5 +17,10 @@ const initialData: Data = {
 export const useSignUpData = () => {
   const [data, setData] = useState<Data>(initialData);
 
-  return { data, setData };
+  const signup = () => {
+    console.log("サインアップ");
+    console.log(data);
+  };
+
+  return { data, setData, signup };
 };
