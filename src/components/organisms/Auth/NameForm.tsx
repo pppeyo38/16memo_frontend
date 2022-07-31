@@ -2,7 +2,7 @@ import { FC, Dispatch, SetStateAction } from "react";
 import { Stack, Input } from "@chakra-ui/react";
 import { Button } from "../../atoms/Button";
 import { PrimaryButton } from "../../atoms/PrimaryButton";
-import { Data } from "../../../hooks/useSignUpData";
+import { Data } from "../../../hooks/useSignUp";
 
 type Props = {
   onClickSignUp: () => void;

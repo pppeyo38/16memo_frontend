@@ -5,7 +5,7 @@ import { Button } from "../../atoms/Button";
 import { PrimaryButton } from "../../atoms/PrimaryButton";
 import styled from "styled-components";
 
-import { Data } from "../../../hooks/useSignUpData";
+import { Data } from "../../../hooks/useSignUp";
 
 type Props = {
   isPwForget?: boolean;

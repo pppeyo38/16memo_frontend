@@ -17,7 +17,7 @@ const initialData: Data = {
   createdID: "",
 };
 
-export const useSignUpData = () => {
+export const useSignUp = () => {
   const navigate = useNavigate();
   const { setLoginUser } = useLoginUser();
   const [data, setData] = useState<Data>(initialData);

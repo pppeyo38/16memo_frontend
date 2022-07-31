@@ -7,11 +7,11 @@ import { IromemoIcon } from "../atoms/IromemoIcon";
 import { MailPwForm } from "../organisms/Auth/MailPwForm";
 import { NameForm } from "../organisms/Auth/NameForm";
 
-import { useSignUpData } from "../../hooks/useSignUpData";
+import { useSignUp } from "../../hooks/useSignUp";
 
 export const SignUpLayout = () => {
   const [isNext, setIsNext] = useState(false);
-  const { data, setData, signup } = useSignUpData();
+  const { data, setData, signup } = useSignUp();
   const onClickNext = () => {
     setIsNext(true);
   };
