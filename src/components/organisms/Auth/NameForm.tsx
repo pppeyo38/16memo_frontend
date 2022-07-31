@@ -44,7 +44,12 @@ export const NameForm: FC<Props> = (props) => {
         />
       </Stack>
       <Stack spacing="13px" alignItems="center" mt="26px">
-        <PrimaryButton onClick={onClickSignUp}>アカウントを作成</PrimaryButton>
+        <PrimaryButton
+          onClick={onClickSignUp}
+          disabled={data.nickname === "" || data.createdID === ""}
+        >
+          アカウントを作成
+        </PrimaryButton>
         <Button text="ログイン" size="m" link="/login" />
       </Stack>
     </div>

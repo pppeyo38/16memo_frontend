@@ -5,24 +5,30 @@ import { Font } from "../../style/Font";
 
 type Props = {
   children: ReactNode;
+  disabled: boolean;
   onClick: () => void;
 };
 
 export const PrimaryButton: FC<Props> = memo((props) => {
-  const { children, onClick } = props;
+  const { children, disabled, onClick } = props;
 
-  return <Button onClick={onClick}>{children}</Button>;
+  return (
+    <Button disabled={disabled} onClick={onClick}>
+      {children}
+    </Button>
+  );
 });
 
 const { palette } = ColorTheme;
 const { fontWeight, fontFamily } = Font;
 
-const Button = styled.button`
+const Button = styled.button<{ disabled: boolean }>`
   width: 340px;
   height: 40px;
   border-radius: 20px;
   font-family: ${fontFamily.Noto};
   font-weight: ${fontWeight.bold};
   color: ${palette.white};
-  background-color: ${palette.blueGreen};
+  background-color: ${({ disabled }) =>
+    disabled ? "#93D6D5" : `${palette.blueGreen}`};
 `;

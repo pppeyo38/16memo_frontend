@@ -52,7 +52,12 @@ export const MailPwForm: FC<Props> = (props) => {
         )}
       </Stack>
       <Stack spacing="13px" alignItems="center" mt="26px">
-        <PrimaryButton onClick={onClickNext}>次へ</PrimaryButton>
+        <PrimaryButton
+          onClick={onClickNext}
+          disabled={data.email === "" || data.password === ""}
+        >
+          次へ
+        </PrimaryButton>
         <Button text="ログイン" size="m" link="/login" />
       </Stack>
     </div>
