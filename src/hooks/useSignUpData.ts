@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import { API_URL } from "../api/endpoint";
+import { useNavigate } from "react-router-dom";
+import { useLoginUser } from "./useLoginUser";
 
 export type Data = {
   email: string;
@@ -17,11 +18,17 @@ const initialData: Data = {
 };
 
 export const useSignUpData = () => {
+  const navigate = useNavigate();
+  const { setLoginUser } = useLoginUser();
   const [data, setData] = useState<Data>(initialData);
 
   const signup = () => {
     axios.post("http://localhost:3200/signup", data).then((response) => {
-      console.log("response body:", response.data);
+      if (response.data) {
+        const isAdmin = true;
+        setLoginUser({ ...response.data, isAdmin });
+        navigate("/");
+      }
     });
   };
 

@@ -3,14 +3,17 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 import { Router } from "./router/Router";
+import { LoginUserProvider } from "./providers/LoginUserProvider";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <BrowserRouter basename="/">
-        <Router />
-      </BrowserRouter>
+      <LoginUserProvider>
+        <BrowserRouter basename="/">
+          <Router />
+        </BrowserRouter>
+      </LoginUserProvider>
     </>
   );
 }
