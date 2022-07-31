@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useLogin } from "../../hooks/useLogin";
 import Div100vh from "react-div-100vh";
 import { Stack, Input } from "@chakra-ui/react";
 import styled from "styled-components";
@@ -18,6 +19,7 @@ const initialData: Data = {
 };
 
 export const LoginLayout = () => {
+  const { login } = useLogin();
   const [data, setData] = useState<Data>(initialData);
 
   const onChangeMail = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +33,7 @@ export const LoginLayout = () => {
   };
 
   const onClickLogin = () => {
-    console.log("ログイン");
+    login(data);
   };
 
   return (
