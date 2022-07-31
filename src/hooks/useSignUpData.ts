@@ -1,4 +1,6 @@
 import { useState } from "react";
+import axios from "axios";
+import { API_URL } from "../api/endpoint";
 
 export type Data = {
   email: string;
@@ -18,8 +20,9 @@ export const useSignUpData = () => {
   const [data, setData] = useState<Data>(initialData);
 
   const signup = () => {
-    console.log("サインアップ");
-    console.log(data);
+    axios.post("http://localhost:3200/signup", data).then((response) => {
+      console.log("response body:", response.data);
+    });
   };
 
   return { data, setData, signup };
