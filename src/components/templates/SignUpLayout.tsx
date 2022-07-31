@@ -34,7 +34,7 @@ export const SignUpLayout = () => {
           />
         ) : (
           <MailPwForm
-            onClickNext={onClickNext}
+            onClick={onClickNext}
             setData={setData}
             data={data}
             isPwForget={true}

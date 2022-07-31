@@ -9,13 +9,13 @@ import { Data } from "../../../hooks/useSignUpData";
 
 type Props = {
   isPwForget?: boolean;
-  onClickNext: () => void;
+  onClick: () => void;
   setData: Dispatch<SetStateAction<Data>>;
   data: Data;
 };
 
 export const MailPwForm: FC<Props> = (props) => {
-  const { isPwForget, onClickNext, setData, data } = props;
+  const { isPwForget, onClick, setData, data } = props;
 
   const onChangeMail = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -53,7 +53,7 @@ export const MailPwForm: FC<Props> = (props) => {
       </Stack>
       <Stack spacing="13px" alignItems="center" mt="26px">
         <PrimaryButton
-          onClick={onClickNext}
+          onClick={onClick}
           disabled={data.email === "" || data.password === ""}
         >
           次へ
