@@ -1,4 +1,4 @@
-import { HeaderIcon } from "../molecules/HeaderIcon";
+import { IromemoIcon } from "../atoms/IromemoIcon";
 import { Button } from "../atoms/Button";
 import { ColorThumb } from "../atoms/ColorThumb";
 import { useState, useEffect } from "react";
@@ -17,6 +17,11 @@ export const ComponentCatalog = () => {
   const { data, error, loading } = useGetMemos("とかげ");
   const { filesData, filesError, filesLoading } = useGetFiles();
 
+  console.log(filesData);
+
+  //モーダルを開くトリガーをOpenModalBtnに渡す
+  const OpenModalBtn = <IromemoIcon />;
+
   if (error) {
     return <p>error: {error.message}</p>;
   } else if (filesError) {
@@ -28,35 +33,50 @@ export const ComponentCatalog = () => {
   }
 
   return (
-		<>
-			<h2 style={{ margin: "20px" }}>
-				コンポーネントの使用例カタログ的なページ
-			</h2>
-      <Input variant="white" size='md' placeholder="メールアドレス" />
-      <Input variant="filled" size='md' placeholder="#色名を入力" />
-			<HeaderIcon />
-			<Button text="アイウエオ青" size="s" link="/signup"></Button>
-			<div>
-				{data.map((memo) => (
-					<ColorThumb key={memo.id} memoId={memo.id} colorCode={memo.colorCode}/>
-				))}
-			</div>
-			{
-				data.map((memo) => (
-          <Popup key={memo.id} variant="logout">
-            <ColorMemoThumb key={memo.id} memoId={memo.id} colorCode={memo.colorCode} tagName={memo.tagName} deleteMode={true}></ColorMemoThumb>
-          </Popup>
-				))
-			}
-      {
-        filesData.map((file) => (
-            <FileThumb key={file.id} name={file.name} colorNum={file.memo.colorNum} mainColors={file.memo.mainColor}></FileThumb>
-        ))
-      }
-      <SettingLink label="ニックネーム" content="とかげかわいい" link="/setting/nickname" />
-		</>
-  )
-}
+    <>
+      <h2 style={{ margin: "20px" }}>
+        コンポーネントの使用例カタログ的なページ
+      </h2>
+      <Input variant="white" size="md" placeholder="メールアドレス" />
+      <Input variant="filled" size="md" placeholder="#色名を入力" />
+      <IromemoIcon />
+      <Button text="アイウエオ青" size="s" link="/signup"></Button>
+      <div>
+        {data.map((memo) => (
+          <ColorThumb
+            key={memo.id}
+            memoId={memo.id}
+            colorCode={memo.colorCode}
+          />
+        ))}
+      </div>
+      {data.map((memo) => (
+        <Popup key={memo.id} variant="logout">
+          <ColorMemoThumb
+            key={memo.id}
+            memoId={memo.id}
+            colorCode={memo.colorCode}
+            tagName={memo.tagName}
+            deleteMode={true}
+          ></ColorMemoThumb>
+        </Popup>
+      ))}
+      {filesData.map((file) => (
+        <FileThumb
+          key={file.id}
+          name={file.name}
+          colorNum={file.memo.colorNum}
+          mainColors={file.memo.mainColor}
+        ></FileThumb>
+      ))}
+      <SettingLink
+        label="ニックネーム"
+        content="とかげかわいい"
+        link="/setting/nickname"
+      />
+    </>
+  );
+};
 
 //メモ情報取得メモ情報取得
 const useGetMemos = (tagName?: string) => {
@@ -73,7 +93,7 @@ const useGetMemos = (tagName?: string) => {
     const fetchData = async () => {
       const url = tagName
         ? `${API_URL}/memos/search?tag_name=${tagName}`
-        : `${API_URL}/memos/search`
+        : `${API_URL}/memos/search`;
 
       try {
         await new Promise((resolve) => setTimeout(resolve, 1000)); // 挙動確認の為に sleep
@@ -106,7 +126,7 @@ const useGetFiles = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = `${API_URL}/files`
+      const url = `${API_URL}/files`;
 
       try {
         await new Promise((resolve) => setTimeout(resolve, 1000)); // 挙動確認の為に sleep

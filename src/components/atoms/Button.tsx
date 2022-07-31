@@ -1,21 +1,21 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import styled, { css } from "styled-components"
+import styled, { css } from "styled-components";
 import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 
 type Props = {
-  text : string;
-  size : "s" | "m" | "l";
+  text: string;
+  size: "s" | "m" | "l";
   link: string;
-}
+};
 
 let theme = {};
 
 export const Button: FC<Props> = (props) => {
   const { text, size, link } = props;
 
-  switch(size){
+  switch (size) {
     case "s":
       theme = s;
       break;
@@ -27,14 +27,14 @@ export const Button: FC<Props> = (props) => {
       break;
   }
 
-	return (
+  return (
     <StyledBtnWrapper>
       <StyledBtn to={link} theme={theme}>
-        { text }
+        {text}
       </StyledBtn>
     </StyledBtnWrapper>
-	)
-}
+  );
+};
 
 const { blueGreen, lightGray, white, black } = ColorTheme.palette;
 const { regular, medium } = Font.fontWeight;
@@ -44,23 +44,23 @@ const StyledBtnWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-`
+`;
 
 const StyledBtn = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: ${props => props.theme.width};
-  height: ${props => props.theme.height};
+  width: ${(props) => props.theme.width};
+  height: ${(props) => props.theme.height};
   font-family: ${Noto};
-  font-size: ${props => props.theme.fs};
-  font-weight: ${props => props.theme.fw};
-  color: ${props => props.theme.color};
-  background-color: ${props => props.theme.bg};
+  font-size: ${(props) => props.theme.fs};
+  font-weight: ${(props) => props.theme.fw};
+  color: ${(props) => props.theme.color};
+  background-color: ${(props) => props.theme.bg};
   border-radius: 100vh;
   text-decoration: none;
-  border: ${props => props.theme.border};
-`
+  border: ${(props) => props.theme.border};
+`;
 
 const s = {
   fw: regular,
@@ -69,25 +69,25 @@ const s = {
   height: "50px",
   bg: blueGreen,
   color: white,
-  border: "none"
+  border: "none",
 };
 
 const m = {
   fw: regular,
   fs: "14px",
-  width: "52%",
+  width: "180px",
   height: "35px",
   bg: lightGray,
   color: black,
-  border: `1px solid ${black}`
+  border: `1px solid ${black}`,
 };
 
 const l = {
   fw: medium,
   fs: "16px",
-  width: "100%",
+  width: "340px",
   height: "40px",
   bg: blueGreen,
   color: white,
-  border: "none"
+  border: "none",
 };

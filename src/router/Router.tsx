@@ -28,22 +28,8 @@ export const Router = memo(() => {
           </HeaderLayout>
         }
       />
-      <Route
-        path="/signup"
-        element={
-          <HeaderLayout>
-            <Singup />
-          </HeaderLayout>
-        }
-      />
-      <Route
-        path="/login"
-        element={
-          <HeaderLayout>
-            <Login />
-          </HeaderLayout>
-        }
-      />
+      <Route path="/signup" element={<Singup />} />
+      <Route path="/login" element={<Login />} />
       <Route
         path="/"
         element={
