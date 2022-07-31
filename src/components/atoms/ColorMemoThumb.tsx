@@ -8,19 +8,36 @@ type Props = {
   memoId: number;
   colorCode: string;
   tagName: string;
+  deleteMode: boolean;
 }
 
 export const ColorMemoThumb: FC<Props> = (props) => {
-  const { memoId, colorCode, tagName } = props;
+  const { memoId, colorCode, tagName, deleteMode } = props;
   return(
-    <LinkWrapper to={`/memo/${memoId}`}>
-      <ColorCodeBox {...props}>
-        <WhiteBox>
-          <h2>{tagName}</h2>
-          <p>#{colorCode}</p>
-        </WhiteBox>
-      </ColorCodeBox>
-    </LinkWrapper>
+    <>
+      {
+        deleteMode 
+        ? (
+          <NoLinkWrapper>
+            <ColorCodeBox {...props}>
+              <WhiteBox>
+                <h2>{tagName}</h2>
+                <p>#{colorCode}</p>
+              </WhiteBox>
+            </ColorCodeBox>
+          </NoLinkWrapper>
+        ) : (
+          <LinkWrapper to={`/memo/${memoId}`}>
+            <ColorCodeBox {...props}>
+              <WhiteBox>
+                <h2>{tagName}</h2>
+                <p>#{colorCode}</p>
+              </WhiteBox>
+            </ColorCodeBox>
+          </LinkWrapper>
+        )
+      }
+    </>
   )
 }
 
@@ -29,6 +46,16 @@ const { Roboto, Noto } = Font.fontFamily;
 const { regular } = Font.fontWeight;
 
 const LinkWrapper = styled(Link)`
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 60px;
+  border-bottom-right-radius: 13px;
+  box-shadow: 0px 2px 3px 2px rgba(22, 22, 22, 0.15);
+`
+
+const NoLinkWrapper = styled.div`
   display: inline-block;
   position: relative;
   overflow: hidden;
