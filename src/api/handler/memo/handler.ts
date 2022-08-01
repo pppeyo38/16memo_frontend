@@ -1,5 +1,5 @@
-import { rest } from "msw"
-import { MemoType } from "./type"
+import { rest } from "msw";
+import { MemoType } from "./type";
 
 // POST /memos
 export const postMemos = rest.post<Omit<MemoType, "id">>(
@@ -8,10 +8,10 @@ export const postMemos = rest.post<Omit<MemoType, "id">>(
     const resBody: MemoType = {
       id: 1,
       ...req.body,
-    }
-    return res(ctx.status(201), ctx.json(resBody))
+    };
+    return res(ctx.status(201), ctx.json(resBody));
   }
-)
+);
 
 // PUT /memos/:id
 export const putMemosID = rest.put<
@@ -25,21 +25,21 @@ export const putMemosID = rest.put<
     url: "https://www.san-x.co.jp/sumikko/",
     tagName: "とかげ",
     ...req.body,
-  }
-  return res(ctx.status(200), ctx.json(resBody))
-})
+  };
+  return res(ctx.status(200), ctx.json(resBody));
+});
 
 // DELETE /memos/:id
 export const deleteMemosID = rest.delete<{}, { id: string }>(
   "/memos/:id",
   (req, res, ctx) => {
-    return res(ctx.status(204), ctx.json({}))
+    return res(ctx.status(204), ctx.json({}));
   }
-)
+);
 
 // GET /memos/search
 export const getMemosSearch = rest.get("/memos/search", (req, res, ctx) => {
-  const tagName = req.url.searchParams.get("tag_name")
+  const tagName = req.url.searchParams.get("tag_name");
   const memos: MemoType[] = [
     {
       id: 1,
@@ -76,9 +76,9 @@ export const getMemosSearch = rest.get("/memos/search", (req, res, ctx) => {
       url: "https://www.san-x.co.jp/sumikko/",
       tagName: "ぺんぎん？",
     },
-  ]
+  ];
   const resBody =
-    tagName === null ? memos : memos.filter((memo) => memo.tagName === tagName)
+    tagName === null ? memos : memos.filter((memo) => memo.tagName === tagName);
 
-  return res(ctx.status(200), ctx.json(resBody))
-})
+  return res(ctx.status(200), ctx.json(resBody));
+});

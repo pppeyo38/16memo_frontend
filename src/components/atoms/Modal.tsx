@@ -5,21 +5,19 @@ import { ColorTheme } from "../../style/ColorTheme";
 type Props = {
   children: ReactNode;
   OpenModalBtn: ReactNode;
-}
+};
 
-export const Modal:FC<Props> = (props) => {
+export const Modal: FC<Props> = (props) => {
   const { children, OpenModalBtn } = props;
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const clickExitIcon = () => {
     setIsOpen(!isOpen);
-  }
+  };
 
-  return(
+  return (
     <>
-      <div onClick={clickExitIcon}>
-        {OpenModalBtn}
-      </div>
+      <div onClick={clickExitIcon}>{OpenModalBtn}</div>
       <BackgroundModal isOpen={isOpen}>
         <StyledModalWrapper isOpen={isOpen}>
           <StyledExitBtnWrapper>
@@ -29,25 +27,25 @@ export const Modal:FC<Props> = (props) => {
         </StyledModalWrapper>
       </BackgroundModal>
     </>
-  )
-}
+  );
+};
 
 const { black, lightGray } = ColorTheme.palette;
 
-const BackgroundModal = styled.div<{isOpen:boolean}>`
+const BackgroundModal = styled.div<{ isOpen: boolean }>`
   position: fixed;
   top: 48px;
   left: 0px;
   width: 100%;
   height: calc(100vh - 48px);
-  opacity: ${props => props.isOpen ? 1 : 0};
-  background-color: rgba(0,0,0,0.5);
-  pointer-events: ${props => props.isOpen ? "all" : "none"};
+  opacity: ${(props) => (props.isOpen ? 1 : 0)};
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: ${(props) => (props.isOpen ? "all" : "none")};
   transition: 0.3s;
   z-index: 10;
-`
+`;
 
-const StyledModalWrapper = styled.div<{isOpen:boolean}>`
+const StyledModalWrapper = styled.div<{ isOpen: boolean }>`
   position: fixed;
   bottom: 0px;
   width: calc(100% - 70px);
@@ -56,12 +54,13 @@ const StyledModalWrapper = styled.div<{isOpen:boolean}>`
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
   /* アニメーションつけたいなと思って↓ */
-  transform: ${props => props.isOpen ? "translateY(0px)" : "translateY(100%)"};
+  transform: ${(props) =>
+    props.isOpen ? "translateY(0px)" : "translateY(100%)"};
   transition: 0.3s;
-  &:hover{
+  &:hover {
     opacity: 0%;
   }
-`
+`;
 
 const StyledExitBtnWrapper = styled.div`
   width: 100%;
@@ -74,8 +73,9 @@ const StyledExitBtnWrapper = styled.div`
     height: 18px;
     padding: 0px;
     border: none;
-    &::before, &::after{
-      content: '';
+    &::before,
+    &::after {
+      content: "";
       position: absolute;
       top: 50%;
       left: 50%;
@@ -85,10 +85,10 @@ const StyledExitBtnWrapper = styled.div`
       background-color: ${black};
     }
     &::before {
-      transform: translate(-50%,-50%) rotate(-45deg);
+      transform: translate(-50%, -50%) rotate(-45deg);
     }
     &::after {
-      transform: translate(-50%,-50%) rotate(45deg);
+      transform: translate(-50%, -50%) rotate(45deg);
     }
   }
-`
+`;

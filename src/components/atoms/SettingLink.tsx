@@ -9,20 +9,20 @@ type Props = {
   label: string;
   content?: string;
   link: string;
-}
+};
 
 let theme = {};
 
 export const SettingLink: FC<Props> = (props) => {
   const { label, content, link } = props;
 
-  return(
+  return (
     <SettingLinkContainer to={link} theme={theme}>
       {label}
       <span>{content}</span>
     </SettingLinkContainer>
-  )
-}
+  );
+};
 
 const { black, gray, white, lightGray } = ColorTheme.palette;
 const { Noto } = Font.fontFamily;
@@ -44,7 +44,7 @@ const SettingLinkContainer = styled(Link)`
     font-size: 14px;
   }
   ::before {
-    content: '';
+    content: "";
     width: 8px;
     height: 13px;
     position: absolute;
@@ -55,4 +55,4 @@ const SettingLinkContainer = styled(Link)`
     background-size: contain;
     background-repeat: no-repeat;
   }
-`
+`;
