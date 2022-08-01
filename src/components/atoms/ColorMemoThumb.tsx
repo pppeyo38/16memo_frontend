@@ -9,37 +9,34 @@ type Props = {
   colorCode: string;
   tagName: string;
   deleteMode: boolean;
-}
+};
 
 export const ColorMemoThumb: FC<Props> = (props) => {
   const { memoId, colorCode, tagName, deleteMode } = props;
-  return(
+  return (
     <>
-      {
-        deleteMode 
-        ? (
-          <NoLinkWrapper>
-            <ColorCodeBox {...props}>
-              <WhiteBox>
-                <h2>{tagName}</h2>
-                <p>#{colorCode}</p>
-              </WhiteBox>
-            </ColorCodeBox>
-          </NoLinkWrapper>
-        ) : (
-          <LinkWrapper to={`/memo/${memoId}`}>
-            <ColorCodeBox {...props}>
-              <WhiteBox>
-                <h2>{tagName}</h2>
-                <p>#{colorCode}</p>
-              </WhiteBox>
-            </ColorCodeBox>
-          </LinkWrapper>
-        )
-      }
+      {deleteMode ? (
+        <NoLinkWrapper>
+          <ColorCodeBox {...props}>
+            <WhiteBox>
+              <h2>{tagName}</h2>
+              <p>#{colorCode}</p>
+            </WhiteBox>
+          </ColorCodeBox>
+        </NoLinkWrapper>
+      ) : (
+        <LinkWrapper to={`/memo/${memoId}`}>
+          <ColorCodeBox {...props}>
+            <WhiteBox>
+              <h2>{tagName}</h2>
+              <p>#{colorCode}</p>
+            </WhiteBox>
+          </ColorCodeBox>
+        </LinkWrapper>
+      )}
     </>
-  )
-}
+  );
+};
 
 const { white, black } = ColorTheme.palette;
 const { Roboto, Noto } = Font.fontFamily;
@@ -53,7 +50,7 @@ const LinkWrapper = styled(Link)`
   height: 60px;
   border-bottom-right-radius: 13px;
   box-shadow: 0px 2px 3px 2px rgba(22, 22, 22, 0.15);
-`
+`;
 
 const NoLinkWrapper = styled.div`
   display: inline-block;
@@ -63,13 +60,13 @@ const NoLinkWrapper = styled.div`
   height: 60px;
   border-bottom-right-radius: 13px;
   box-shadow: 0px 2px 3px 2px rgba(22, 22, 22, 0.15);
-`
+`;
 
 const ColorCodeBox = styled.div<Props>`
   width: 100%;
   height: 100%;
-  background-color: ${props => `#${props.colorCode}`};
-`
+  background-color: ${(props) => `#${props.colorCode}`};
+`;
 
 const WhiteBox = styled.div`
   position: absolute;
@@ -88,7 +85,7 @@ const WhiteBox = styled.div`
   }
   p {
     color: #9b9b9b;
-    font-size: 13px; 
+    font-size: 13px;
     font-family: ${Roboto};
   }
-`
+`;

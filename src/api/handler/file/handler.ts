@@ -1,5 +1,5 @@
-import { rest } from "msw"
-import { FileType, FileWithMemoInfoType, FileWithMemosType } from "./type"
+import { rest } from "msw";
+import { FileType, FileWithMemoInfoType, FileWithMemosType } from "./type";
 
 // GET /files
 export const getFiles = rest.get("/files", (_, res, ctx) => {
@@ -31,15 +31,15 @@ export const getFiles = rest.get("/files", (_, res, ctx) => {
         colorNum: 2,
       },
     },
-  ]
-  return res(ctx.status(200), ctx.json(resBody))
-})
+  ];
+  return res(ctx.status(200), ctx.json(resBody));
+});
 
 // GET /files/:id
 export const getFilesID = rest.get<{}, { id: string }>(
   "/files/:id",
   (req, res, ctx) => {
-    const { id } = req.params
+    const { id } = req.params;
     const resBody: FileWithMemosType = {
       id: +id,
       name: "すみっコぐらし",
@@ -81,44 +81,44 @@ export const getFilesID = rest.get<{}, { id: string }>(
           tagName: "ぺんぎん？",
         },
       ],
-    }
-    return res(ctx.status(200), ctx.json(resBody))
+    };
+    return res(ctx.status(200), ctx.json(resBody));
   }
-)
+);
 
 // POST /files
 export const postFiles = rest.post<Omit<FileType, "id" | "userId">>(
   "/files",
   (req, res, ctx) => {
-    const { name } = req.body
+    const { name } = req.body;
     const resBody: FileType = {
       id: 1,
       userId: 1,
       name,
-    }
-    return res(ctx.status(201), ctx.json(resBody))
+    };
+    return res(ctx.status(201), ctx.json(resBody));
   }
-)
+);
 
 // PUT /files/:id
 export const putFilesID = rest.put<
   Partial<Omit<FileType, "id" | "userId">>,
   { id: string }
 >("/files/:id", (req, res, ctx) => {
-  const { id } = req.params
+  const { id } = req.params;
   const resBody: FileType = {
     id: +id,
     name: "すみっコぐらし",
     userId: 1,
     ...req.body,
-  }
-  return res(ctx.status(200), ctx.json(resBody))
-})
+  };
+  return res(ctx.status(200), ctx.json(resBody));
+});
 
 // DELETE /files/:id
 export const deleteFilesID = rest.put<{}, { id: string }>(
   "/files/:id",
   (req, res, ctx) => {
-    return res(ctx.status(204), ctx.json({}))
+    return res(ctx.status(204), ctx.json({}));
   }
-)
+);
