@@ -15,7 +15,7 @@ import { SettingDeactivate } from "../components/pages/SettingDeactivate";
 import { MemoAdd } from "../components/pages/MemoAdd";
 import { MemoEdit } from "../components/pages/MemoEdit";
 import { Login } from "../components/pages/Login";
-import { SearchResult } from "../components/pages/SearchResult";
+// import { Search } from "../components/pages/Search";
 
 export const Router = memo(() => {
   return (
