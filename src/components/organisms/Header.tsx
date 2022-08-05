@@ -1,9 +1,10 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDisclosure } from "@chakra-ui/react";
+import { MenuDrawer } from "./MenuDrawer";
 import styled from "styled-components";
 
 export const Header = () => {
-  const [isClose, setIsClose] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <HeaderWrap>
@@ -11,13 +12,14 @@ export const Header = () => {
         <CreateMemoBtn to={"/"}>
           <img src="./src/images/penIcon.svg" />
         </CreateMemoBtn>
-        <ToggleDrawer isClose={isClose}>
-          <ToggleDrawerBtn>
+        <ToggleDrawer onClick={isOpen ? onClose : onOpen}>
+          <ToggleDrawerBtn isOpen={isOpen}>
             <span></span>
             <span></span>
             <span></span>
           </ToggleDrawerBtn>
         </ToggleDrawer>
+        <MenuDrawer isOpen={isOpen} onClose={onClose} />
       </HeaderContent>
     </HeaderWrap>
   );
@@ -28,6 +30,7 @@ const HeaderWrap = styled.header`
   align-items: flex-end;
   justify-content: center;
   position: absolute;
+  z-index: 10000;
   right: 15px;
   width: 105px;
   height: 70px;
@@ -48,12 +51,12 @@ const CreateMemoBtn = styled(Link)`
   height: 35px;
 `;
 
-const ToggleDrawer = styled.div<{ isClose: boolean }>`
+const ToggleDrawer = styled.div`
   width: 30px;
   height: 30px;
 `;
 
-const ToggleDrawerBtn = styled.button`
+const ToggleDrawerBtn = styled.button<{ isOpen: boolean }>`
   position: relative;
   width: 100%;
   height: 100%;
@@ -69,13 +72,20 @@ const ToggleDrawerBtn = styled.button`
     height: 1.5px;
     border-radius: 3px;
     background: #a2d6d3;
+    transition: all 0.4s;
 
     &:nth-child(1) {
-      transform: translateY(-7px);
+      transform: ${({ isOpen }) =>
+        isOpen ? "rotate(45deg)" : "translateY(-7px)"};
+    }
+
+    &:nth-child(2) {
+      display: ${({ isOpen }) => (isOpen ? "none" : "block")};
     }
 
     &:nth-child(3) {
-      transform: translateY(7px);
+      transform: ${({ isOpen }) =>
+        isOpen ? "rotate(-45deg)" : "translateY(7px)"};
     }
   }
 `;
