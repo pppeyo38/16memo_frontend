@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import { useLoginUser } from "../../hooks/useLoginUser";
+import { FilesLayout } from "../templates/FilesLayout";
 
 type Props = {};
 
@@ -8,11 +9,12 @@ export const Files: FC<Props> = (props) => {
   console.log(loginUser);
   return (
     <div>
-      {loginUser?.isAdmin ? (
+      {/* {loginUser?.isAdmin ? (
         <p>ログイン中のユーザー :{loginUser.nickname}</p>
       ) : (
         <p>ログインユーザーがいません</p>
-      )}
+      )} */}
+      <FilesLayout />
     </div>
   );
 };
