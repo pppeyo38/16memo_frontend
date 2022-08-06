@@ -18,7 +18,7 @@ export const MemosFileLayout = () => {
   return (
     <ContentInner>
       <ArrowWrap>
-        <ReturnArrow path="/" />
+        <ReturnArrow path="/" color={"#161616"} />
       </ArrowWrap>
       <PageTitle>{memosData.name}</PageTitle>
       {memosLoading ? (

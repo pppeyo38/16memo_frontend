@@ -18,7 +18,7 @@ export const MemoLayout = (memoContent: MemoContent) => {
     <DisPlay bg={memoContent.colorCode}>
       <Content>
         <Head>
-          <ReturnArrow path={"/"} />
+          <ReturnArrow path={"/"} color={"white"} />
           <EditButton />
         </Head>
         <Main>
