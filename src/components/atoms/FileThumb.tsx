@@ -1,20 +1,26 @@
 import { FC } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 
 type Props = {
+  fileId: number;
   name: string;
   colorNum: number;
   mainColors: string[];
 };
 
 export const FileThumb: FC<Props> = (props) => {
-  const { name, colorNum, mainColors } = props;
+  const { fileId, name, colorNum, mainColors } = props;
+  const navigate = useNavigate();
+
+  const handleClick = (id: number, name: string) => {
+    navigate(`/${name}`, { state: { id: id } });
+  };
 
   return (
-    <FileThumbContainer to={`/${name}`}>
+    <FileThumbContainer onClick={() => handleClick(fileId, name)}>
       <MainColorsWrapper>
         {mainColors.length ? (
           <>
@@ -42,7 +48,7 @@ export const FileThumb: FC<Props> = (props) => {
 const { black, gray } = ColorTheme.palette;
 const { Roboto, Noto } = Font.fontFamily;
 
-const FileThumbContainer = styled(Link)`
+const FileThumbContainer = styled.div`
   display: inline-block;
   overflow: hidden;
   width: 100%;

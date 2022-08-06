@@ -64,6 +64,7 @@ export const ComponentCatalog = () => {
       {filesData.map((file) => (
         <FileThumb
           key={file.id}
+          fileId={file.id}
           name={file.name}
           colorNum={file.memo.colorNum}
           mainColors={file.memo.mainColor}
