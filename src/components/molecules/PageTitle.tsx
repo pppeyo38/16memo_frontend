@@ -8,12 +8,17 @@ type Props = {
 };
 
 export const PageTitle = ({ children }: Props) => {
+  const onClick = () => {
+    // クリックしたときの挙動をここに書く
+    console.log("メニューアイコンクリック");
+  };
+
   return (
     <TitleWrap>
       <Title>{children}</Title>
-      <IconWrap>
+      <MenuButton onClick={onClick}>
         <img src="./src/images/menuIcon.svg" />
-      </IconWrap>
+      </MenuButton>
     </TitleWrap>
   );
 };
@@ -25,8 +30,7 @@ const TitleWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 95px;
-  margin: 95px 25px 0;
+  margin: 0 25px;
 `;
 
 const Title = styled.h1`
@@ -36,4 +40,4 @@ const Title = styled.h1`
   color: ${palette.black};
 `;
 
-const IconWrap = styled.div``;
+const MenuButton = styled.button``;

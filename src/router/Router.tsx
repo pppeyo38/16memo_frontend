@@ -1,6 +1,5 @@
 import { memo } from "react";
-import { Routes, Route, useParams } from "react-router-dom";
-
+import { Routes, Route, useParams, Navigate } from "react-router-dom";
 import { HeaderLayout } from "../components/templates/HeaderLayout";
 import { ComponentCatalog } from "../components/pages/ComponentCatalog";
 import { Singup } from "../components/pages/Singup";
@@ -30,6 +29,18 @@ export const Router = memo(() => {
       />
       <Route path="/signup" element={<Singup />} />
       <Route path="/login" element={<Login />} />
+      <Route
+        path="/authFiles"
+        element={
+          localStorage.getItem("token") ? (
+            <HeaderLayout>
+              <Files />
+            </HeaderLayout>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
       <Route
         path="/"
         element={
