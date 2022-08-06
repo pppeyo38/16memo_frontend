@@ -48,6 +48,7 @@ export const FilesLayout = ({ state }: Props) => {
 };
 
 const ContentInner = styled.div`
+  max-width: 340px;
   margin: 95px auto 0;
 `;
 

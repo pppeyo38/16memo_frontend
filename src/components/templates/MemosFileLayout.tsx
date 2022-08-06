@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useGetMemos } from "../../hooks/memos/useGetMemos";
+import { ReturnArrow } from "../atoms/ReturnArrow";
 import { PageTitle } from "../molecules/PageTitle";
 import { ColorMemoThumb } from "../atoms/ColorMemoThumb";
 import { Center, Spinner } from "@chakra-ui/react";
@@ -16,6 +17,9 @@ export const MemosFileLayout = () => {
 
   return (
     <ContentInner>
+      <ArrowWrap>
+        <ReturnArrow path="/" />
+      </ArrowWrap>
       <PageTitle>{memosData.name}</PageTitle>
       {memosLoading ? (
         <Center h="50vh">
@@ -46,7 +50,12 @@ export const MemosFileLayout = () => {
 };
 
 const ContentInner = styled.div`
-  margin: 95px auto 0;
+  max-width: 340px;
+  margin: 35px auto 0;
+`;
+
+const ArrowWrap = styled.div`
+  margin-bottom: 25px;
 `;
 
 const MemosWrap = styled.div`
