@@ -1,6 +1,5 @@
 import { memo } from "react";
-import { Routes, Route, useParams } from "react-router-dom";
-
+import { Routes, Route, useParams, Navigate } from "react-router-dom";
 import { HeaderLayout } from "../components/templates/HeaderLayout";
 import { ComponentCatalog } from "../components/pages/ComponentCatalog";
 import { Singup } from "../components/pages/Singup";
@@ -15,7 +14,7 @@ import { SettingDeactivate } from "../components/pages/SettingDeactivate";
 import { MemoAdd } from "../components/pages/MemoAdd";
 import { MemoEdit } from "../components/pages/MemoEdit";
 import { Login } from "../components/pages/Login";
-import { SearchResult } from "../components/pages/SearchResult";
+// import { Search } from "../components/pages/Search";
 
 export const Router = memo(() => {
   return (
@@ -30,6 +29,18 @@ export const Router = memo(() => {
       />
       <Route path="/signup" element={<Singup />} />
       <Route path="/login" element={<Login />} />
+      <Route
+        path="/authFiles"
+        element={
+          localStorage.getItem("token") ? (
+            <HeaderLayout>
+              <Files />
+            </HeaderLayout>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
       <Route
         path="/"
         element={

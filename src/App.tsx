@@ -1,4 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
+import Div100vh from "react-div-100vh";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
@@ -11,7 +12,9 @@ function App() {
       <GlobalStyle />
       <LoginUserProvider>
         <BrowserRouter basename="/">
-          <Router />
+          <Div100vh style={Display100vh}>
+            <Router />
+          </Div100vh>
         </BrowserRouter>
       </LoginUserProvider>
     </>
@@ -27,3 +30,10 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 `;
+
+const Display100vh = {
+  overflow: "hidden",
+  backgroundImage: "radial-gradient(#9B9B9B 3%, transparent 3%)",
+  backgroundSize: "20px 20px",
+  backgroundRepeat: "repeat",
+};

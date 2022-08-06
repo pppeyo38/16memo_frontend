@@ -12,8 +12,6 @@ export const useLogin = () => {
   const { setLoginUser } = useLoginUser();
 
   const login = (data: Data) => {
-    console.log(data);
-
     axios
       .post(
         `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${
@@ -22,6 +20,7 @@ export const useLogin = () => {
         { ...data, returnSecureToken: true }
       )
       .then((response) => {
+        const idToken = response.data.idToken;
         axios
           .get("http://localhost:3200/login", {
             headers: {
@@ -30,6 +29,7 @@ export const useLogin = () => {
           })
           .then((response) => {
             if (response.data) {
+              localStorage.setItem("token", idToken);
               const isAdmin = true;
               setLoginUser({ ...response.data, isAdmin });
               navigate("/");
