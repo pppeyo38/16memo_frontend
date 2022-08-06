@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 type Props = {};
 
 export const MemoFiles: FC<Props> = (props) => {
-  const { fileName } = useParams();
+	const { fileName } = useParams();
 
-  return <div>/{fileName}</div>;
+	return <div>/{fileName}</div>;
 };
