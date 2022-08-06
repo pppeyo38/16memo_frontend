@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useGetMemos } from "../../hooks/memos/useGetMemos";
-import { ReturnArrow } from "../atoms/ReturnArrow";
+import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { PageTitle } from "../molecules/PageTitle";
 import { ColorMemoThumb } from "../atoms/ColorMemoThumb";
 import { Center, Spinner } from "@chakra-ui/react";

@@ -1,8 +1,11 @@
-import { ReturnArrow } from "../atoms/ReturnArrow";
+import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { EditButton } from "../atoms/EditButton";
+import { LinkIcon } from "../atoms/Icon/LinkIcon";
+import { TrashIcon } from "../atoms/Icon/TrashIcon";
 import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 import styled from "styled-components";
+import { CommentIcon } from "../atoms/Icon/CommentIcon";
 
 type MemoContent = {
   id: number;
@@ -41,15 +44,9 @@ export const MemoLayout = (memoContent: MemoContent) => {
             </CodeListItem>
           </CodeList>
           <ActionIcons>
-            <button>
-              <img src="http://localhost:3000/src/images/iconComment.svg" />
-            </button>
-            <button>
-              <img src="http://localhost:3000/src/images/iconLink.svg" />
-            </button>
-            <button>
-              <img src="http://localhost:3000/src/images/iconDelete.svg" />
-            </button>
+            <CommentIcon color={"white"} />
+            <LinkIcon color={"white"} />
+            <TrashIcon color={"white"} />
           </ActionIcons>
         </Main>
       </Content>
