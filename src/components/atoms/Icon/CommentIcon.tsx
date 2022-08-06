@@ -5,10 +5,8 @@ type Props = {
 };
 
 export const CommentIcon = ({ color }: Props) => {
-  const onClick = () => {};
-
   return (
-    <Comment onClick={() => onClick()}>
+    <Comment>
       <svg
         width="30"
         height="30"
@@ -28,7 +26,7 @@ export const CommentIcon = ({ color }: Props) => {
   );
 };
 
-const Comment = styled.button`
+const Comment = styled.div`
   width: 30px;
   height: 30px;
 `;

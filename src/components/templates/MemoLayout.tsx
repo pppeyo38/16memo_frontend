@@ -1,3 +1,4 @@
+import { useDisclosure } from "@chakra-ui/react";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { EditButton } from "../atoms/EditButton";
 import { LinkIcon } from "../atoms/Icon/LinkIcon";
@@ -6,6 +7,7 @@ import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 import styled from "styled-components";
 import { CommentIcon } from "../atoms/Icon/CommentIcon";
+import { DrawerWrap } from "../molecules/DrawerWrap";
 
 type FileInfo = {
   id: number;
@@ -23,8 +25,10 @@ type MemoContent = {
 };
 
 export const MemoLayout = (memoContent: MemoContent) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
-    <DisPlay bg={memoContent.colorCode}>
+    <Display bg={memoContent.colorCode}>
       <Content>
         <Head>
           <ReturnArrow
@@ -54,20 +58,31 @@ export const MemoLayout = (memoContent: MemoContent) => {
             </CodeListItem>
           </CodeList>
           <ActionIcons>
-            <CommentIcon color={"white"} />
+            <button onClick={onOpen}>
+              <CommentIcon color={"white"} />
+            </button>
             <LinkIcon color={"white"} />
             <TrashIcon color={"white"} />
           </ActionIcons>
         </Main>
       </Content>
-    </DisPlay>
+      <DrawerWrap onClose={onClose} isOpen={isOpen}>
+        <DrawerContent>
+          <CloseButton onClick={onClose}>
+            <span />
+            <span />
+          </CloseButton>
+          <Comment>{memoContent.comment}</Comment>
+        </DrawerContent>
+      </DrawerWrap>
+    </Display>
   );
 };
 
 const { palette } = ColorTheme;
 const { fontWeight, fontFamily } = Font;
 
-const DisPlay = styled.div<{ bg: string }>`
+const Display = styled.div<{ bg: string }>`
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -131,4 +146,42 @@ const ActionIcons = styled.div`
   display: flex;
   gap: 20px;
   margin-top: 25px;
+`;
+
+const DrawerContent = styled.div`
+  position: relative;
+  padding: 80px 35px;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  display: grid;
+  place-content: center;
+  width: 35px;
+  height: 35px;
+  top: 25px;
+  right: 25px;
+
+  span {
+    display: block;
+    width: 26px;
+    height: 1px;
+    border-radius: 50%;
+    background-color: #161616;
+
+    &:nth-child(1) {
+      transform: rotate(45deg);
+    }
+
+    &:nth-child(2) {
+      transform: rotate(-45deg);
+    }
+  }
+`;
+
+const Comment = styled.p`
+  color: ${palette.black};
+  font-family: ${fontFamily.Noto};
+  font-size: 16px;
+  font-weight: ${fontWeight.regular};
 `;
