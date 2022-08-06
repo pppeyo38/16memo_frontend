@@ -16,18 +16,17 @@ export const FileThumb: FC<Props> = (props) => {
   return (
     <FileThumbContainer to={`/${name}`}>
       <MainColorsWrapper>
-        {mainColors.map((mainColor, index) =>
-          mainColors.length == 0 ? (
-            <BgMainColor
-              key={index}
-              theme={{ width: 100, bgColor: "fff" }}
-            ></BgMainColor>
-          ) : (
-            <BgMainColor
-              key={index}
-              theme={{ width: 100 / mainColors.length, bgColor: mainColor }}
-            ></BgMainColor>
-          )
+        {mainColors.length ? (
+          <>
+            {mainColors.map((mainColor, index) => (
+              <BgMainColor
+                key={index}
+                theme={{ width: 100 / mainColors.length, bgColor: mainColor }}
+              />
+            ))}
+          </>
+        ) : (
+          <BgMainColor theme={{ width: 100, bgColor: "fff" }} />
         )}
       </MainColorsWrapper>
       <FileTextWrapper>
