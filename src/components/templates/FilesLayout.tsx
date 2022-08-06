@@ -14,7 +14,6 @@ type Props = {
 
 export const FilesLayout = ({ state }: Props) => {
   const { filesData, filesError, filesLoading } = state;
-  console.log(filesData);
 
   return (
     <ContentInner>

@@ -48,6 +48,7 @@ export const useGetMemos = (fileId: number) => {
         }
       }
     };
+    console.log("--- useEffect ---");
     fetchData();
   }, []);
 

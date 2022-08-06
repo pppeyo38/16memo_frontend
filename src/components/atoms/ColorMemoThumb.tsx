@@ -4,32 +4,40 @@ import styled from "styled-components";
 import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 
-type Props = {
-  memoId: number;
+type MemoContent = {
+  id: number;
   colorCode: string;
   tagName: string;
+  comment: string;
+  url: string;
+  createdAt: string;
+};
+
+type Props = {
+  memoId: number;
+  content: MemoContent;
   deleteMode: boolean;
 };
 
 export const ColorMemoThumb: FC<Props> = (props) => {
-  const { memoId, colorCode, tagName, deleteMode } = props;
+  const { memoId, content, deleteMode } = props;
   return (
     <>
       {deleteMode ? (
         <NoLinkWrapper>
           <ColorCodeBox {...props}>
             <WhiteBox>
-              <h2>{tagName}</h2>
-              <p>#{colorCode}</p>
+              <h2>{content.tagName}</h2>
+              <p>#{content.colorCode}</p>
             </WhiteBox>
           </ColorCodeBox>
         </NoLinkWrapper>
       ) : (
-        <LinkWrapper to={`/memo/${memoId}`}>
+        <LinkWrapper to={`/memo/${memoId}`} state={content}>
           <ColorCodeBox {...props}>
             <WhiteBox>
-              <h2>{tagName}</h2>
-              <p>#{colorCode}</p>
+              <h2>{content.tagName}</h2>
+              <p>#{content.colorCode}</p>
             </WhiteBox>
           </ColorCodeBox>
         </LinkWrapper>
@@ -65,7 +73,7 @@ const NoLinkWrapper = styled.div`
 const ColorCodeBox = styled.div<Props>`
   width: 100%;
   height: 100%;
-  background-color: ${(props) => `#${props.colorCode}`};
+  background-color: ${(props) => `#${props.content.colorCode}`};
 `;
 
 const WhiteBox = styled.div`

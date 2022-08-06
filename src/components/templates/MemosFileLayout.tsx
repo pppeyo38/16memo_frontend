@@ -38,9 +38,8 @@ export const MemosFileLayout = () => {
               <ColorMemoThumb
                 key={index}
                 memoId={memo.id}
-                colorCode={memo.colorCode}
-                tagName={memo.tagName}
-                deleteMode={true}
+                content={memo}
+                deleteMode={false}
               ></ColorMemoThumb>
             ))}
         </MemosWrap>

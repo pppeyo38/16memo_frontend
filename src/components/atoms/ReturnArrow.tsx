@@ -13,7 +13,7 @@ export const ReturnArrow = ({ path }: Props) => {
 
   return (
     <Arrow onClick={() => onClickReturn(path)}>
-      <img src="./src/images/returnArrow.svg" />
+      <img src="http://localhost:3000/src/images/returnArrow.svg" />
     </Arrow>
   );
 };
