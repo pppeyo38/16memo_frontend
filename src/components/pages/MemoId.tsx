@@ -1,5 +1,5 @@
-import { FC, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { MemoLayout } from "../templates/MemoLayout";
 
 type FileInfo = {
