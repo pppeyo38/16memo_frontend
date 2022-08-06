@@ -14,6 +14,7 @@ type Props = {
 
 export const FilesLayout = ({ state }: Props) => {
   const { filesData, filesError, filesLoading } = state;
+  console.log(filesData);
 
   return (
     <ContentInner>
@@ -31,9 +32,10 @@ export const FilesLayout = ({ state }: Props) => {
       ) : (
         <FilesWrap>
           {filesData &&
-            filesData.map((file) => (
+            filesData.map((file, index) => (
               <FileThumb
-                key={file.id}
+                key={index}
+                fileId={file.id}
                 name={file.name}
                 colorNum={file.memo.colorNum}
                 mainColors={file.memo.mainColor}
