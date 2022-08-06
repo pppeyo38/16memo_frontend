@@ -7,6 +7,11 @@ import { Font } from "../../style/Font";
 import styled from "styled-components";
 import { CommentIcon } from "../atoms/Icon/CommentIcon";
 
+type FileInfo = {
+  id: number;
+  name: string;
+};
+
 type MemoContent = {
   id: number;
   colorCode: string;
@@ -14,6 +19,7 @@ type MemoContent = {
   comment: string;
   url: string;
   createdAt: string;
+  fileInfo: FileInfo;
 };
 
 export const MemoLayout = (memoContent: MemoContent) => {
@@ -21,7 +27,11 @@ export const MemoLayout = (memoContent: MemoContent) => {
     <DisPlay bg={memoContent.colorCode}>
       <Content>
         <Head>
-          <ReturnArrow path={"/"} color={"white"} />
+          <ReturnArrow
+            path={`/${memoContent.fileInfo.name}`}
+            id={memoContent.fileInfo.id}
+            color={"white"}
+          />
           <EditButton />
         </Head>
         <Main>

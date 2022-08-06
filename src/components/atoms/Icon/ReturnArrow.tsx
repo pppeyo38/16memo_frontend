@@ -2,14 +2,19 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 type Props = {
+  id?: number;
   path: string;
   color: string;
 };
 
-export const ReturnArrow = ({ path, color }: Props) => {
+export const ReturnArrow = ({ id, path, color }: Props) => {
   const navigate = useNavigate();
   const onClickReturn = (returnPath: string) => {
-    navigate(returnPath);
+    if (id === undefined) {
+      navigate(returnPath);
+    } else {
+      navigate(returnPath, { state: { id: id } });
+    }
   };
 
   return (

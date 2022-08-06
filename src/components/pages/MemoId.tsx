@@ -2,6 +2,11 @@ import { FC, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { MemoLayout } from "../templates/MemoLayout";
 
+type FileInfo = {
+  id: number;
+  name: string;
+};
+
 type MemoContent = {
   id: number;
   colorCode: string;
@@ -9,10 +14,10 @@ type MemoContent = {
   comment: string;
   url: string;
   createdAt: string;
+  fileInfo: FileInfo;
 };
 
 export const MemoId = () => {
-  const { memoId } = useParams();
   const location = useLocation();
   const [memoContent, setMemoContent] = useState<MemoContent>(
     location.state as MemoContent

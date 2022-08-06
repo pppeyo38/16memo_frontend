@@ -4,6 +4,11 @@ import styled from "styled-components";
 import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 
+type FileInfo = {
+  id: number;
+  name: string;
+};
+
 type MemoContent = {
   id: number;
   colorCode: string;
@@ -11,6 +16,7 @@ type MemoContent = {
   comment: string;
   url: string;
   createdAt: string;
+  fileInfo: FileInfo;
 };
 
 type Props = {
