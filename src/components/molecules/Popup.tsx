@@ -4,7 +4,6 @@ import {
   ModalContent,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import { useDisclosure } from "@chakra-ui/react";
 import { ReactNode, FC } from "react";
 import styled from "styled-components";
 import { ColorTheme } from "../../style/ColorTheme";
@@ -19,40 +18,6 @@ type Props = {
 
 export const Popup: FC<Props> = (props) => {
   const { isOpen, onClose, proposalText, children } = props;
-  // const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const logoutLogic = () => {
-    console.log("これは仮で置いてる関数なので自由に消してもらって、、");
-  };
-
-  const fileDeleteLogic = () => {
-    console.log("これは仮で置いてる関数なので自由に消してもらって、、");
-  };
-
-  const memoDeleteLogic = () => {
-    console.log("これは仮で置いてる関数なので自由に消してもらって、、");
-  };
-
-  // switch (variant) {
-  //   case "logout":
-  //     mainTxt = "ログアウトしますか？";
-  //     subTxt = undefined;
-  //     // ↓ここでログアウトのロジックを呼び出す予定です
-  //     redBtn = <button onClick={logoutLogic}>ログアウト</button>;
-  //     break;
-  //   case "fileDelete":
-  //     mainTxt = "ファイルを削除しますか？";
-  //     subTxt = "ファイル内のメモが全て削除されます。";
-  //     // ↓ここでファイル削除のロジックを呼び出す予定です
-  //     redBtn = <button onClick={fileDeleteLogic}>削除する</button>;
-  //     break;
-  //   case "memoDelete":
-  //     mainTxt = "メモを削除しますか？";
-  //     subTxt = undefined;
-  //     // ↓ここでメモ削除のロジックを呼び出す予定です
-  //     redBtn = <button onClick={memoDeleteLogic}>削除する</button>;
-  //     break;
-  // }
 
   return (
     <Modal isOpen={isOpen} isCentered onClose={onClose}>

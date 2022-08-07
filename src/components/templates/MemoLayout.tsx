@@ -10,6 +10,7 @@ import { Font } from "../../style/Font";
 import styled from "styled-components";
 import { CommentDrawer } from "../organisms/Memo/CommentDrawer";
 import { LinkPopup } from "../organisms/Memo/LinkPopup";
+import { TrashPopup } from "../organisms/Memo/TrashPopup";
 
 type FileInfo = {
   id: number;
@@ -29,10 +30,10 @@ type MemoContent = {
 export const MemoLayout = (memoContent: MemoContent) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isOpenLink, setIsOpenLink] = useState<boolean>(false);
+  const [isOpenTrash, setIsOpenTrash] = useState<boolean>(false);
 
-  const onCloseLink = () => {
-    setIsOpenLink(false);
-  };
+  const onCloseLink = () => setIsOpenLink(false);
+  const onCloseTrash = () => setIsOpenTrash(false);
 
   return (
     <Display bg={memoContent.colorCode}>
@@ -71,7 +72,9 @@ export const MemoLayout = (memoContent: MemoContent) => {
             <button onClick={() => setIsOpenLink(true)}>
               <LinkIcon color={"white"} />
             </button>
-            <TrashIcon color={"white"} />
+            <div onClick={() => setIsOpenTrash(true)}>
+              <TrashIcon color={"white"} />
+            </div>
           </ActionIcons>
         </Main>
       </Content>
@@ -83,6 +86,7 @@ export const MemoLayout = (memoContent: MemoContent) => {
         isOpenLink={isOpenLink}
         onClose={onCloseLink}
       />
+      <TrashPopup isOpenTrash={isOpenTrash} onClose={onCloseTrash} />
     </Display>
   );
 };
