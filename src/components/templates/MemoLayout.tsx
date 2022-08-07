@@ -7,7 +7,7 @@ import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 import styled from "styled-components";
 import { CommentIcon } from "../atoms/Icon/CommentIcon";
-import { DrawerWrap } from "../molecules/DrawerWrap";
+import { CommentDrawer } from "../organisms/Memo/CommentDrawer";
 
 type FileInfo = {
   id: number;
@@ -66,15 +66,9 @@ export const MemoLayout = (memoContent: MemoContent) => {
           </ActionIcons>
         </Main>
       </Content>
-      <DrawerWrap onClose={onClose} isOpen={isOpen}>
-        <DrawerContent>
-          <CloseButton onClick={onClose}>
-            <span />
-            <span />
-          </CloseButton>
-          <Comment>{memoContent.comment}</Comment>
-        </DrawerContent>
-      </DrawerWrap>
+      <CommentDrawer isOpen={isOpen} onClose={onClose}>
+        {memoContent.comment}
+      </CommentDrawer>
     </Display>
   );
 };
@@ -146,42 +140,4 @@ const ActionIcons = styled.div`
   display: flex;
   gap: 20px;
   margin-top: 25px;
-`;
-
-const DrawerContent = styled.div`
-  position: relative;
-  padding: 80px 35px;
-`;
-
-const CloseButton = styled.button`
-  position: absolute;
-  display: grid;
-  place-content: center;
-  width: 35px;
-  height: 35px;
-  top: 25px;
-  right: 25px;
-
-  span {
-    display: block;
-    width: 26px;
-    height: 1px;
-    border-radius: 50%;
-    background-color: #161616;
-
-    &:nth-child(1) {
-      transform: rotate(45deg);
-    }
-
-    &:nth-child(2) {
-      transform: rotate(-45deg);
-    }
-  }
-`;
-
-const Comment = styled.p`
-  color: ${palette.black};
-  font-family: ${fontFamily.Noto};
-  font-size: 16px;
-  font-weight: ${fontWeight.regular};
 `;
