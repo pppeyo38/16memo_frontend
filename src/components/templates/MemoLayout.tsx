@@ -1,13 +1,15 @@
+import { useState } from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { EditButton } from "../atoms/EditButton";
+import { CommentIcon } from "../atoms/Icon/CommentIcon";
 import { LinkIcon } from "../atoms/Icon/LinkIcon";
 import { TrashIcon } from "../atoms/Icon/TrashIcon";
 import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 import styled from "styled-components";
-import { CommentIcon } from "../atoms/Icon/CommentIcon";
 import { CommentDrawer } from "../organisms/Memo/CommentDrawer";
+import { LinkPopup } from "../organisms/Memo/LinkPopup";
 
 type FileInfo = {
   id: number;
@@ -26,6 +28,11 @@ type MemoContent = {
 
 export const MemoLayout = (memoContent: MemoContent) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isOpenLink, setIsOpenLink] = useState<boolean>(false);
+
+  const onCloseLink = () => {
+    setIsOpenLink(false);
+  };
 
   return (
     <Display bg={memoContent.colorCode}>
@@ -61,7 +68,9 @@ export const MemoLayout = (memoContent: MemoContent) => {
             <button onClick={onOpen}>
               <CommentIcon color={"white"} />
             </button>
-            <LinkIcon color={"white"} />
+            <button onClick={() => setIsOpenLink(true)}>
+              <LinkIcon color={"white"} />
+            </button>
             <TrashIcon color={"white"} />
           </ActionIcons>
         </Main>
@@ -69,6 +78,11 @@ export const MemoLayout = (memoContent: MemoContent) => {
       <CommentDrawer isOpen={isOpen} onClose={onClose}>
         {memoContent.comment}
       </CommentDrawer>
+      <LinkPopup
+        url={memoContent.url}
+        isOpenLink={isOpenLink}
+        onClose={onCloseLink}
+      />
     </Display>
   );
 };

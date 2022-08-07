@@ -5,10 +5,8 @@ type Props = {
 };
 
 export const LinkIcon = ({ color }: Props) => {
-  const onClick = () => {};
-
   return (
-    <Link onClick={() => onClick()}>
+    <Link>
       <svg
         width="25"
         height="25"
@@ -28,7 +26,7 @@ export const LinkIcon = ({ color }: Props) => {
   );
 };
 
-const Link = styled.button`
+const Link = styled.div`
   width: 30px;
   height: 30px;
 `;
