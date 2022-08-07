@@ -50,17 +50,9 @@ export const ComponentCatalog = () => {
           />
         ))}
       </div>
-      {data.map((memo) => (
-        <Popup key={memo.id} variant="logout">
-          <ColorMemoThumb
-            key={memo.id}
-            memoId={memo.id}
-            colorCode={memo.colorCode}
-            tagName={memo.tagName}
-            deleteMode={true}
-          ></ColorMemoThumb>
-        </Popup>
-      ))}
+      <Popup variant="logout">
+        <div>ポップアップ</div>
+      </Popup>
       {filesData.map((file) => (
         <FileThumb
           key={file.id}

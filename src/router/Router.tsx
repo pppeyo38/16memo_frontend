@@ -57,14 +57,7 @@ export const Router = memo(() => {
           </HeaderLayout>
         }
       />
-      <Route
-        path="/memo/:memoId"
-        element={
-          <HeaderLayout>
-            <MemoId />
-          </HeaderLayout>
-        }
-      />
+      <Route path="/memo/:memoId" element={<MemoId />} />
       {/* TODO: クエリパラメータ */}
       <Route
         path="/search"

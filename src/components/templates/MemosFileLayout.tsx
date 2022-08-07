@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useGetMemos } from "../../hooks/memos/useGetMemos";
-import { ReturnArrow } from "../atoms/ReturnArrow";
+import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { PageTitle } from "../molecules/PageTitle";
 import { ColorMemoThumb } from "../atoms/ColorMemoThumb";
 import { Center, Spinner } from "@chakra-ui/react";
@@ -18,7 +18,7 @@ export const MemosFileLayout = () => {
   return (
     <ContentInner>
       <ArrowWrap>
-        <ReturnArrow path="/" />
+        <ReturnArrow path="/" color={"#161616"} />
       </ArrowWrap>
       <PageTitle>{memosData.name}</PageTitle>
       {memosLoading ? (
@@ -38,10 +38,12 @@ export const MemosFileLayout = () => {
               <ColorMemoThumb
                 key={index}
                 memoId={memo.id}
-                colorCode={memo.colorCode}
-                tagName={memo.tagName}
-                deleteMode={true}
-              ></ColorMemoThumb>
+                content={{
+                  ...memo,
+                  fileInfo: { id: memosData.id, name: memosData.name },
+                }}
+                deleteMode={false}
+              />
             ))}
         </MemosWrap>
       )}
