@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDisclosure } from "@chakra-ui/react";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { EditButton } from "../atoms/EditButton";
@@ -28,9 +29,14 @@ type MemoContent = {
 };
 
 export const MemoLayout = (memoContent: MemoContent) => {
+  const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isOpenLink, setIsOpenLink] = useState<boolean>(false);
   const [isOpenTrash, setIsOpenTrash] = useState<boolean>(false);
+
+  const handleClick = () => {
+    navigate(`/memo/${memoContent.id}/edit`, { state: memoContent });
+  };
 
   const onCloseLink = () => setIsOpenLink(false);
   const onCloseTrash = () => setIsOpenTrash(false);
@@ -44,7 +50,7 @@ export const MemoLayout = (memoContent: MemoContent) => {
             id={memoContent.fileInfo.id}
             color={"white"}
           />
-          <EditButton />
+          <EditButton onClick={handleClick} />
         </Head>
         <Main>
           <MemoInfo>

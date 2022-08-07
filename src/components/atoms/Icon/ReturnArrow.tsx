@@ -1,17 +1,33 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+type FileInfo = {
+  id: number;
+  name: string;
+};
+
+type MemoContent = {
+  id: number;
+  colorCode: string;
+  tagName: string;
+  comment: string;
+  url: string;
+  createdAt: string;
+  fileInfo: FileInfo;
+};
+
 type Props = {
   id?: number;
+  state?: MemoContent;
   path: string;
   color: string;
 };
 
-export const ReturnArrow = ({ id, path, color }: Props) => {
+export const ReturnArrow = ({ id, state, path, color }: Props) => {
   const navigate = useNavigate();
   const onClickReturn = (returnPath: string) => {
     if (id === undefined) {
-      navigate(returnPath);
+      navigate(returnPath, { state: state });
     } else {
       navigate(returnPath, { state: { id: id } });
     }

@@ -2,8 +2,12 @@ import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 import styled from "styled-components";
 
-export const EditButton = () => {
-  return <Button>編集</Button>;
+type Props = {
+  onClick: () => void;
+};
+
+export const EditButton = ({ onClick }: Props) => {
+  return <Button onClick={onClick}>編集</Button>;
 };
 
 const { palette } = ColorTheme;

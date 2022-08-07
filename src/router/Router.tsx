@@ -111,14 +111,7 @@ export const Router = memo(() => {
           </HeaderLayout>
         }
       />
-      <Route
-        path="/memo/:memoId/edit"
-        element={
-          <HeaderLayout>
-            <MemoEdit />
-          </HeaderLayout>
-        }
-      />
+      <Route path="/memo/:memoId/edit" element={<MemoEdit />} />
     </Routes>
   );
 });

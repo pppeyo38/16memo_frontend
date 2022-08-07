@@ -1,9 +1,27 @@
-import type { FC } from "react";
-import { useParams } from "react-router-dom";
+import { useState } from "react";
+import { useParams, useLocation } from "react-router-dom";
+import { MemoCreateLayout } from "../templates/MemoCreateLayout";
 
-type Props = {};
+type FileInfo = {
+  id: number;
+  name: string;
+};
 
-export const MemoEdit: FC<Props> = (props) => {
+type MemoContent = {
+  id: number;
+  colorCode: string;
+  tagName: string;
+  comment: string;
+  url: string;
+  createdAt: string;
+  fileInfo: FileInfo;
+};
+
+export const MemoEdit = () => {
+  const location = useLocation();
+  const [memoContent, setMemoContent] = useState<MemoContent>(
+    location.state as MemoContent
+  );
   const { memoId } = useParams();
-  return <div>/memo/{memoId}/edit</div>;
+  return <MemoCreateLayout {...memoContent} />;
 };
