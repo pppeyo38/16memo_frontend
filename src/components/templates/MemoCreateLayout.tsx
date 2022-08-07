@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Stack, Input, useDisclosure } from "@chakra-ui/react";
+import {
+  Stack,
+  Input,
+  useDisclosure,
+  InputGroup,
+  InputLeftElement,
+  Textarea,
+} from "@chakra-ui/react";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { FilesDrawer } from "../organisms/Memo/FilesDrawer";
 import { ColorTheme } from "../../style/ColorTheme";
@@ -35,6 +42,18 @@ export const MemoCreateLayout = (memoContent: MemoContent) => {
   const [newMemo, setNewMemo] = useState<NewMemo>(memoContent);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const onChangeTag = (value: string) => {
+    setNewMemo((prev) => ({ ...prev, tagName: value }));
+  };
+
+  const onChangeComment = (value: string) => {
+    setNewMemo((prev) => ({ ...prev, comment: value }));
+  };
+
+  const onChangeURL = (value: string) => {
+    setNewMemo((prev) => ({ ...prev, url: value }));
+  };
+
   return (
     <Display>
       <Content>
@@ -51,17 +70,30 @@ export const MemoCreateLayout = (memoContent: MemoContent) => {
         </Color>
         <Stack spacing={3} style={{ maxWidth: "340px", margin: "0 auto" }}>
           <FileSelect onClick={onOpen}>{newMemo.fileInfo.name}</FileSelect>
-          <Input variant="filled" color="#9B9B9B" />
-          <Input variant="filled" color="#9B9B9B" />
-          <Input variant="filled" color="#9B9B9B" />
+          <InputGroup>
+            <InputLeftElement pointerEvents="none" children={<span>#</span>} />
+            <Input
+              style={InputStyle}
+              placeholder="#色名を入力"
+              value={newMemo.tagName}
+              onChange={(e) => onChangeTag(e.target.value)}
+            />
+          </InputGroup>
+          <Textarea
+            style={TextAreaStyle}
+            placeholder="メモ"
+            value={newMemo.comment}
+            onChange={(e) => onChangeComment(e.target.value)}
+          />
+          <Input
+            style={InputURLStyle}
+            placeholder="URLを入力"
+            value={newMemo.url}
+            onChange={(e) => onChangeURL(e.target.value)}
+          />
         </Stack>
       </Content>
-      <FilesDrawer
-        isOpen={isOpen}
-        onClose={onClose}
-        newMemo={newMemo}
-        setNewMemo={setNewMemo}
-      />
+      <FilesDrawer isOpen={isOpen} onClose={onClose} setNewMemo={setNewMemo} />
     </Display>
   );
 };
@@ -128,3 +160,28 @@ const FileSelect = styled.button`
     background-repeat: no-repeat;
   }
 `;
+
+const InputStyle = {
+  fontFamily: fontFamily.Noto,
+  fontSize: "16px",
+  border: "none",
+  background: "#F2F2F2",
+  color: "#161616",
+};
+
+const TextAreaStyle = {
+  height: "115px",
+  fontFamily: fontFamily.Noto,
+  fontSize: "16px",
+  border: "none",
+  background: "#F2F2F2",
+  color: "#161616",
+};
+
+const InputURLStyle = {
+  fontFamily: fontFamily.Roboto,
+  fontSize: "16px",
+  border: "none",
+  background: "#F2F2F2",
+  color: "#161616",
+};

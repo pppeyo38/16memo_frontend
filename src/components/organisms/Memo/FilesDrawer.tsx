@@ -23,12 +23,11 @@ type NewMemo = {
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  newMemo: NewMemo;
   setNewMemo: Dispatch<SetStateAction<NewMemo>>;
 };
 
 export const FilesDrawer: FC<Props> = (props) => {
-  const { isOpen, onClose, newMemo, setNewMemo } = props;
+  const { isOpen, onClose, setNewMemo } = props;
   const { filesList, filesLoading, filesError } = useFilesList();
 
   const ChooseFile = (id: number, name: string) => {
