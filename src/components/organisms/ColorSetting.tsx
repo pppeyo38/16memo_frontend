@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useColorValues } from "../../hooks/color/useColor";
 import { ColorPicker, Input, Select } from "@mantine/core";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { ChevronDown } from "../atoms/Icon/ChevronDown";
@@ -6,9 +7,21 @@ import styled from "styled-components";
 import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 import "./ColorSetting.css";
-import { HashTag } from "../atoms/Icon/HashTag";
 
 export const ColorSetting = () => {
+  const { colorValues, setColorValues } = useColorValues();
+
+  const onChangeHex = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setColorValues((prev) => ({ ...prev, hex: e.target.value }));
+  };
+
+  const handleChange = (value: string) => {
+    setColorValues((prev) => ({
+      ...prev,
+      hex: value,
+    }));
+  };
+
   // 変換方式
   const conversionData = [
     { value: "rgb", label: "RGB" },
@@ -24,7 +37,11 @@ export const ColorSetting = () => {
         <CompleteButton>決定</CompleteButton>
       </Head>
       <Content>
-        <Input id="inputHex" icon={<HashTag />} />
+        <Input
+          id="inputHex"
+          value={`${colorValues.hex}`}
+          onChange={onChangeHex}
+        />
         <Select
           id="selector"
           rightSection={<ChevronDown />}
@@ -35,16 +52,20 @@ export const ColorSetting = () => {
         />
         <Palettes>
           <ColorPalette color={"#d9d9d9"} />
-          <ColorPalette color={"#00A8A6"} />
+          <ColorPalette color={colorValues.hex} />
         </Palettes>
-        <ColorPicker format={"hex"} />
+        <ColorPicker
+          format={"hex"}
+          value={colorValues.hex}
+          onChange={handleChange}
+        />
       </Content>
     </ColorSettingModal>
   );
 };
 
 const { palette } = ColorTheme;
-const { fontWeight, fontFamily } = Font;
+const { fontFamily } = Font;
 
 const ColorSettingModal = styled.section``;
 
