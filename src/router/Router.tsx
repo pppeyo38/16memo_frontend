@@ -15,10 +15,12 @@ import { MemoAdd } from "../components/pages/MemoAdd";
 import { MemoEdit } from "../components/pages/MemoEdit";
 import { Login } from "../components/pages/Login";
 // import { Search } from "../components/pages/Search";
+import { Test } from "../components/pages/Test";
 
 export const Router = memo(() => {
   return (
     <Routes>
+      <Route path="/test" element={<Test />} />
       <Route
         path="/catalog"
         element={
