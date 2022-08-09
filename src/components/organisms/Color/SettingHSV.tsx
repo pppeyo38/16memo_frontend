@@ -57,11 +57,11 @@ export const SettingHSV = ({ colorValues, setColorValues }: Props) => {
           }}
         />
       </SliderSaturation>
-      <SliderLightness bg={"#00FFF0"}>
+      <SliderValue bg={"#00FFF0"}>
         <SliderLabel>V</SliderLabel>
         <Slider
           max={100}
-          value={colorValues.hsv.lightness}
+          value={colorValues.hsv.value}
           onChange={(e) => handleChange(e, "lightness")}
           style={SliderStyle}
         />
@@ -69,14 +69,14 @@ export const SettingHSV = ({ colorValues, setColorValues }: Props) => {
           hideControls
           min={0}
           max={100}
-          value={colorValues.hsv.lightness}
+          value={colorValues.hsv.value}
           onChange={(e) => {
             if (e !== undefined) {
               handleChange(e, "lightness");
             }
           }}
         />
-      </SliderLightness>
+      </SliderValue>
     </Section>
   );
 };
@@ -175,7 +175,7 @@ const SliderSaturation = styled.div<{ bg: string }>`
   }
 `;
 
-const SliderLightness = styled.div<{ bg: string }>`
+const SliderValue = styled.div<{ bg: string }>`
   position: relative;
   width: 210px;
   height: 25px;
