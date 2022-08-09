@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Slider, NumberInput } from "@mantine/core";
 import { ColorValuesType } from "../../../hooks/color/useColor";
 import styled from "styled-components";
@@ -11,29 +11,28 @@ type Props = {
   setColorValues: Dispatch<SetStateAction<ColorValuesType>>;
 };
 
+type TypeCMYK = {
+  cyan: number;
+  magenta: number;
+  yellow: number;
+  key: number;
+};
+
 export const SettingCMYK = ({ colorValues, setColorValues }: Props) => {
   const { setCMYKtoRGB } = useCmykToRgb();
   const { setRGBtoHex } = useHexToRgb();
   const { setRGBtoHSV } = useHsvToRgb();
 
-  const handleChange = (value: number, color: string) => {
-    setColorValues((prev) => ({
-      ...prev,
-      cmyk: { ...prev.cmyk, [color]: value },
-    }));
-    setColorValues((prev) => ({
-      ...prev,
-      rgb: setCMYKtoRGB(prev.cmyk),
-    }));
-  };
+  const [cmyk, setCmyk] = useState<TypeCMYK>({
+    cyan: 0,
+    magenta: 0,
+    yellow: 0,
+    key: 0,
+  });
 
-  useEffect(() => {
-    setColorValues((prev) => ({
-      ...prev,
-      hex: setRGBtoHex(prev.rgb),
-      hsv: setRGBtoHSV(prev.rgb),
-    }));
-  }, [colorValues.rgb]);
+  const handleChange = (value: number, color: string) => {
+    setCmyk((prev) => ({ ...prev, [color]: value }));
+  };
 
   return (
     <Section>
@@ -41,7 +40,7 @@ export const SettingCMYK = ({ colorValues, setColorValues }: Props) => {
         <SliderLabel>C</SliderLabel>
         <Slider
           max={100}
-          value={colorValues.cmyk.cyan}
+          value={cmyk.cyan}
           onChange={(e) => handleChange(e, "cyan")}
           style={SliderStyle}
         />
@@ -49,7 +48,7 @@ export const SettingCMYK = ({ colorValues, setColorValues }: Props) => {
           hideControls
           min={0}
           max={100}
-          value={colorValues.cmyk.cyan}
+          value={cmyk.cyan}
           onChange={(e) => {
             if (e !== undefined) {
               handleChange(e, "cyan");
@@ -61,7 +60,7 @@ export const SettingCMYK = ({ colorValues, setColorValues }: Props) => {
         <SliderLabel>M</SliderLabel>
         <Slider
           max={100}
-          value={colorValues.cmyk.magenta}
+          value={cmyk.magenta}
           onChange={(e) => handleChange(e, "magenta")}
           style={SliderStyle}
         />
@@ -69,7 +68,7 @@ export const SettingCMYK = ({ colorValues, setColorValues }: Props) => {
           hideControls
           min={0}
           max={100}
-          value={colorValues.cmyk.magenta}
+          value={cmyk.magenta}
           onChange={(e) => {
             if (e !== undefined) {
               handleChange(e, "magenta");
@@ -81,7 +80,7 @@ export const SettingCMYK = ({ colorValues, setColorValues }: Props) => {
         <SliderLabel>Y</SliderLabel>
         <Slider
           max={100}
-          value={colorValues.cmyk.yellow}
+          value={cmyk.yellow}
           onChange={(e) => handleChange(e, "yellow")}
           style={SliderStyle}
         />
@@ -89,7 +88,7 @@ export const SettingCMYK = ({ colorValues, setColorValues }: Props) => {
           hideControls
           min={0}
           max={100}
-          value={colorValues.cmyk.yellow}
+          value={cmyk.yellow}
           onChange={(e) => {
             if (e !== undefined) {
               handleChange(e, "yellow");
@@ -101,7 +100,7 @@ export const SettingCMYK = ({ colorValues, setColorValues }: Props) => {
         <SliderLabel>K</SliderLabel>
         <Slider
           max={100}
-          value={colorValues.cmyk.key}
+          value={cmyk.key}
           onChange={(e) => handleChange(e, "key")}
           style={SliderStyle}
         />
@@ -109,7 +108,7 @@ export const SettingCMYK = ({ colorValues, setColorValues }: Props) => {
           hideControls
           min={0}
           max={100}
-          value={colorValues.cmyk.key}
+          value={cmyk.key}
           onChange={(e) => {
             if (e !== undefined) {
               handleChange(e, "key");

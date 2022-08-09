@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import { useColorValues } from "../../hooks/color/useColor";
+import { SettingRGB } from "./Color/SettingRGB";
+import { SettingCMYK } from "./Color/SettingCMYK";
+import { SettingHSV } from "./Color/SettingHSV";
+import { useHexToRgb } from "../../hooks/color/useHexToRgb";
 import { ColorPicker, Input, Select } from "@mantine/core";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { ChevronDown } from "../atoms/Icon/ChevronDown";
@@ -7,21 +11,29 @@ import styled from "styled-components";
 import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 import "./ColorSetting.css";
-import { SettingRGB } from "./Color/SettingRGB";
-import { SettingCMYK } from "./Color/SettingCMYK";
-import { SettingHSV } from "./Color/SettingHSV";
-import { useHexToRgb } from "../../hooks/color/useHexToRgb";
-import { useCmykToRgb } from "../../hooks/color/useCmykToRgb";
-import { useHsvToRgb } from "../../hooks/color/useHsvToRgb";
 
 export const ColorSetting = () => {
-  const { colorValues, setColorValues } = useColorValues();
-  const { setHextoRGB } = useHexToRgb();
-  const { setRGBtoCMYK } = useCmykToRgb();
-  const { setRGBtoHSV } = useHsvToRgb();
+  const { colorValues, setColorValues, changeHex } = useColorValues();
+  const [hex, setHex] = useState<string>(colorValues.hex);
+  const { setHextoRGB, setRGBtoHex } = useHexToRgb();
 
-  const onChangeHex = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setColorValues((prev) => ({ ...prev, hex: e.target.value }));
+  const onBlurHex = (value: string) => {
+    if (value.length === 1 && value.slice(0, 1) === "#") {
+      setHex(colorValues.hex);
+      return;
+    } else if (value.slice(0, 1) === "#") {
+      value = value.slice(1);
+    } else if (value === "") {
+      setHex(colorValues.hex);
+      return;
+    }
+    const Hex = changeHex(value);
+    setColorValues((prev) => ({
+      ...prev,
+      hex: Hex,
+      rgb: setHextoRGB(Hex),
+    }));
+    setHex(Hex);
   };
 
   const handleChange = (value: string) => {
@@ -30,18 +42,12 @@ export const ColorSetting = () => {
       hex: value,
       rgb: setHextoRGB(value),
     }));
+    setHex(value);
   };
 
   useEffect(() => {
-    if (colorValues.hex.length === 7) {
-      setColorValues((prev) => ({
-        ...prev,
-        rgb: setHextoRGB(prev.hex),
-        cmyk: setRGBtoCMYK(setHextoRGB(prev.hex)),
-        hsv: setRGBtoHSV(setHextoRGB(prev.hex)),
-      }));
-    }
-  }, [colorValues.hex]);
+    setHex(setRGBtoHex(colorValues.rgb));
+  }, [colorValues.rgb]);
 
   // 変換方式
   const conversionData = [
@@ -60,9 +66,12 @@ export const ColorSetting = () => {
       <Content isHsv={conversion === "hsv" ? true : false}>
         <Input
           id="inputHex"
-          value={colorValues.hex}
+          value={hex}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            e.target.value.length <= 7 && onChangeHex(e);
+            e.target.value.length <= 7 && setHex(e.target.value);
+          }}
+          onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+            onBlurHex(e.target.value);
           }}
         />
         <Select
@@ -77,11 +86,7 @@ export const ColorSetting = () => {
           <ColorPalette color={"#d9d9d9"} />
           <ColorPalette color={colorValues.hex} />
         </Palettes>
-        <ColorPicker
-          format={"hex"}
-          value={colorValues.hex}
-          onChange={handleChange}
-        />
+        <ColorPicker format={"hex"} value={hex} onChange={handleChange} />
       </Content>
       {conversion === "rgb" && (
         <SettingRGB colorValues={colorValues} setColorValues={setColorValues} />

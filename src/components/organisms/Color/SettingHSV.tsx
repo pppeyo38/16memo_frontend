@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Slider, NumberInput, HueSlider } from "@mantine/core";
 import { ColorValuesType } from "../../../hooks/color/useColor";
 import styled from "styled-components";
@@ -11,36 +11,33 @@ type Props = {
   setColorValues: Dispatch<SetStateAction<ColorValuesType>>;
 };
 
+type TypeHSV = {
+  hue: number;
+  saturation: number;
+  brightness: number;
+};
+
 export const SettingHSV = ({ colorValues, setColorValues }: Props) => {
   const { setHSVtoRGB } = useHsvToRgb();
   const { setRGBtoHex } = useHexToRgb();
   const { setRGBtoCMYK } = useCmykToRgb();
 
-  const handleChange = (value: number, status: string) => {
-    setColorValues((prev) => ({
-      ...prev,
-      hsv: { ...prev.hsv, [status]: value },
-    }));
-    setColorValues((prev) => ({
-      ...prev,
-      rgb: setHSVtoRGB(prev.hsv),
-    }));
-  };
+  const [hsv, setHsv] = useState<TypeHSV>({
+    hue: 0,
+    saturation: 0,
+    brightness: 100,
+  });
 
-  useEffect(() => {
-    setColorValues((prev) => ({
-      ...prev,
-      hex: setRGBtoHex(prev.rgb),
-      cmyk: setRGBtoCMYK(prev.rgb),
-    }));
-  }, [colorValues.rgb]);
+  const handleChange = (value: number, status: string) => {
+    setHsv((prev) => ({ ...prev, [status]: value }));
+  };
 
   return (
     <Section>
       <SliderHue>
         <SliderLabel>H</SliderLabel>
         <HueSlider
-          value={colorValues.hsv.hue}
+          value={hsv.hue}
           onChange={(e) => handleChange(e, "hue")}
           style={SliderStyle}
         />
@@ -48,7 +45,7 @@ export const SettingHSV = ({ colorValues, setColorValues }: Props) => {
           hideControls
           min={0}
           max={360}
-          value={colorValues.hsv.hue}
+          value={hsv.hue}
           onChange={(e) => {
             if (e !== undefined) {
               handleChange(e, "hue");
@@ -60,7 +57,7 @@ export const SettingHSV = ({ colorValues, setColorValues }: Props) => {
         <SliderLabel>S</SliderLabel>
         <Slider
           max={100}
-          value={colorValues.hsv.saturation}
+          value={hsv.saturation}
           onChange={(e) => handleChange(e, "saturation")}
           style={SliderStyle}
         />
@@ -68,7 +65,7 @@ export const SettingHSV = ({ colorValues, setColorValues }: Props) => {
           hideControls
           min={0}
           max={100}
-          value={colorValues.hsv.saturation}
+          value={hsv.saturation}
           onChange={(e) => {
             if (e !== undefined) {
               handleChange(e, "saturation");
@@ -80,18 +77,18 @@ export const SettingHSV = ({ colorValues, setColorValues }: Props) => {
         <SliderLabel>V</SliderLabel>
         <Slider
           max={100}
-          value={colorValues.hsv.value}
-          onChange={(e) => handleChange(e, "lightness")}
+          value={hsv.brightness}
+          onChange={(e) => handleChange(e, "brightness")}
           style={SliderStyle}
         />
         <NumberInput
           hideControls
           min={0}
           max={100}
-          value={colorValues.hsv.value}
+          value={hsv.brightness}
           onChange={(e) => {
             if (e !== undefined) {
-              handleChange(e, "lightness");
+              handleChange(e, "brightness");
             }
           }}
         />

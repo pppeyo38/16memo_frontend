@@ -7,7 +7,7 @@ type TypeRGB = {
 type TypeHSV = {
   hue: number;
   saturation: number;
-  value: number;
+  brightness: number;
 };
 
 export const useHsvToRgb = () => {
@@ -43,13 +43,13 @@ export const useHsvToRgb = () => {
     return {
       hue: Math.round(h),
       saturation: Math.round(s * 100),
-      value: Math.round(v * 100),
+      brightness: Math.round(v * 100),
     };
   };
 
   // HSV→RGB
   const setHSVtoRGB = (getHSV: TypeHSV) => {
-    let C = (getHSV["value"] / 100) * (getHSV["saturation"] / 100);
+    let C = (getHSV["brightness"] / 100) * (getHSV["saturation"] / 100);
     let Hp = getHSV["hue"] / 60;
     let X = C * (1 - Math.abs((Hp % 2) - 1));
 
@@ -70,7 +70,7 @@ export const useHsvToRgb = () => {
       [R, G, B] = [0, 0, 0];
     }
 
-    let m = getHSV["value"] - C;
+    let m = getHSV["brightness"] - C;
     [R, G, B] = [R + m, G + m, B + m];
 
     R = Math.floor((R * 255) / 100);

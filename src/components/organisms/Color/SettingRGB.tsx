@@ -13,8 +13,6 @@ type Props = {
 
 export const SettingRGB = ({ colorValues, setColorValues }: Props) => {
   const { setRGBtoHex } = useHexToRgb();
-  const { setRGBtoCMYK } = useCmykToRgb();
-  const { setRGBtoHSV } = useHsvToRgb();
 
   const handleChange = (value: number, color: string) => {
     setColorValues((prev) => ({
@@ -23,14 +21,18 @@ export const SettingRGB = ({ colorValues, setColorValues }: Props) => {
     }));
   };
 
-  useEffect(() => {
+  const onBlurRgb = (value: number, color: string) => {
+    if (value > 255) {
+      value = 255;
+    } else if (value < 0) {
+      value = 0;
+    }
     setColorValues((prev) => ({
       ...prev,
-      hex: setRGBtoHex(prev.rgb),
-      cmyk: setRGBtoCMYK(prev.rgb),
-      hsv: setRGBtoHSV(prev.rgb),
+      hex: setRGBtoHex({ ...prev.rgb, [color]: value }),
+      rgb: { ...prev.rgb, [color]: value },
     }));
-  }, [colorValues.rgb]);
+  };
 
   return (
     <Section>
@@ -48,9 +50,15 @@ export const SettingRGB = ({ colorValues, setColorValues }: Props) => {
           max={255}
           value={colorValues.rgb.red}
           onChange={(e) => {
-            if (e !== undefined) {
+            if (e !== undefined && e <= 255) {
               handleChange(e, "red");
             }
+          }}
+          onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+            if (e.target.value === "") {
+              e.target.value = "0";
+            }
+            onBlurRgb(parseInt(e.target.value), "red");
           }}
         />
       </SliderWrap>
@@ -68,9 +76,15 @@ export const SettingRGB = ({ colorValues, setColorValues }: Props) => {
           max={255}
           value={colorValues.rgb.green}
           onChange={(e) => {
-            if (e !== undefined) {
+            if (e !== undefined && e <= 255) {
               handleChange(e, "green");
             }
+          }}
+          onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+            if (e.target.value === "") {
+              e.target.value = "0";
+            }
+            onBlurRgb(parseInt(e.target.value), "green");
           }}
         />
       </SliderWrap>
@@ -88,9 +102,15 @@ export const SettingRGB = ({ colorValues, setColorValues }: Props) => {
           max={255}
           value={colorValues.rgb.blue}
           onChange={(e) => {
-            if (e !== undefined) {
+            if (e !== undefined && e <= 255) {
               handleChange(e, "blue");
             }
+          }}
+          onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+            if (e.target.value === "") {
+              e.target.value = "0";
+            }
+            onBlurRgb(parseInt(e.target.value), "blue");
           }}
         />
       </SliderWrap>
