@@ -22,7 +22,7 @@ export type ColorValuesType = {
 };
 
 export const useColorValues = () => {
-  const [colorValues, setColorValues] = useState({
+  const [colorValues, setColorValues] = useState<ColorValuesType>({
     hex: "ffffff",
     rgb: { red: 255, blue: 255, green: 255 },
     cmyk: {

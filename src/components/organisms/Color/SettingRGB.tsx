@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, FC } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { Slider, NumberInput } from "@mantine/core";
 import { ColorValuesType } from "../../../hooks/color/useColor";
 import styled from "styled-components";

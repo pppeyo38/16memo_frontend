@@ -8,6 +8,7 @@ import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 import "./ColorSetting.css";
 import { SettingRGB } from "./Color/SettingRGB";
+import { SettingCMYK } from "./Color/SettingCMYK";
 
 export const ColorSetting = () => {
   const { colorValues, setColorValues } = useColorValues();
@@ -63,6 +64,12 @@ export const ColorSetting = () => {
       </Content>
       {conversion === "rgb" && (
         <SettingRGB colorValues={colorValues} setColorValues={setColorValues} />
+      )}
+      {conversion === "cmyk" && (
+        <SettingCMYK
+          colorValues={colorValues}
+          setColorValues={setColorValues}
+        />
       )}
     </ColorSettingModal>
   );
