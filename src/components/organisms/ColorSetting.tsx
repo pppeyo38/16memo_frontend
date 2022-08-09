@@ -22,17 +22,6 @@ export const ColorSetting = () => {
 
   const onChangeHex = (e: React.ChangeEvent<HTMLInputElement>) => {
     setColorValues((prev) => ({ ...prev, hex: e.target.value }));
-    console.log(colorValues.hex.length);
-
-    if (colorValues.hex.length === 7) {
-      console.log("6桁！！！！");
-      // setColorValues((prev) => ({
-      //   ...prev,
-      //   rgb: setHextoRGB(prev.hex),
-      //   cmyk: setRGBtoCMYK(prev.rgb),
-      //   hsv: setRGBtoHSV(prev.rgb),
-      // }));
-    }
   };
 
   const handleChange = (value: string) => {
@@ -44,11 +33,14 @@ export const ColorSetting = () => {
   };
 
   useEffect(() => {
-    setColorValues((prev) => ({
-      ...prev,
-      cmyk: setRGBtoCMYK(prev.rgb),
-      hsv: setRGBtoHSV(prev.rgb),
-    }));
+    if (colorValues.hex.length === 7) {
+      setColorValues((prev) => ({
+        ...prev,
+        rgb: setHextoRGB(prev.hex),
+        cmyk: setRGBtoCMYK(setHextoRGB(prev.hex)),
+        hsv: setRGBtoHSV(setHextoRGB(prev.hex)),
+      }));
+    }
   }, [colorValues.hex]);
 
   // 変換方式
@@ -66,7 +58,13 @@ export const ColorSetting = () => {
         <CompleteButton>決定</CompleteButton>
       </Head>
       <Content isHsv={conversion === "hsv" ? true : false}>
-        <Input id="inputHex" value={colorValues.hex} onChange={onChangeHex} />
+        <Input
+          id="inputHex"
+          value={colorValues.hex}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            e.target.value.length <= 7 && onChangeHex(e);
+          }}
+        />
         <Select
           id="selector"
           rightSection={<ChevronDown />}

@@ -73,9 +73,9 @@ export const useHsvToRgb = () => {
     let m = getHSV["value"] - C;
     [R, G, B] = [R + m, G + m, B + m];
 
-    R = Math.floor(R * 255);
-    G = Math.floor(G * 255);
-    B = Math.floor(B * 255);
+    R = Math.floor((R * 255) / 100);
+    G = Math.floor((G * 255) / 100);
+    B = Math.floor((B * 255) / 100);
 
     return { red: R, green: G, blue: B };
   };
