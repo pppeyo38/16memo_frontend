@@ -28,7 +28,7 @@ export const useCmykToRgb = () => {
             return Math.round(((value - k) / (1 - k)) * 100);
           });
     cmyk.push(Math.round(k * 100));
-    return cmyk;
+    return { cyan: cmyk[0], magenta: cmyk[1], yellow: cmyk[2], key: cmyk[3] };
   };
 
   // CMYK→CMY→RGB
@@ -43,7 +43,7 @@ export const useCmykToRgb = () => {
     const rgb = cmy.map((value) => {
       return Math.round((1 - value) * 255);
     });
-    return rgb;
+    return { red: rgb[0], green: rgb[1], blue: rgb[2] };
   };
 
   return { setRGBtoCMYK, setCMYKtoRGB };
