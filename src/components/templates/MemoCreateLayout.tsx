@@ -7,7 +7,7 @@ import {
   InputLeftElement,
   Textarea,
 } from "@chakra-ui/react";
-import { Modal } from "@mantine/core";
+import { usePostMemos, MemoContent } from "../../hooks/memos/usePostMemo";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { FilesDrawer } from "../organisms/Memo/FilesDrawer";
 import { ColorTheme } from "../../style/ColorTheme";
@@ -15,33 +15,8 @@ import { Font } from "../../style/Font";
 import styled from "styled-components";
 import { ColorSetting } from "../organisms/ColorSetting";
 
-type FileInfo = {
-  id: number;
-  name: string;
-};
-
-type MemoContent = {
-  id: number;
-  colorCode: string;
-  tagName: string;
-  comment: string;
-  url: string;
-  createdAt: string;
-  fileInfo: FileInfo;
-};
-
-type NewMemo = {
-  id: number;
-  colorCode: string;
-  tagName: string;
-  comment: string;
-  url: string;
-  createdAt: string;
-  fileInfo: FileInfo;
-};
-
 export const MemoCreateLayout = (memoContent: MemoContent) => {
-  const [newMemo, setNewMemo] = useState<NewMemo>(memoContent);
+  const { newMemo, setNewMemo } = usePostMemos(memoContent);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [openedModal, setOpenedModal] = useState(false);
 
@@ -68,9 +43,9 @@ export const MemoCreateLayout = (memoContent: MemoContent) => {
           />
           <CompleteButton>完了</CompleteButton>
         </Head>
-        <Color bg={memoContent.colorCode} onClick={() => setOpenedModal(true)}>
+        <Color bg={newMemo.colorCode} onClick={() => setOpenedModal(true)}>
           <ColorEdit>色を編集</ColorEdit>
-          <ColorCode># {memoContent.colorCode}</ColorCode>
+          <ColorCode># {newMemo.colorCode}</ColorCode>
         </Color>
         <Stack spacing={3} style={{ maxWidth: "340px", margin: "0 auto" }}>
           <FileSelect onClick={onOpen}>{newMemo.fileInfo.name}</FileSelect>
@@ -97,7 +72,13 @@ export const MemoCreateLayout = (memoContent: MemoContent) => {
           />
         </Stack>
       </Content>
-      {openedModal && <ColorSetting setOpenedModal={setOpenedModal} />}
+      {openedModal && (
+        <ColorSetting
+          setOpenedModal={setOpenedModal}
+          currentColor={`#${newMemo.colorCode}`}
+          setNewMemo={setNewMemo}
+        />
+      )}
       <FilesDrawer isOpen={isOpen} onClose={onClose} setNewMemo={setNewMemo} />
     </Display>
   );

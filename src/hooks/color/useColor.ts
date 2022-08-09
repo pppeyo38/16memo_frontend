@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export type ColorValuesType = {
   hex: string;
   rgb: {
@@ -21,22 +19,6 @@ export type ColorValuesType = {
 };
 
 export const useColorValues = () => {
-  const [colorValues, setColorValues] = useState<ColorValuesType>({
-    hex: "#ffffff",
-    rgb: { red: 255, blue: 255, green: 255 },
-    // cmyk: {
-    //   cyan: 0,
-    //   magenta: 0,
-    //   yellow: 0,
-    //   key: 0,
-    // },
-    // hsv: {
-    //   hue: 0,
-    //   saturation: 0,
-    //   brightness: 100,
-    // },
-  });
-
   // 「#」なしで渡す
   const changeHex = (hex: string) => {
     // 桁調整
@@ -65,5 +47,5 @@ export const useColorValues = () => {
     return "#" + hex;
   };
 
-  return { colorValues, setColorValues, changeHex };
+  return { changeHex };
 };

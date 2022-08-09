@@ -1,4 +1,4 @@
-import { useEffect, useState, Dispatch, SetStateAction } from "react";
+import { useEffect, useState, Dispatch, SetStateAction, FC, memo } from "react";
 import { useColorValues } from "../../hooks/color/useColor";
 import { SettingRGB } from "./Color/SettingRGB";
 import { SettingCMYK } from "./Color/SettingCMYK";
@@ -11,15 +11,34 @@ import styled from "styled-components";
 import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 import "./ColorSetting.css";
+import { MemoContent } from "../../hooks/memos/usePostMemo";
 
 type Props = {
   setOpenedModal: Dispatch<SetStateAction<boolean>>;
+  currentColor: string;
+  setNewMemo: Dispatch<SetStateAction<MemoContent>>;
 };
 
-export const ColorSetting = ({ setOpenedModal }: Props) => {
-  const { colorValues, setColorValues, changeHex } = useColorValues();
-  const [hex, setHex] = useState<string>(colorValues.hex);
+type ColorValues = {
+  hex: string;
+  rgb: {
+    red: number;
+    blue: number;
+    green: number;
+  };
+};
+
+export const ColorSetting: FC<Props> = memo((props) => {
+  const { setOpenedModal, currentColor, setNewMemo } = props;
   const { setHextoRGB, setRGBtoHex } = useHexToRgb();
+  const { changeHex } = useColorValues();
+
+  const [colorValues, setColorValues] = useState<ColorValues>({
+    hex: currentColor,
+    rgb: setHextoRGB(currentColor),
+  });
+
+  const [hex, setHex] = useState(currentColor);
 
   const onBlurHex = (value: string) => {
     if (value.length === 1 && value.slice(0, 1) === "#") {
@@ -65,7 +84,15 @@ export const ColorSetting = ({ setOpenedModal }: Props) => {
     <SettingModal>
       <Head>
         <CancelArrow onClick={() => setOpenedModal(false)} color={"#161616"} />
-        <CompleteButton onClick={() => setOpenedModal(false)}>
+        <CompleteButton
+          onClick={() => {
+            setOpenedModal(false);
+            setNewMemo((prev) => ({
+              ...prev,
+              colorCode: colorValues.hex.slice(1),
+            }));
+          }}
+        >
           決定
         </CompleteButton>
       </Head>
@@ -108,7 +135,7 @@ export const ColorSetting = ({ setOpenedModal }: Props) => {
       )}
     </SettingModal>
   );
-};
+});
 
 const { palette } = ColorTheme;
 const { fontFamily } = Font;
