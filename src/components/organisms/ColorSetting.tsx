@@ -9,6 +9,7 @@ import { Font } from "../../style/Font";
 import "./ColorSetting.css";
 import { SettingRGB } from "./Color/SettingRGB";
 import { SettingCMYK } from "./Color/SettingCMYK";
+import { SettingHSV } from "./Color/SettingHSV";
 
 export const ColorSetting = () => {
   const { colorValues, setColorValues } = useColorValues();
@@ -38,7 +39,7 @@ export const ColorSetting = () => {
         <ReturnArrow path={""} color={"#161616"} />
         <CompleteButton>決定</CompleteButton>
       </Head>
-      <Content>
+      <Content isHsv={conversion === "hsv" ? true : false}>
         <Input
           id="inputHex"
           value={`${colorValues.hex}`}
@@ -71,6 +72,9 @@ export const ColorSetting = () => {
           setColorValues={setColorValues}
         />
       )}
+      {conversion === "hsv" && (
+        <SettingHSV colorValues={colorValues} setColorValues={setColorValues} />
+      )}
     </ColorSettingModal>
   );
 };
@@ -93,12 +97,20 @@ const CompleteButton = styled.button`
   font-size: 16px;
 `;
 
-const Content = styled.div`
+const Content = styled.div<{ isHsv: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
   margin-top: 25px;
+
+  ${(props) =>
+    props.isHsv &&
+    `
+      & .mantine-ColorPicker-wrapper.mantine-1m6yxe8 > .mantine-ColorPicker-body {
+        display: none;
+      }
+  `}
 `;
 
 const Palettes = styled.div`
