@@ -1,18 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import { useColorValues } from "../../hooks/color/useColor";
 import { SettingRGB } from "./Color/SettingRGB";
 import { SettingCMYK } from "./Color/SettingCMYK";
 import { SettingHSV } from "./Color/SettingHSV";
 import { useHexToRgb } from "../../hooks/color/useHexToRgb";
 import { ColorPicker, Input, Select } from "@mantine/core";
-import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
+import { CancelArrow } from "../atoms/Icon/CancelArrow";
 import { ChevronDown } from "../atoms/Icon/ChevronDown";
 import styled from "styled-components";
 import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 import "./ColorSetting.css";
 
-export const ColorSetting = () => {
+type Props = {
+  setOpenedModal: Dispatch<SetStateAction<boolean>>;
+};
+
+export const ColorSetting = ({ setOpenedModal }: Props) => {
   const { colorValues, setColorValues, changeHex } = useColorValues();
   const [hex, setHex] = useState<string>(colorValues.hex);
   const { setHextoRGB, setRGBtoHex } = useHexToRgb();
@@ -58,10 +62,12 @@ export const ColorSetting = () => {
   const [conversion, setConversion] = useState("rgb");
 
   return (
-    <ColorSettingModal>
+    <SettingModal>
       <Head>
-        <ReturnArrow path={""} color={"#161616"} />
-        <CompleteButton>決定</CompleteButton>
+        <CancelArrow onClick={() => setOpenedModal(false)} color={"#161616"} />
+        <CompleteButton onClick={() => setOpenedModal(false)}>
+          決定
+        </CompleteButton>
       </Head>
       <Content isHsv={conversion === "hsv" ? true : false}>
         <Input
@@ -100,14 +106,20 @@ export const ColorSetting = () => {
       {conversion === "hsv" && (
         <SettingHSV colorValues={colorValues} setColorValues={setColorValues} />
       )}
-    </ColorSettingModal>
+    </SettingModal>
   );
 };
 
 const { palette } = ColorTheme;
 const { fontFamily } = Font;
 
-const ColorSettingModal = styled.section``;
+const SettingModal = styled.section`
+  position: absolute;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background: white;
+`;
 
 const Head = styled.div`
   max-width: 335px;

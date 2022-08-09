@@ -105,14 +105,7 @@ export const Router = memo(() => {
           </HeaderLayout>
         }
       />
-      <Route
-        path="/memo/add"
-        element={
-          <HeaderLayout>
-            <MemoAdd />
-          </HeaderLayout>
-        }
-      />
+      <Route path="/memo/add" element={<MemoAdd />} />
       <Route path="/memo/:memoId/edit" element={<MemoEdit />} />
     </Routes>
   );

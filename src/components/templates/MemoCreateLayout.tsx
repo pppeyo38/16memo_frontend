@@ -7,11 +7,13 @@ import {
   InputLeftElement,
   Textarea,
 } from "@chakra-ui/react";
+import { Modal } from "@mantine/core";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { FilesDrawer } from "../organisms/Memo/FilesDrawer";
 import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 import styled from "styled-components";
+import { ColorSetting } from "../organisms/ColorSetting";
 
 type FileInfo = {
   id: number;
@@ -41,6 +43,7 @@ type NewMemo = {
 export const MemoCreateLayout = (memoContent: MemoContent) => {
   const [newMemo, setNewMemo] = useState<NewMemo>(memoContent);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [openedModal, setOpenedModal] = useState(false);
 
   const onChangeTag = (value: string) => {
     setNewMemo((prev) => ({ ...prev, tagName: value }));
@@ -65,7 +68,8 @@ export const MemoCreateLayout = (memoContent: MemoContent) => {
           />
           <CompleteButton>完了</CompleteButton>
         </Head>
-        <Color bg={memoContent.colorCode}>
+        <Color bg={memoContent.colorCode} onClick={() => setOpenedModal(true)}>
+          <ColorEdit>色を編集</ColorEdit>
           <ColorCode># {memoContent.colorCode}</ColorCode>
         </Color>
         <Stack spacing={3} style={{ maxWidth: "340px", margin: "0 auto" }}>
@@ -93,6 +97,7 @@ export const MemoCreateLayout = (memoContent: MemoContent) => {
           />
         </Stack>
       </Content>
+      {openedModal && <ColorSetting setOpenedModal={setOpenedModal} />}
       <FilesDrawer isOpen={isOpen} onClose={onClose} setNewMemo={setNewMemo} />
     </Display>
   );
@@ -126,17 +131,25 @@ const CompleteButton = styled.button`
 const Color = styled.div<{ bg: string }>`
   display: grid;
   place-content: center;
+  text-align: center;
   margin: 25px 0;
   width: 100vw;
   height: 170px;
   background-color: ${({ bg }) => `#${bg}`};
 `;
 
-const ColorCode = styled.h1`
+const ColorEdit = styled.h1`
+  color: ${palette.white};
+  font-family: ${fontFamily.Noto};
+  font-weight: ${fontWeight.bold};
+  font-size: 24px;
+`;
+
+const ColorCode = styled.h2`
   color: ${palette.white};
   font-family: ${fontFamily.Roboto};
   font-weight: ${fontWeight.medium};
-  font-size: 24px;
+  font-size: 16px;
 `;
 
 const FileSelect = styled.button`
