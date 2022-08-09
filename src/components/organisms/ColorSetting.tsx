@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 import "./ColorSetting.css";
+import { SettingRGB } from "./Color/SettingRGB";
 
 export const ColorSetting = () => {
   const { colorValues, setColorValues } = useColorValues();
@@ -60,6 +61,9 @@ export const ColorSetting = () => {
           onChange={handleChange}
         />
       </Content>
+      {conversion === "rgb" && (
+        <SettingRGB colorValues={colorValues} setColorValues={setColorValues} />
+      )}
     </ColorSettingModal>
   );
 };
