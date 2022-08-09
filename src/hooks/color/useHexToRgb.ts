@@ -41,5 +41,5 @@ export const useHexToRgb = () => {
     };
   };
 
-  return { toHex, setRGBtoHex, setHextoRGB };
+  return { setRGBtoHex, setHextoRGB };
 };

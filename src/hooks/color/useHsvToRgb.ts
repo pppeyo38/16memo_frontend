@@ -40,12 +40,16 @@ export const useHsvToRgb = () => {
     let s = max === 0 ? 0 : diff / max;
     let v = max;
 
-    return { hue: h, saturation: s, value: v };
+    return {
+      hue: Math.round(h),
+      saturation: Math.round(s * 100),
+      value: Math.round(v * 100),
+    };
   };
 
   // HSV→RGB
   const setHSVtoRGB = (getHSV: TypeHSV) => {
-    let C = getHSV["value"] * getHSV["saturation"];
+    let C = (getHSV["value"] / 100) * (getHSV["saturation"] / 100);
     let Hp = getHSV["hue"] / 60;
     let X = C * (1 - Math.abs((Hp % 2) - 1));
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useColorValues } from "../../hooks/color/useColor";
 import { ColorPicker, Input, Select } from "@mantine/core";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
@@ -10,20 +10,46 @@ import "./ColorSetting.css";
 import { SettingRGB } from "./Color/SettingRGB";
 import { SettingCMYK } from "./Color/SettingCMYK";
 import { SettingHSV } from "./Color/SettingHSV";
+import { useHexToRgb } from "../../hooks/color/useHexToRgb";
+import { useCmykToRgb } from "../../hooks/color/useCmykToRgb";
+import { useHsvToRgb } from "../../hooks/color/useHsvToRgb";
 
 export const ColorSetting = () => {
   const { colorValues, setColorValues } = useColorValues();
+  const { setHextoRGB } = useHexToRgb();
+  const { setRGBtoCMYK } = useCmykToRgb();
+  const { setRGBtoHSV } = useHsvToRgb();
 
   const onChangeHex = (e: React.ChangeEvent<HTMLInputElement>) => {
     setColorValues((prev) => ({ ...prev, hex: e.target.value }));
+    console.log(colorValues.hex.length);
+
+    if (colorValues.hex.length === 7) {
+      console.log("6桁！！！！");
+      // setColorValues((prev) => ({
+      //   ...prev,
+      //   rgb: setHextoRGB(prev.hex),
+      //   cmyk: setRGBtoCMYK(prev.rgb),
+      //   hsv: setRGBtoHSV(prev.rgb),
+      // }));
+    }
   };
 
   const handleChange = (value: string) => {
     setColorValues((prev) => ({
       ...prev,
       hex: value,
+      rgb: setHextoRGB(value),
     }));
   };
+
+  useEffect(() => {
+    setColorValues((prev) => ({
+      ...prev,
+      cmyk: setRGBtoCMYK(prev.rgb),
+      hsv: setRGBtoHSV(prev.rgb),
+    }));
+  }, [colorValues.hex]);
 
   // 変換方式
   const conversionData = [
@@ -40,11 +66,7 @@ export const ColorSetting = () => {
         <CompleteButton>決定</CompleteButton>
       </Head>
       <Content isHsv={conversion === "hsv" ? true : false}>
-        <Input
-          id="inputHex"
-          value={`${colorValues.hex}`}
-          onChange={onChangeHex}
-        />
+        <Input id="inputHex" value={colorValues.hex} onChange={onChangeHex} />
         <Select
           id="selector"
           rightSection={<ChevronDown />}

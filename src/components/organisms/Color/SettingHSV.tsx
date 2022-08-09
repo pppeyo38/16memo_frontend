@@ -1,7 +1,10 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import { Slider, NumberInput, HueSlider } from "@mantine/core";
 import { ColorValuesType } from "../../../hooks/color/useColor";
 import styled from "styled-components";
+import { useHsvToRgb } from "../../../hooks/color/useHsvToRgb";
+import { useHexToRgb } from "../../../hooks/color/useHexToRgb";
+import { useCmykToRgb } from "../../../hooks/color/useCmykToRgb";
 
 type Props = {
   colorValues: ColorValuesType;
@@ -9,12 +12,28 @@ type Props = {
 };
 
 export const SettingHSV = ({ colorValues, setColorValues }: Props) => {
+  const { setHSVtoRGB } = useHsvToRgb();
+  const { setRGBtoHex } = useHexToRgb();
+  const { setRGBtoCMYK } = useCmykToRgb();
+
   const handleChange = (value: number, status: string) => {
     setColorValues((prev) => ({
       ...prev,
       hsv: { ...prev.hsv, [status]: value },
     }));
+    setColorValues((prev) => ({
+      ...prev,
+      rgb: setHSVtoRGB(prev.hsv),
+    }));
   };
+
+  useEffect(() => {
+    setColorValues((prev) => ({
+      ...prev,
+      hex: setRGBtoHex(prev.rgb),
+      cmyk: setRGBtoCMYK(prev.rgb),
+    }));
+  }, [colorValues.rgb]);
 
   return (
     <Section>
