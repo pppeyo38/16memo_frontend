@@ -88,16 +88,18 @@ const WhiteBox = styled.div`
   right: 0px;
   width: calc(100% - 60px);
   height: 55px;
-  padding: 10px 13px;
+  padding: 7px 13px 8px;
   background-color: ${white};
   box-sizing: border-box;
   font-weight: ${regular};
   h2 {
+    line-height: 1.43;
     color: ${black};
     font-size: 16px;
     font-family: ${Noto};
   }
   p {
+    line-height: 1.15;
     color: #9b9b9b;
     font-size: 13px;
     font-family: ${Roboto};

@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useLoginUser } from "./useLoginUser";
+import { API_URL } from "../api/endpoint";
 
 export type Data = {
   email: string;
@@ -23,7 +24,7 @@ export const useSignUp = () => {
   const [data, setData] = useState<Data>(initialData);
 
   const signup = () => {
-    axios.post("http://localhost:3200/signup", data).then((response) => {
+    axios.post(`${API_URL}/signup`, data).then((response) => {
       if (response.data) {
         const isAdmin = true;
         setLoginUser({ ...response.data, isAdmin });
