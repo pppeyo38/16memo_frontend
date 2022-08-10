@@ -58,10 +58,12 @@ const { regular } = Font.fontWeight;
 
 const LinkWrapper = styled(Link)`
   display: inline-block;
+  flex-shrink: 0;
   position: relative;
   overflow: hidden;
-  width: 100%;
+  width: 340px;
   height: 60px;
+  margin-bottom: 13px;
   border-bottom-right-radius: 13px;
   box-shadow: 0px 2px 3px 2px rgba(22, 22, 22, 0.15);
 `;
@@ -77,8 +79,8 @@ const NoLinkWrapper = styled.div`
 `;
 
 const ColorCodeBox = styled.div<Props>`
-  width: 100%;
-  height: 100%;
+  width: 340px;
+  height: 60px;
   background-color: ${(props) => `#${props.content.colorCode}`};
 `;
 
@@ -86,7 +88,7 @@ const WhiteBox = styled.div`
   position: absolute;
   top: 0px;
   right: 0px;
-  width: calc(100% - 60px);
+  width: 280px;
   height: 55px;
   padding: 7px 13px 8px;
   background-color: ${white};

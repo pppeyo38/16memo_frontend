@@ -63,8 +63,10 @@ const ArrowWrap = styled.div`
 
 const MemosWrap = styled.div`
   max-width: 340px;
-  margin: 15px auto;
+  height: calc(100vh - 125px);
+  overflow-y: scroll;
+  margin: 15px auto 0;
+  padding-bottom: 15px;
   display: flex;
   flex-direction: column;
-  gap: 13px;
 `;
