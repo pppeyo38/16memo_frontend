@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "../../api/axios";
-import requests from "../../api/Requests";
+import { client } from "../../lib/axios";
 import { FileWithMemoInfoType } from "../../api/handler/file/type";
 
 export const useFiles = () => {
@@ -15,26 +14,12 @@ export const useFiles = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem("token");
-      try {
-        await axios
-          .get(requests.fetchFiles, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          })
-          .then((response) => {
-            if (response.data) {
-              const filesData = response.data;
-              setState({ filesData, filesLoading: false });
-            }
-          });
-      } catch (filesError: unknown) {
-        if (filesError instanceof Error) {
-          const err = filesError;
-          setState((prev) => ({ ...prev, filesError: err, loading: false }));
-        }
-      }
+      await client
+        .get("color_files")
+        .then((response) => {
+          setState({ filesData: response.data, filesLoading: false });
+        })
+        .catch((error) => console.log("useFiles: " + error));
     };
 
     fetchData();

@@ -1,7 +1,9 @@
 import axios from "axios";
+import { auth } from "../FirebaseConfig";
+import { client } from "../lib/axios";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useLoginUser } from "./useLoginUser";
-import { API_URL } from "../api/endpoint";
 
 type Data = {
   email: string;
@@ -13,29 +15,21 @@ export const useLogin = () => {
   const { setLoginUser } = useLoginUser();
 
   const login = (data: Data) => {
-    axios
-      .post(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${
-          import.meta.env.VITE_FIREBASE_API_KEY
-        }`,
-        { ...data, returnSecureToken: true }
-      )
-      .then((response) => {
-        const idToken = response.data.idToken;
-        axios
-          .get(`${API_URL}/login`, {
-            headers: {
-              Authorization: `Bearer ${response.data.idToken}`,
-            },
-          })
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then(() => {
+        console.log("--- ログイン ---");
+        client
+          .get("login")
           .then((response) => {
-            if (response.data) {
-              localStorage.setItem("token", idToken);
-              const isAdmin = true;
-              setLoginUser({ ...response.data, isAdmin });
-              navigate("/");
-            }
-          });
+            const isAdmin = true;
+            setLoginUser({ ...response.data, isAdmin });
+            navigate("/");
+          })
+          .catch(() => console.log("ユーザー情報取得失敗..."));
+      })
+      .catch((error) => {
+        console.log("--- ログイン失敗 ---");
+        console.log(error);
       });
   };
 

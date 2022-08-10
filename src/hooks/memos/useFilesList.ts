@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "../../api/axios";
+import { client } from "../../lib/axios";
 import requests from "../../api/Requests";
 
 type filesListData = {
@@ -19,30 +19,30 @@ export const useFilesList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem("token");
-      try {
-        await axios
-          .get(requests.getFilesName, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          })
-          .then((response) => {
-            if (response.data) {
-              const filesList = response.data;
-              setState({ filesList, filesLoading: false });
-            }
-          });
-      } catch (filesError: unknown) {
-        if (filesError instanceof Error) {
-          const err = filesError;
-          setState((prev) => ({
-            ...prev,
-            filesError: err,
-            filesLoading: false,
-          }));
-        }
-      }
+      // const token = localStorage.getItem("token");
+      // try {
+      //   await axios
+      //     .get(requests.getFilesName, {
+      //       headers: {
+      //         Authorization: `Bearer ${token}`,
+      //       },
+      //     })
+      //     .then((response) => {
+      //       if (response.data) {
+      //         const filesList = response.data;
+      //         setState({ filesList, filesLoading: false });
+      //       }
+      //     });
+      // } catch (filesError: unknown) {
+      //   if (filesError instanceof Error) {
+      //     const err = filesError;
+      //     setState((prev) => ({
+      //       ...prev,
+      //       filesError: err,
+      //       filesLoading: false,
+      //     }));
+      //   }
+      // }
     };
 
     fetchData();
