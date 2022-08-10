@@ -1,29 +1,15 @@
 import { Dispatch, FC, SetStateAction } from "react";
+import { PostMemo } from "../../../hooks/memos/usePostMemo";
 import { useFilesList } from "../../../hooks/memos/useFilesList";
 import { DrawerWrap } from "../../molecules/DrawerWrap";
 import styled from "styled-components";
 import { ColorTheme } from "../../../style/ColorTheme";
 import { Font } from "../../../style/Font";
 
-type FilesData = {
-  id: number;
-  name: string;
-};
-
-type NewMemo = {
-  id: number;
-  colorCode: string;
-  tagName: string;
-  comment: string;
-  url: string;
-  createdAt: string;
-  fileInfo: FilesData;
-};
-
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  setNewMemo: Dispatch<SetStateAction<NewMemo>>;
+  setNewMemo: Dispatch<SetStateAction<PostMemo>>;
 };
 
 export const FilesDrawer: FC<Props> = (props) => {

@@ -6,18 +6,16 @@ type FileInfo = {
   name: string;
 };
 
-export type MemoContent = {
-  id: number;
+export type PostMemo = {
   colorCode: string;
   tagName: string;
   comment: string;
   url: string;
-  createdAt: string;
   fileInfo: FileInfo;
 };
 
-export const usePostMemos = (memoContent: MemoContent) => {
-  const [newMemo, setNewMemo] = useState<MemoContent>(memoContent);
+export const usePostMemos = (memoContent: PostMemo) => {
+  const [newMemo, setNewMemo] = useState<PostMemo>(memoContent);
 
   return { newMemo, setNewMemo };
 };
