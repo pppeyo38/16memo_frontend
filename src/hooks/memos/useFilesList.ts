@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { client } from "../../lib/axios";
-import requests from "../../api/Requests";
 
 type filesListData = {
   id: number;
@@ -19,30 +18,12 @@ export const useFilesList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // const token = localStorage.getItem("token");
-      // try {
-      //   await axios
-      //     .get(requests.getFilesName, {
-      //       headers: {
-      //         Authorization: `Bearer ${token}`,
-      //       },
-      //     })
-      //     .then((response) => {
-      //       if (response.data) {
-      //         const filesList = response.data;
-      //         setState({ filesList, filesLoading: false });
-      //       }
-      //     });
-      // } catch (filesError: unknown) {
-      //   if (filesError instanceof Error) {
-      //     const err = filesError;
-      //     setState((prev) => ({
-      //       ...prev,
-      //       filesError: err,
-      //       filesLoading: false,
-      //     }));
-      //   }
-      // }
+      await client
+        .get("files_name")
+        .then((response) => {
+          setState({ filesList: response.data, filesLoading: false });
+        })
+        .catch(() => console.log("ファイル名一覧の取得に失敗しました..."));
     };
 
     fetchData();
