@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { client } from "../../lib/axios";
 
 type MemoType = {
   id: number;
@@ -28,25 +28,12 @@ export const useGetMemos = (fileId: number) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem("token");
-      try {
-        await axios
-          .get(`http://localhost:3200/color_files/${fileId}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          })
-          .then((response) => {
-            if (response.data) {
-              const memosData = response.data;
-              setState({ memosData, memosLoading: false });
-            }
-          });
-      } catch (memosError: unknown) {
-        if (memosError instanceof Error) {
-          const err = memosError;
-        }
-      }
+      await client
+        .get(`color_files/${fileId}`)
+        .then((response) => {
+          setState({ memosData: response.data, memosLoading: false });
+        })
+        .catch((error) => console.log("メモ情報取得失敗..."));
     };
     fetchData();
   }, []);
