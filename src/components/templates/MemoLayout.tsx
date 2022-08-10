@@ -45,11 +45,7 @@ export const MemoLayout = (memoContent: MemoContent) => {
     <Display bg={memoContent.colorCode}>
       <Content>
         <Head>
-          <ReturnArrow
-            path={`/${memoContent.fileInfo.name}`}
-            id={memoContent.fileInfo.id}
-            color={"white"}
-          />
+          <ReturnArrow onClick={() => navigate(-1)} color={"white"} />
           <EditButton onClick={handleClick} />
         </Head>
         <Main>

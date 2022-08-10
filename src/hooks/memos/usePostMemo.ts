@@ -24,9 +24,9 @@ export const usePostMemos = () => {
     };
     console.log(sendData);
     await client.post("memos", sendData).then((response) => {
-      console.log("メモ作成完了");
-      console.log(response.data);
-      navigate(`/memo/${response.data.id}`);
+      navigate(`/${response.data.fileName}`, {
+        state: { id: response.data.fileId },
+      });
     });
   };
 
