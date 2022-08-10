@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useLoginUser } from "./useLoginUser";
+import { API_URL } from "../api/endpoint";
 
 type Data = {
   email: string;
@@ -22,7 +23,7 @@ export const useLogin = () => {
       .then((response) => {
         const idToken = response.data.idToken;
         axios
-          .get("http://localhost:3200/login", {
+          .get(`${API_URL}/login`, {
             headers: {
               Authorization: `Bearer ${response.data.idToken}`,
             },
