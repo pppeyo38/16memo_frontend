@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, FC, SetStateAction, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePostMemos, PostMemo } from "../../hooks/memos/usePostMemo";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
@@ -8,17 +8,26 @@ import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 import styled from "styled-components";
 
-export const MemoCreateLayout = (memoContent: PostMemo) => {
-  const { newMemo, setNewMemo } = usePostMemos(memoContent);
+type Props = {
+  newMemo: PostMemo;
+  setNewMemo: Dispatch<SetStateAction<PostMemo>>;
+};
+
+// POST /memos
+export const MemoCreateLayout: FC<Props> = (props) => {
+  const { newMemo, setNewMemo } = props;
+  const { SendPostMemo } = usePostMemos();
   const [openedModal, setOpenedModal] = useState(false);
   const navigate = useNavigate();
 
   return (
-    <Display>
+    <>
       <Content>
         <Head>
           <ReturnArrow onClick={() => navigate(-1)} color={"#161616"} />
-          <CompleteButton>完了</CompleteButton>
+          <CompleteButton onClick={() => SendPostMemo(newMemo)}>
+            完了
+          </CompleteButton>
         </Head>
         <Color bg={newMemo.colorCode} onClick={() => setOpenedModal(true)}>
           <ColorEdit>色を編集</ColorEdit>
@@ -33,21 +42,19 @@ export const MemoCreateLayout = (memoContent: PostMemo) => {
           setNewMemo={setNewMemo}
         />
       )}
-    </Display>
+    </>
   );
 };
 
 const { palette } = ColorTheme;
 const { fontWeight, fontFamily } = Font;
 
-const Display = styled.div`
+const Content = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
   background: white;
 `;
-
-const Content = styled.div``;
 
 const Head = styled.div`
   max-width: 335px;

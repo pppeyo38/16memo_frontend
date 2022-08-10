@@ -16,10 +16,10 @@ export const FilesDrawer: FC<Props> = (props) => {
   const { isOpen, onClose, setNewMemo } = props;
   const { filesList, filesLoading, filesError } = useFilesList();
 
-  const ChooseFile = (id: number, name: string) => {
+  const ChooseFile = (name: string) => {
     setNewMemo((prev) => ({
       ...prev,
-      fileInfo: { ...prev.fileInfo, id: id, name: name },
+      fileName: name,
     }));
     onClose();
   };
@@ -38,10 +38,7 @@ export const FilesDrawer: FC<Props> = (props) => {
         </Head>
         <FilesList>
           {filesList.map((file) => (
-            <ListItem
-              onClick={() => ChooseFile(file.id, file.name)}
-              key={file.id}
-            >
+            <ListItem onClick={() => ChooseFile(file.name)} key={file.id}>
               {file.name}
             </ListItem>
           ))}

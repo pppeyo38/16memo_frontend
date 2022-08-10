@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import styled from "styled-components";
 import { Font } from "../../../style/Font";
 import {
@@ -28,7 +28,7 @@ export const MemoForm: FC<Props> = (props) => {
   return (
     <>
       <Stack spacing={3} style={{ maxWidth: "340px", margin: "0 auto" }}>
-        <FileSelect onClick={onOpen}>{newMemo.fileInfo.name}</FileSelect>
+        <FileSelect onClick={onOpen}>{newMemo.fileName}</FileSelect>
         <InputGroup>
           <InputLeftElement pointerEvents="none" children={<span>#</span>} />
           <Input

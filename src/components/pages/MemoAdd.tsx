@@ -1,35 +1,18 @@
 import { FC, useState } from "react";
+import { PostMemo } from "../../hooks/memos/usePostMemo";
 import { MemoCreateLayout } from "../templates/MemoCreateLayout";
 
-type FileInfo = {
-  id: number;
-  name: string;
-};
-
-type MemoContent = {
-  id: number;
-  colorCode: string;
-  tagName: string;
-  comment: string;
-  url: string;
-  createdAt: string;
-  fileInfo: FileInfo;
-};
-
+// 初期状態のメモ
 const defaultValue = {
-  id: 1,
   colorCode: "00A8A6",
   tagName: "",
   comment: "",
   url: "",
-  createdAt: "",
-  fileInfo: {
-    id: 1,
-    name: "",
-  },
+  fileName: "",
 };
 
 export const MemoAdd: FC = () => {
-  const [memoContent, setMemoContent] = useState<MemoContent>(defaultValue);
-  return <MemoCreateLayout {...memoContent} />;
+  const [newMemo, setNewMemo] = useState<PostMemo>(defaultValue);
+
+  return <MemoCreateLayout newMemo={newMemo} setNewMemo={setNewMemo} />;
 };
