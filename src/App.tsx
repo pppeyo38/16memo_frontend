@@ -7,18 +7,18 @@ import { Router } from "./router/Router";
 import { LoginUserProvider } from "./providers/LoginUserProvider";
 
 function App() {
-	return (
-		<>
-			<GlobalStyle />
-			<LoginUserProvider>
-				<BrowserRouter basename="/">
-					<Div100vh style={Display100vh}>
-						<Router />
-					</Div100vh>
-				</BrowserRouter>
-			</LoginUserProvider>
-		</>
-	);
+  return (
+    <>
+      <GlobalStyle />
+      <LoginUserProvider>
+        <BrowserRouter basename="/">
+          <Div100vh style={Display100vh}>
+            <Router />
+          </Div100vh>
+        </BrowserRouter>
+      </LoginUserProvider>
+    </>
+  );
 }
 
 export default App;
@@ -32,8 +32,8 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Display100vh = {
-	overflow: "hidden",
-	backgroundImage: "radial-gradient(#9B9B9B 3%, transparent 3%)",
-	backgroundSize: "20px 20px",
-	backgroundRepeat: "repeat",
+  overflow: "hidden",
+  backgroundImage: "radial-gradient(#9B9B9B 3%, transparent 3%)",
+  backgroundSize: "20px 20px",
+  backgroundRepeat: "repeat",
 };
