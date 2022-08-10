@@ -1,4 +1,3 @@
-import axios from "axios";
 import { auth } from "../FirebaseConfig";
 import { client } from "../lib/axios";
 import { signInWithEmailAndPassword } from "firebase/auth";
