@@ -23,5 +23,5 @@ export const MemoEdit = () => {
     location.state as MemoContent
   );
   const { memoId } = useParams();
-  return <MemoCreateLayout {...memoContent} />;
+  // return <MemoCreateLayout {...memoContent} />;
 };

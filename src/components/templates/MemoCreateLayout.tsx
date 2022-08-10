@@ -1,76 +1,39 @@
-import { useState } from "react";
-import {
-  Stack,
-  Input,
-  useDisclosure,
-  InputGroup,
-  InputLeftElement,
-  Textarea,
-} from "@chakra-ui/react";
-import { usePostMemos, MemoContent } from "../../hooks/memos/usePostMemo";
+import { Dispatch, FC, SetStateAction, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { usePostMemos, PostMemo } from "../../hooks/memos/usePostMemo";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
-import { FilesDrawer } from "../organisms/Memo/FilesDrawer";
+import { ColorSetting } from "../organisms/ColorSetting";
+import { MemoForm } from "../organisms/Memo/MemoForm";
 import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 import styled from "styled-components";
-import { ColorSetting } from "../organisms/ColorSetting";
 
-export const MemoCreateLayout = (memoContent: MemoContent) => {
-  const { newMemo, setNewMemo } = usePostMemos(memoContent);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+type Props = {
+  newMemo: PostMemo;
+  setNewMemo: Dispatch<SetStateAction<PostMemo>>;
+};
+
+// POST /memos
+export const MemoCreateLayout: FC<Props> = (props) => {
+  const { newMemo, setNewMemo } = props;
+  const { SendPostMemo } = usePostMemos();
   const [openedModal, setOpenedModal] = useState(false);
-
-  const onChangeTag = (value: string) => {
-    setNewMemo((prev) => ({ ...prev, tagName: value }));
-  };
-
-  const onChangeComment = (value: string) => {
-    setNewMemo((prev) => ({ ...prev, comment: value }));
-  };
-
-  const onChangeURL = (value: string) => {
-    setNewMemo((prev) => ({ ...prev, url: value }));
-  };
+  const navigate = useNavigate();
 
   return (
-    <Display>
+    <>
       <Content>
         <Head>
-          <ReturnArrow
-            path={`/memo/${memoContent.id}`}
-            state={memoContent}
-            color={"#161616"}
-          />
-          <CompleteButton>完了</CompleteButton>
+          <ReturnArrow onClick={() => navigate(-1)} color={"#161616"} />
+          <CompleteButton onClick={() => SendPostMemo(newMemo)}>
+            完了
+          </CompleteButton>
         </Head>
         <Color bg={newMemo.colorCode} onClick={() => setOpenedModal(true)}>
           <ColorEdit>色を編集</ColorEdit>
           <ColorCode># {newMemo.colorCode}</ColorCode>
         </Color>
-        <Stack spacing={3} style={{ maxWidth: "340px", margin: "0 auto" }}>
-          <FileSelect onClick={onOpen}>{newMemo.fileInfo.name}</FileSelect>
-          <InputGroup>
-            <InputLeftElement pointerEvents="none" children={<span>#</span>} />
-            <Input
-              style={InputStyle}
-              placeholder="#色名を入力"
-              value={newMemo.tagName}
-              onChange={(e) => onChangeTag(e.target.value)}
-            />
-          </InputGroup>
-          <Textarea
-            style={TextAreaStyle}
-            placeholder="メモ"
-            value={newMemo.comment}
-            onChange={(e) => onChangeComment(e.target.value)}
-          />
-          <Input
-            style={InputURLStyle}
-            placeholder="URLを入力"
-            value={newMemo.url}
-            onChange={(e) => onChangeURL(e.target.value)}
-          />
-        </Stack>
+        <MemoForm newMemo={newMemo} setNewMemo={setNewMemo} />
       </Content>
       {openedModal && (
         <ColorSetting
@@ -79,22 +42,19 @@ export const MemoCreateLayout = (memoContent: MemoContent) => {
           setNewMemo={setNewMemo}
         />
       )}
-      <FilesDrawer isOpen={isOpen} onClose={onClose} setNewMemo={setNewMemo} />
-    </Display>
+    </>
   );
 };
 
 const { palette } = ColorTheme;
 const { fontWeight, fontFamily } = Font;
 
-const Display = styled.div`
+const Content = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
   background: white;
 `;
-
-const Content = styled.div``;
 
 const Head = styled.div`
   max-width: 335px;
@@ -120,6 +80,7 @@ const Color = styled.div<{ bg: string }>`
 `;
 
 const ColorEdit = styled.h1`
+  line-height: 1.45;
   color: ${palette.white};
   font-family: ${fontFamily.Noto};
   font-weight: ${fontWeight.bold};
@@ -127,55 +88,9 @@ const ColorEdit = styled.h1`
 `;
 
 const ColorCode = styled.h2`
+  line-height: 1.18;
   color: ${palette.white};
   font-family: ${fontFamily.Roboto};
   font-weight: ${fontWeight.medium};
   font-size: 16px;
 `;
-
-const FileSelect = styled.button`
-  width: 340px;
-  height: 40px;
-  padding-left: 13px;
-  text-align: start;
-  position: relative;
-  border-radius: 5px;
-  background-color: #f2f2f2;
-
-  &:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 40px;
-    height: 40px;
-    background-image: url("../../src/images/grayArrow.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-`;
-
-const InputStyle = {
-  fontFamily: fontFamily.Noto,
-  fontSize: "16px",
-  border: "none",
-  background: "#F2F2F2",
-  color: "#161616",
-};
-
-const TextAreaStyle = {
-  height: "115px",
-  fontFamily: fontFamily.Noto,
-  fontSize: "16px",
-  border: "none",
-  background: "#F2F2F2",
-  color: "#161616",
-};
-
-const InputURLStyle = {
-  fontFamily: fontFamily.Roboto,
-  fontSize: "16px",
-  border: "none",
-  background: "#F2F2F2",
-  color: "#161616",
-};

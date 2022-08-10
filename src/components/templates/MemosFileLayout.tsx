@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useGetMemos } from "../../hooks/memos/useGetMemos";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { PageTitle } from "../molecules/PageTitle";
@@ -9,16 +9,17 @@ import styled from "styled-components";
 
 export const MemosFileLayout = () => {
   const location = useLocation();
-  const [selectId, setSelectId] = useState<{ id: number }>(
+  const navigate = useNavigate();
+  const [selectValue, setSelectValue] = useState<{ id: number }>(
     location.state as { id: number }
   );
 
-  const { memosData, memosLoading, memosError } = useGetMemos(selectId.id);
+  const { memosData, memosLoading, memosError } = useGetMemos(selectValue.id);
 
   return (
     <ContentInner>
       <ArrowWrap>
-        <ReturnArrow path="/" color={"#161616"} />
+        <ReturnArrow onClick={() => navigate("/")} color={"#161616"} />
       </ArrowWrap>
       <PageTitle>{memosData.name}</PageTitle>
       {memosLoading ? (
@@ -62,8 +63,10 @@ const ArrowWrap = styled.div`
 
 const MemosWrap = styled.div`
   max-width: 340px;
-  margin: 15px auto;
+  height: calc(100vh - 125px);
+  overflow-y: scroll;
+  margin: 15px auto 0;
+  padding-bottom: 15px;
   display: flex;
   flex-direction: column;
-  gap: 13px;
 `;

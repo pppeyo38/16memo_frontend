@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useHexToRgb } from "../../hooks/color/useHexToRgb";
+import { useCmykToRgb } from "../../hooks/color/useCmykToRgb";
+import { useHsvToRgb } from "../../hooks/color/useHsvToRgb";
 import { useDisclosure } from "@chakra-ui/react";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { EditButton } from "../atoms/EditButton";
@@ -34,6 +37,13 @@ export const MemoLayout = (memoContent: MemoContent) => {
   const [isOpenLink, setIsOpenLink] = useState<boolean>(false);
   const [isOpenTrash, setIsOpenTrash] = useState<boolean>(false);
 
+  const { setHextoRGB } = useHexToRgb();
+  const { setRGBtoCMYK } = useCmykToRgb();
+  const { setRGBtoHSV } = useHsvToRgb();
+  const rgb = setHextoRGB(memoContent.colorCode);
+  const cmyk = setRGBtoCMYK(rgb);
+  const hsv = setRGBtoHSV(rgb);
+
   const handleClick = () => {
     navigate(`/memo/${memoContent.id}/edit`, { state: memoContent });
   };
@@ -45,11 +55,7 @@ export const MemoLayout = (memoContent: MemoContent) => {
     <Display bg={memoContent.colorCode}>
       <Content>
         <Head>
-          <ReturnArrow
-            path={`/${memoContent.fileInfo.name}`}
-            id={memoContent.fileInfo.id}
-            color={"white"}
-          />
+          <ReturnArrow onClick={() => navigate(-1)} color={"white"} />
           <EditButton onClick={handleClick} />
         </Head>
         <Main>
@@ -62,13 +68,15 @@ export const MemoLayout = (memoContent: MemoContent) => {
           <CodeList>
             <CodeListItem>
               <p>RGB</p>
-              255 255 255
+              {`${rgb.red} ${rgb.green} ${rgb.blue}`}
             </CodeListItem>
             <CodeListItem>
-              <p>CMYK</p>0 0 0 0
+              <p>CMYK</p>
+              {`${cmyk.cyan} ${cmyk.magenta} ${cmyk.yellow} ${cmyk.key}`}
             </CodeListItem>
             <CodeListItem>
-              <p>HSV/HSB</p>0 0 0
+              <p>HSV/HSB</p>
+              {`${hsv.hue} ${hsv.saturation} ${hsv.brightness}`}
             </CodeListItem>
           </CodeList>
           <ActionIcons>
@@ -157,6 +165,7 @@ const CodeListItem = styled.li`
 
   & p {
     width: 65px;
+    line-height: 1.2;
   }
 `;
 

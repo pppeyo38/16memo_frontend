@@ -1,41 +1,13 @@
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-type FileInfo = {
-  id: number;
-  name: string;
-};
-
-type MemoContent = {
-  id: number;
-  colorCode: string;
-  tagName: string;
-  comment: string;
-  url: string;
-  createdAt: string;
-  fileInfo: FileInfo;
-};
-
 type Props = {
-  id?: number;
-  state?: MemoContent;
-  path: string;
+  onClick: () => void;
   color: string;
 };
 
-// TODO: ReturnArrowのPropsについて考える（パス変更しか使えないの不便）
-export const ReturnArrow = ({ id, state, path, color }: Props) => {
-  const navigate = useNavigate();
-  const onClickReturn = (returnPath: string) => {
-    if (id === undefined) {
-      navigate(returnPath, { state: state });
-    } else {
-      navigate(returnPath, { state: { id: id } });
-    }
-  };
-
+export const ReturnArrow = ({ onClick, color }: Props) => {
   return (
-    <Arrow onClick={() => onClickReturn(path)}>
+    <Arrow onClick={onClick}>
       <svg
         width="35"
         height="35"

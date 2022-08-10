@@ -1,23 +1,34 @@
 import { useState } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { client } from "../../lib/axios";
 
-type FileInfo = {
-  id: number;
-  name: string;
-};
-
-export type MemoContent = {
-  id: number;
+export type PostMemo = {
   colorCode: string;
   tagName: string;
   comment: string;
   url: string;
-  createdAt: string;
-  fileInfo: FileInfo;
+  fileName: string;
 };
 
-export const usePostMemos = (memoContent: MemoContent) => {
-  const [newMemo, setNewMemo] = useState<MemoContent>(memoContent);
+export const usePostMemos = () => {
+  const [newMemo, setNewMemo] = useState<PostMemo>();
+  const navigate = useNavigate();
 
-  return { newMemo, setNewMemo };
+  const SendPostMemo = async (data: PostMemo) => {
+    const sendData = {
+      colorCode: data.colorCode,
+      tag_name: data.tagName,
+      comment: data.comment,
+      url: data.url,
+      color_file_name: data.fileName,
+    };
+    console.log(sendData);
+    await client.post("memos", sendData).then((response) => {
+      navigate(`/${response.data.fileName}`, {
+        state: { id: response.data.fileId },
+      });
+    });
+  };
+
+  return { newMemo, setNewMemo, SendPostMemo };
 };
