@@ -40,14 +40,14 @@ export const SearchResult: FC<Props> = (props) => {
           <TabPanel sx={TabPanelStyle}>
             {memosData.map((memo, index) => (
               <Wrapper key={index}>
-                <ColorThumb memoId={memo.id} colorCode={memo.colorCode} />
+                <ColorThumb memoId={memo.id} content={memo} />
               </Wrapper>
             ))}
           </TabPanel>
           <TabPanel sx={TabPanelStyle}>
             {reversedData.map((memo, index) => (
               <Wrapper key={index}>
-                <ColorThumb memoId={memo.id} colorCode={memo.colorCode} />
+                <ColorThumb memoId={memo.id} content={memo} />
               </Wrapper>
             ))}
           </TabPanel>

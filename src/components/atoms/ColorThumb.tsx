@@ -1,20 +1,21 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
+import { MemoType } from "../../hooks/memos/useSearchMemos";
 import styled from "styled-components";
 import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 
 type Props = {
   memoId: number;
-  colorCode: string;
+  content: MemoType;
 };
 
 export const ColorThumb: FC<Props> = (props) => {
-  const { memoId, colorCode } = props;
+  const { memoId, content } = props;
 
   return (
-    <StyledMemoWrapper to={`/memo/${memoId}`}>
-      <StyledMemo {...props}># {colorCode}</StyledMemo>
+    <StyledMemoWrapper to={`/memo/${memoId}`} state={content}>
+      <StyledMemo bg={content.colorCode}># {content.colorCode}</StyledMemo>
     </StyledMemoWrapper>
   );
 };
@@ -27,12 +28,12 @@ const StyledMemoWrapper = styled(Link)`
   display: inline-block;
   width: 165px;
 `;
-const StyledMemo = styled.div<Props>`
+const StyledMemo = styled.div<{ bg: string }>`
   display: flex;
   align-items: center;
   width: 100%;
   height: 60px;
-  background-color: ${(props) => `#${props.colorCode}`};
+  background-color: ${(props) => `#${props.bg}`};
   color: ${black};
   padding-left: 13px;
   font-family: ${Noto};

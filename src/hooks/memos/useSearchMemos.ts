@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { client } from "../../lib/axios";
 
-type MemoType = {
+export type MemoType = {
   id: number;
   colorCode: string;
   comment: string;
