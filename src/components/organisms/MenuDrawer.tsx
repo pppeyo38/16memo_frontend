@@ -19,7 +19,7 @@ export const MenuDrawer = ({ isOpen, onClose }: Props) => {
             <Link to="/">メモ</Link>
           </MenuListItems>
           <MenuListItems>
-            <Link to="/">検索</Link>
+            <Link to="/search">検索</Link>
           </MenuListItems>
           <MenuListItems>
             <Link to="/">アカウント</Link>
@@ -46,6 +46,7 @@ const MenuListItems = styled.li`
   font-weight: ${fontWeight.bold};
   font-family: ${fontFamily.Noto};
   font-size: 24px;
+  line-height: 1.45;
   color: ${palette.blueGreen};
 `;
 
@@ -54,7 +55,8 @@ const ContentLogout = styled(Link)`
   font-weight: ${fontWeight.bold};
   font-family: ${fontFamily.Noto};
   font-size: 20px;
-  color: ${palette.blueGreen};
+  line-height: 1.45;
+  color: ${palette.black};
 `;
 
 const DrawerStyle = {

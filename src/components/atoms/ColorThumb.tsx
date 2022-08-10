@@ -39,6 +39,6 @@ const StyledMemo = styled.div<Props>`
   font-size: 16px;
   font-weight: ${regular};
   border-bottom-right-radius: 13px;
-  box-shadow: 0px 2px 3px 0px rgba(22, 22, 22, 0.15);
+  box-shadow: 0px 2px 3px 2px rgba(22, 22, 22, 0.15);
   box-sizing: border-box;
 `;

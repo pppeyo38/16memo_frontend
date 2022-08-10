@@ -1,27 +1,30 @@
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 import search from "../../images/search.svg";
 
-export const SearchForm = () => {
-  let [text, setText] = useState<string>("");
+type Props = {
+  searchTag: string;
+  setSearchTag: Dispatch<SetStateAction<string>>;
+  setIsResult: Dispatch<SetStateAction<boolean>>;
+};
+
+export const SearchForm = ({ searchTag, setSearchTag, setIsResult }: Props) => {
+  const navigate = useNavigate();
   const onChangeText = (e: ChangeEvent<HTMLInputElement>) =>
-    setText(e.target.value);
+    setSearchTag(e.target.value);
 
   //Enterキー押した時の処理
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.nativeEvent.isComposing || e.key !== "Enter") {
       return;
     } else {
-      let firstText = text.slice(0, 1);
-      if (firstText === "#") {
-        //一文字目の#は削除する
-        text = text.slice(1);
-      }
-      window.location.href = `/search?tag=${text}`;
-      setText("");
+      if (searchTag.slice(0, 1) === "#") searchTag = searchTag.slice(1);
     }
+    navigate(`/search?tag=${searchTag}`);
+    setIsResult(true);
   };
 
   return (
@@ -31,7 +34,7 @@ export const SearchForm = () => {
       </SearchIcon>
       <SearchInputForm
         type="text"
-        value={text}
+        value={searchTag}
         onChange={onChangeText}
         placeholder="#名前やキーワードなど"
         onKeyDown={handleKeyDown}
