@@ -23,6 +23,7 @@ type Props = {
   color: string;
 };
 
+// TODO: ReturnArrowのPropsについて考える（パス変更しか使えないの不便）
 export const ReturnArrow = ({ id, state, path, color }: Props) => {
   const navigate = useNavigate();
   const onClickReturn = (returnPath: string) => {
