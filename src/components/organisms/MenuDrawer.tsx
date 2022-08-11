@@ -22,7 +22,7 @@ export const MenuDrawer = ({ isOpen, onClose }: Props) => {
             <Link to="/search">検索</Link>
           </MenuListItems>
           <MenuListItems onClick={onClose}>
-            <Link to="/">アカウント</Link>
+            <Link to="/setting">アカウント</Link>
           </MenuListItems>
         </MenuList>
         <ContentLogout to="/">ログアウト</ContentLogout>

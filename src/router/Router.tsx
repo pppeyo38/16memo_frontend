@@ -5,11 +5,13 @@ import { Singup } from "../components/pages/Singup";
 import { Files } from "../components/pages/Files";
 import { MemoFiles } from "../components/pages/MemoFiles";
 import { MemoId } from "../components/pages/MemoId";
-import { Setting } from "../components/pages/Setting";
+import { Setting } from "../components/pages/account/Setting";
 import { Search } from "../components/pages/Search";
-import { SettingName } from "../components/pages/SettingName";
-import { SettingPw } from "../components/pages/SettingPw";
-import { SettingDeactivate } from "../components/pages/SettingDeactivate";
+import { SettingName } from "../components/pages/account/SettingName";
+import { SettingMail } from "../components/pages/account/SettingMail";
+import { SettingId } from "../components/pages/account/SettingId";
+import { SettingPw } from "../components/pages/account/SettingPw";
+import { SettingDeactivate } from "../components/pages/account/SettingDeactivate";
 import { MemoAdd } from "../components/pages/MemoAdd";
 import { MemoEdit } from "../components/pages/MemoEdit";
 import { Login } from "../components/pages/Login";
@@ -29,6 +31,8 @@ export const Router = memo(() => {
         <Route path="/search" element={<Search />} />
         <Route path="/setting" element={<Setting />} />
         <Route path="/setting/nickname" element={<SettingName />} />
+        <Route path="/setting/username" element={<SettingId />} />
+        <Route path="/setting/mail" element={<SettingMail />} />
         <Route path="/setting/password" element={<SettingPw />} />
         <Route path="/setting/deactivate" element={<SettingDeactivate />} />
       </Route>
