@@ -8,26 +8,23 @@ import arrow from "../../images/grayArrow.svg";
 type Props = {
   label: string;
   link: string;
-  children: ReactNode;
+  textcolor: string;
 };
 
-let theme = {};
-
-export const SettingLink: FC<Props> = (props) => {
-  const { label, link, children } = props;
+export const SettingButton: FC<Props> = (props) => {
+  const { label, link, textcolor } = props;
 
   return (
-    <SettingLinkContainer to={link}>
+    <SettingLinkContainer to={link} textcolor={textcolor}>
       {label}
-      <span>{children}</span>
     </SettingLinkContainer>
   );
 };
 
-const { black, gray, white, lightGray } = ColorTheme.palette;
+const { white } = ColorTheme.palette;
 const { Noto } = Font.fontFamily;
 
-const SettingLinkContainer = styled(Link)`
+const SettingLinkContainer = styled(Link)<{ textcolor: string }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -36,13 +33,10 @@ const SettingLinkContainer = styled(Link)`
   position: relative;
   padding: 8px 30px 8px 13px;
   background-color: ${white};
-  color: ${black};
+  color: ${({ textcolor }) => textcolor};
   font-family: ${Noto};
   border-radius: 5px;
-  span {
-    color: ${gray};
-    font-size: 14px;
-  }
+
   ::before {
     content: "";
     width: 8px;

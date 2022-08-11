@@ -29,6 +29,8 @@ export const Router = memo(() => {
         <Route path="/search" element={<Search />} />
         <Route path="/setting" element={<Setting />} />
         <Route path="/setting/nickname" element={<SettingName />} />
+        <Route path="/setting/username" element={<SettingName />} />
+        <Route path="/setting/mail" element={<SettingName />} />
         <Route path="/setting/password" element={<SettingPw />} />
         <Route path="/setting/deactivate" element={<SettingDeactivate />} />
       </Route>

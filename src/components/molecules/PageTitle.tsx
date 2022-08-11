@@ -8,17 +8,9 @@ type Props = {
 };
 
 export const PageTitle = ({ children }: Props) => {
-  const onClick = () => {
-    // クリックしたときの挙動をここに書く
-    console.log("メニューアイコンクリック");
-  };
-
   return (
     <TitleWrap>
       <Title>{children}</Title>
-      <MenuButton onClick={onClick}>
-        <img src="./src/images/menuIcon.svg" />
-      </MenuButton>
     </TitleWrap>
   );
 };
@@ -33,10 +25,9 @@ const TitleWrap = styled.div`
 `;
 
 const Title = styled.h1`
+  line-height: 1.45;
   font-weight: ${fontWeight.bold};
   font-family: ${fontFamily.Noto};
   font-size: 24px;
   color: ${palette.black};
 `;
-
-const MenuButton = styled.button``;
