@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import { Memo } from "../../types/memo";
 import { PostMemo } from "../../hooks/memos/usePostMemo";
 import { MemoCreateLayout } from "../templates/MemoCreateLayout";
 
@@ -12,7 +13,7 @@ const defaultValue = {
 };
 
 export const MemoAdd: FC = () => {
-  const [newMemo, setNewMemo] = useState<PostMemo>(defaultValue);
+  const [newMemo, setNewMemo] = useState<Memo>(defaultValue);
 
   return <MemoCreateLayout newMemo={newMemo} setNewMemo={setNewMemo} />;
 };

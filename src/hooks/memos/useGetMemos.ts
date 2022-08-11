@@ -1,19 +1,11 @@
 import { useState, useEffect } from "react";
+import { Memo } from "../../types/memo";
 import { client } from "../../lib/axios";
-
-type MemoType = {
-  id: number;
-  colorCode: string;
-  comment: string;
-  url: string;
-  tagName: string;
-  createdAt: string;
-};
 
 type MemosDataType = {
   id: number;
   name: string;
-  memos: MemoType[];
+  memos: Memo[];
 };
 
 export const useGetMemos = (fileId: number) => {

@@ -1,6 +1,7 @@
 import { Dispatch, FC, SetStateAction, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { usePostMemos, PostMemo } from "../../hooks/memos/usePostMemo";
+import { Memo } from "../../types/memo";
+import { usePostMemos } from "../../hooks/memos/usePostMemo";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { ColorSetting } from "../organisms/ColorSetting";
 import { MemoForm } from "../organisms/Memo/MemoForm";
@@ -9,8 +10,8 @@ import { Font } from "../../style/Font";
 import styled from "styled-components";
 
 type Props = {
-  newMemo: PostMemo;
-  setNewMemo: Dispatch<SetStateAction<PostMemo>>;
+  newMemo: Memo;
+  setNewMemo: Dispatch<SetStateAction<Memo>>;
 };
 
 // POST /memos

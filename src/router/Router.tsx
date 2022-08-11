@@ -27,7 +27,7 @@ export const Router = memo(() => {
         <Route path="/:fileName" element={<MemoFiles />} />
         <Route path="/memo/:memoId" element={<MemoId />} />
         <Route path="/memo/add" element={<MemoAdd />} />
-        {/* <Route path="/memo/:memoId/edit" element={<MemoEdit />} /> */}
+        <Route path="/memo/:memoId/edit" element={<MemoEdit />} />
         <Route path="/search" element={<Search />} />
         <Route path="/setting" element={<Setting />} />
         <Route path="/setting/nickname" element={<SettingName />} />

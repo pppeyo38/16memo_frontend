@@ -1,4 +1,5 @@
 import { useEffect, useState, Dispatch, SetStateAction, FC, memo } from "react";
+import { Memo } from "../../types/memo";
 import { useColorValues } from "../../hooks/color/useColor";
 import { SettingRGB } from "./Color/SettingRGB";
 import { SettingCMYK } from "./Color/SettingCMYK";
@@ -11,12 +12,11 @@ import styled from "styled-components";
 import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 import "./ColorSetting.css";
-import { PostMemo } from "../../hooks/memos/usePostMemo";
 
 type Props = {
   setOpenedModal: Dispatch<SetStateAction<boolean>>;
   currentColor: string;
-  setNewMemo: Dispatch<SetStateAction<PostMemo>>;
+  setNewMemo: Dispatch<SetStateAction<Memo>>;
 };
 
 type ColorValues = {
