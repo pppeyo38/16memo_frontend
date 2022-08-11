@@ -7,8 +7,11 @@ export const MemoId = () => {
   const { loginUser } = useLoginUser();
   const { memoId } = useParams();
   const data = useShowMemo(Number(memoId));
-
   const editMode = loginUser?.id === data.userId;
 
-  return <MemoLayout memoContent={data.memo} editMode={editMode} />;
+  if (Object.keys(data).length === 0) {
+    return;
+  } else {
+    return <MemoLayout memoContent={data.memo} editMode={editMode} />;
+  }
 };
