@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Memo } from "../../types/memo";
 import { useHexToRgb } from "../../hooks/color/useHexToRgb";
 import { useCmykToRgb } from "../../hooks/color/useCmykToRgb";
 import { useHsvToRgb } from "../../hooks/color/useHsvToRgb";
@@ -16,23 +17,8 @@ import { CommentDrawer } from "../organisms/Memo/CommentDrawer";
 import { LinkPopup } from "../organisms/Memo/LinkPopup";
 import { TrashPopup } from "../organisms/Memo/TrashPopup";
 
-type FileInfo = {
-  id: number;
-  name: string;
-};
-
-type MemoDisplay = {
-  id: number;
-  colorCode: string;
-  tagName: string;
-  comment: string;
-  url: string;
-  createdAt: string;
-  fileInfo: FileInfo;
-};
-
 type Props = {
-  memoContent: MemoDisplay;
+  memoContent: Memo;
   editMode: boolean;
 };
 
@@ -67,7 +53,7 @@ export const MemoLayout: FC<Props> = (props) => {
         <Main>
           <MemoInfo>
             <MemoHeadingWrap>
-              <MemoHeading>{memoContent.tagName}</MemoHeading>
+              <MemoHeading># {memoContent.tagName}</MemoHeading>
               <ColorCode># {memoContent.colorCode}</ColorCode>
             </MemoHeadingWrap>
           </MemoInfo>
