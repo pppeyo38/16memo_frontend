@@ -44,6 +44,7 @@ export const MemosFileLayout = () => {
                   fileInfo: { id: memosData.id, name: memosData.name },
                 }}
                 deleteMode={false}
+                canEdit={true}
               />
             ))}
         </MemosWrap>

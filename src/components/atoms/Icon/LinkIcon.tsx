@@ -2,11 +2,12 @@ import styled from "styled-components";
 
 type Props = {
   color: string;
+  onClick?: () => void;
 };
 
-export const LinkIcon = ({ color }: Props) => {
+export const LinkIcon = ({ color, onClick }: Props) => {
   return (
-    <Link>
+    <Link onClick={onClick}>
       <svg
         width="25"
         height="25"

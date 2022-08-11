@@ -11,12 +11,12 @@ import styled from "styled-components";
 import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 import "./ColorSetting.css";
-import { MemoContent } from "../../hooks/memos/usePostMemo";
+import { PostMemo } from "../../hooks/memos/usePostMemo";
 
 type Props = {
   setOpenedModal: Dispatch<SetStateAction<boolean>>;
   currentColor: string;
-  setNewMemo: Dispatch<SetStateAction<MemoContent>>;
+  setNewMemo: Dispatch<SetStateAction<PostMemo>>;
 };
 
 type ColorValues = {

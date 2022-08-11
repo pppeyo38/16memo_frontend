@@ -1,26 +1,25 @@
-import type { FC } from "react";
-import { useSearchParams, Link } from "react-router-dom";
+import { FC, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { HeaderLayout } from "../templates/HeaderLayout";
 import { SearchLayout } from "../templates/SearchLayout";
-import { SearchResult } from "../organisms/SearchResult";
 
-type Props = {};
-
-export const Search: FC<Props> = (props) => {
+export const Search: FC = () => {
   const [searchParams] = useSearchParams();
   const tagName = searchParams.getAll("tag");
 
-  console.log("TagName=" + tagName);
-  console.log(tagName.length);
+  const [searchTag, setSearchTag] = useState<string>(tagName[0]);
+  const [isResult, setIsResult] = useState<boolean>(
+    tagName.length === 0 ? false : true
+  );
 
   return (
-    <>
-      {tagName.length == 0 ? (
-        <SearchLayout ttl="検索" isSearchResult={false}></SearchLayout>
-      ) : (
-        <SearchLayout ttl={"#" + tagName[0]} isSearchResult={true}>
-          <SearchResult tagName={tagName[0]} />
-        </SearchLayout>
-      )}
-    </>
+    <HeaderLayout>
+      <SearchLayout
+        isResult={isResult}
+        setIsResult={setIsResult}
+        searchTag={searchTag}
+        setSearchTag={setSearchTag}
+      />
+    </HeaderLayout>
   );
 };

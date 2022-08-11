@@ -1,36 +1,50 @@
-import type { FC, ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { FC, Dispatch, SetStateAction } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Font } from "../../style/Font";
 import { ColorTheme } from "../../style/ColorTheme";
 import { SearchForm } from "../atoms/SearchForm";
+import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
+import { SearchResult } from "../organisms/SearchResult";
 import shareIcon from "../../images/shareIcon.svg";
 import { TwitterShareButton, TwitterIcon } from "react-share";
 
 type Props = {
-  ttl: string;
-  children?: ReactNode;
-  isSearchResult: boolean;
+  isResult: boolean;
+  setIsResult: Dispatch<SetStateAction<boolean>>;
+  searchTag: string;
+  setSearchTag: Dispatch<SetStateAction<string>>;
 };
 
 export const SearchLayout: FC<Props> = (props) => {
-  const { ttl, children, isSearchResult } = props;
+  const { isResult, setIsResult, searchTag, setSearchTag } = props;
+  const navigate = useNavigate();
+
+  const onBack = () => {
+    setIsResult(false);
+    setSearchTag("");
+    navigate("/search");
+  };
 
   return (
     <>
-      <Display>
-        <ArrowIcon to="/search" isSearchResult={isSearchResult}></ArrowIcon>
-        <Container isSearchResult={isSearchResult}>
-          <h1>{ttl}</h1>
-          <TwitterShareButton url={"/"} title={"みんなも投稿してね！"}>
-            <img src={shareIcon} />
-          </TwitterShareButton>
-        </Container>
-        <FormWrapper isSearchResult={isSearchResult}>
-          <SearchForm />
-        </FormWrapper>
-      </Display>
-      <Overflow>{children}</Overflow>
+      <Content>
+        <Head>
+          {isResult && (
+            <ReturnArrow onClick={() => onBack()} color={"#161616"} />
+          )}
+        </Head>
+        <Title>{isResult ? `${searchTag}` : "検索"}</Title>
+        {!isResult ? (
+          <SearchForm
+            searchTag={searchTag}
+            setSearchTag={setSearchTag}
+            setIsResult={setIsResult}
+          />
+        ) : (
+          <SearchResult tagName={searchTag} />
+        )}
+      </Content>
     </>
   );
 };
@@ -38,40 +52,23 @@ export const SearchLayout: FC<Props> = (props) => {
 const { fontFamily, fontWeight } = Font;
 const { palette } = ColorTheme;
 
-const ArrowIcon = styled(Link)<{ isSearchResult: boolean }>`
-  display: ${(props) => (props.isSearchResult ? "block" : "none")};
-  position: fixed;
-  top: 43px;
-  margin-left: 11px;
-  width: 12px;
-  height: 12px;
-  border-bottom: 2.8px solid ${palette.black};
-  border-left: 2.8px solid ${palette.black};
-  transform: rotate(45deg);
+const Content = styled.div`
+  width: 340px;
+  margin: 35px auto 0;
 `;
 
-const Display = styled.div`
-  width: 340px;
-  margin: auto;
+const Head = styled.div`
+  height: 35px;
+  margin-bottom: 25px;
 `;
 
-const Container = styled.div<{ isSearchResult: boolean }>`
-  width: 340px;
-  position: fixed;
-  top: 95px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  h1 {
-    font-family: ${fontFamily.Noto};
-    font-weight: ${fontWeight.bold};
-    font-size: 24px;
-    color: ${palette.black};
-  }
-  img {
-    display: ${(props) => (props.isSearchResult ? "block" : "none")};
-    margin-right: 10px;
-  }
+const Title = styled.h1`
+  margin-bottom: 13px;
+  color: ${palette.black};
+  font-family: ${fontFamily.Noto};
+  font-size: 24px;
+  line-height: 1.45;
+  font-weight: ${fontWeight.bold};
 `;
 
 const FormWrapper = styled.div<{ isSearchResult: boolean }>`

@@ -15,13 +15,13 @@ export const MenuDrawer = ({ isOpen, onClose }: Props) => {
       <DrawerOverlay />
       <DrawerContent style={DrawerStyle}>
         <MenuList>
-          <MenuListItems>
+          <MenuListItems onClick={onClose}>
             <Link to="/">メモ</Link>
           </MenuListItems>
-          <MenuListItems>
-            <Link to="/">検索</Link>
+          <MenuListItems onClick={onClose}>
+            <Link to="/search">検索</Link>
           </MenuListItems>
-          <MenuListItems>
+          <MenuListItems onClick={onClose}>
             <Link to="/">アカウント</Link>
           </MenuListItems>
         </MenuList>
@@ -46,6 +46,7 @@ const MenuListItems = styled.li`
   font-weight: ${fontWeight.bold};
   font-family: ${fontFamily.Noto};
   font-size: 24px;
+  line-height: 1.45;
   color: ${palette.blueGreen};
 `;
 
@@ -54,7 +55,8 @@ const ContentLogout = styled(Link)`
   font-weight: ${fontWeight.bold};
   font-family: ${fontFamily.Noto};
   font-size: 20px;
-  color: ${palette.blueGreen};
+  line-height: 1.45;
+  color: ${palette.black};
 `;
 
 const DrawerStyle = {

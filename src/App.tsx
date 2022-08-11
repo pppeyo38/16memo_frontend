@@ -33,7 +33,7 @@ const GlobalStyle = createGlobalStyle`
 
 const Display100vh = {
   overflow: "hidden",
-  backgroundImage: "radial-gradient(#9B9B9B 3%, transparent 3%)",
+  backgroundImage: "radial-gradient(#9B9B9B 3%, #F2F2F2 3%)",
   backgroundSize: "20px 20px",
   backgroundRepeat: "repeat",
 };
