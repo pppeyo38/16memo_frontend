@@ -15,13 +15,13 @@ export const MenuDrawer = ({ isOpen, onClose }: Props) => {
       <DrawerOverlay />
       <DrawerContent style={DrawerStyle}>
         <MenuList>
-          <MenuListItems>
+          <MenuListItems onClick={onClose}>
             <Link to="/">メモ</Link>
           </MenuListItems>
-          <MenuListItems>
+          <MenuListItems onClick={onClose}>
             <Link to="/search">検索</Link>
           </MenuListItems>
-          <MenuListItems>
+          <MenuListItems onClick={onClose}>
             <Link to="/">アカウント</Link>
           </MenuListItems>
         </MenuList>

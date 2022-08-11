@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useHexToRgb } from "../../hooks/color/useHexToRgb";
 import { useCmykToRgb } from "../../hooks/color/useCmykToRgb";
@@ -21,7 +21,7 @@ type FileInfo = {
   name: string;
 };
 
-type MemoContent = {
+type MemoDisplay = {
   id: number;
   colorCode: string;
   tagName: string;
@@ -31,7 +31,13 @@ type MemoContent = {
   fileInfo: FileInfo;
 };
 
-export const MemoLayout = (memoContent: MemoContent) => {
+type Props = {
+  memoContent: MemoDisplay;
+  editMode: boolean;
+};
+
+export const MemoLayout: FC<Props> = (props) => {
+  const { memoContent, editMode } = props;
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isOpenLink, setIsOpenLink] = useState<boolean>(false);
@@ -56,7 +62,7 @@ export const MemoLayout = (memoContent: MemoContent) => {
       <Content>
         <Head>
           <ReturnArrow onClick={() => navigate(-1)} color={"white"} />
-          <EditButton onClick={handleClick} />
+          {editMode && <EditButton onClick={handleClick} />}
         </Head>
         <Main>
           <MemoInfo>
@@ -80,15 +86,11 @@ export const MemoLayout = (memoContent: MemoContent) => {
             </CodeListItem>
           </CodeList>
           <ActionIcons>
-            <button onClick={onOpen}>
-              <CommentIcon color={"white"} />
-            </button>
-            <button onClick={() => setIsOpenLink(true)}>
-              <LinkIcon color={"white"} />
-            </button>
-            <div onClick={() => setIsOpenTrash(true)}>
-              <TrashIcon color={"white"} />
-            </div>
+            <CommentIcon onClick={onOpen} color={"white"} />
+            <LinkIcon onClick={() => setIsOpenLink(true)} color={"white"} />
+            {editMode && (
+              <TrashIcon onClick={() => setIsOpenTrash(true)} color={"white"} />
+            )}
           </ActionIcons>
         </Main>
       </Content>

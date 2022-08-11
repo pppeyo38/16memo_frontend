@@ -7,7 +7,7 @@ type FileInfo = {
   name: string;
 };
 
-type MemoContent = {
+type MemoDisplay = {
   id: number;
   colorCode: string;
   tagName: string;
@@ -17,11 +17,17 @@ type MemoContent = {
   fileInfo: FileInfo;
 };
 
+type StateType = {
+  editMode: boolean;
+  state: MemoDisplay;
+};
+
 export const MemoId = () => {
   const location = useLocation();
-  const [memoContent, setMemoContent] = useState<MemoContent>(
-    location.state as MemoContent
+  const state = location.state as StateType;
+  const [memoContent, setMemoContent] = useState<MemoDisplay>(
+    state.state as MemoDisplay
   );
 
-  return <MemoLayout {...memoContent} />;
+  return <MemoLayout memoContent={memoContent} editMode={state.editMode} />;
 };

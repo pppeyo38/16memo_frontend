@@ -2,13 +2,12 @@ import styled from "styled-components";
 
 type Props = {
   color: string;
+  onClick?: () => void;
 };
 
-export const TrashIcon = ({ color }: Props) => {
-  const onClick = () => {};
-
+export const TrashIcon = ({ color, onClick }: Props) => {
   return (
-    <Trash onClick={() => onClick()}>
+    <Trash onClick={onClick}>
       <svg
         width="30"
         height="30"

@@ -8,13 +8,17 @@ import { Font } from "../../style/Font";
 type Props = {
   memoId: number;
   content: MemoType;
+  canEdit: boolean;
 };
 
 export const ColorThumb: FC<Props> = (props) => {
-  const { memoId, content } = props;
+  const { memoId, content, canEdit } = props;
 
   return (
-    <StyledMemoWrapper to={`/memo/${memoId}`} state={content}>
+    <StyledMemoWrapper
+      to={`/memo/${memoId}`}
+      state={{ state: content, editMode: canEdit }}
+    >
       <StyledMemo bg={content.colorCode}># {content.colorCode}</StyledMemo>
     </StyledMemoWrapper>
   );

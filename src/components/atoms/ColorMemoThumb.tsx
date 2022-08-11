@@ -23,10 +23,11 @@ type Props = {
   memoId: number;
   content: MemoContent;
   deleteMode: boolean;
+  canEdit: boolean;
 };
 
 export const ColorMemoThumb: FC<Props> = (props) => {
-  const { memoId, content, deleteMode } = props;
+  const { memoId, content, deleteMode, canEdit } = props;
   return (
     <>
       {deleteMode ? (
@@ -39,7 +40,10 @@ export const ColorMemoThumb: FC<Props> = (props) => {
           </ColorCodeBox>
         </NoLinkWrapper>
       ) : (
-        <LinkWrapper to={`/memo/${memoId}`} state={content}>
+        <LinkWrapper
+          to={`/memo/${memoId}`}
+          state={{ state: content, editMode: canEdit }}
+        >
           <ColorCodeBox {...props}>
             <WhiteBox>
               <h2>{content.tagName}</h2>
