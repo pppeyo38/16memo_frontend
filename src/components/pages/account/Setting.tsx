@@ -1,6 +1,6 @@
 import type { FC } from "react";
-import { HeaderLayout } from "../templates/HeaderLayout";
-import { SettingLayout } from "../templates/SettingLayout";
+import { HeaderLayout } from "../../templates/HeaderLayout";
+import { SettingLayout } from "../../templates/SettingLayout";
 
 type Props = {};
 

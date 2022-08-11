@@ -1,33 +1,40 @@
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../FirebaseConfig";
+import { useLoginUser } from "../../hooks/useLoginUser";
 import { Stack } from "@chakra-ui/react";
 import { SettingLink } from "../atoms/SettingLink";
 import { SettingButton } from "../atoms/SettingButton";
 
 export const AccountForms = () => {
+  const user = auth.currentUser;
+  const { loginUser } = useLoginUser();
+  const navigate = useNavigate();
+
   return (
     <Stack spacing={"26px"}>
       <Stack spacing={"14px"}>
         <SettingLink label="ニックネーム" link="/setting/nickname">
-          あああ
+          {loginUser?.nickname}
         </SettingLink>
         <SettingLink label="ユーザー名" link="/setting/username">
-          あああ
+          @{loginUser?.createdID}
         </SettingLink>
         <SettingLink label="メール" link="/setting/mail">
-          あああ
+          {user?.email}
         </SettingLink>
         <SettingLink label="パスワード" link="/setting/password">
-          あああ
+          パスワードの変更
         </SettingLink>
       </Stack>
       <Stack spacing={"14px"}>
         <SettingButton
           label="ログアウト"
-          link="/setting/nickname"
+          onClick={() => console.log("ログアウト")}
           textcolor="#161616"
         />
         <SettingButton
-          label="ユーザー名"
-          link="/setting/username"
+          label="アカウント削除"
+          onClick={() => navigate("/setting/deactivate")}
           textcolor="#FD4A4A"
         />
       </Stack>

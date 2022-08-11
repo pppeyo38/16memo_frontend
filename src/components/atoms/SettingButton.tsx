@@ -7,15 +7,15 @@ import arrow from "../../images/grayArrow.svg";
 
 type Props = {
   label: string;
-  link: string;
+  onClick: () => void;
   textcolor: string;
 };
 
 export const SettingButton: FC<Props> = (props) => {
-  const { label, link, textcolor } = props;
+  const { label, onClick, textcolor } = props;
 
   return (
-    <SettingLinkContainer to={link} textcolor={textcolor}>
+    <SettingLinkContainer onClick={onClick} textcolor={textcolor}>
       {label}
     </SettingLinkContainer>
   );
@@ -24,7 +24,7 @@ export const SettingButton: FC<Props> = (props) => {
 const { white } = ColorTheme.palette;
 const { Noto } = Font.fontFamily;
 
-const SettingLinkContainer = styled(Link)<{ textcolor: string }>`
+const SettingLinkContainer = styled.button<{ textcolor: string }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
