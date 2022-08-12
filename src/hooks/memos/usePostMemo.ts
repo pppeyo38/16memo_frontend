@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { client } from "../../lib/axios";
 
@@ -11,7 +10,6 @@ export type PostMemo = {
 };
 
 export const usePostMemos = () => {
-  const [newMemo, setNewMemo] = useState<PostMemo>();
   const navigate = useNavigate();
 
   const SendPostMemo = async (data: PostMemo) => {
@@ -24,11 +22,9 @@ export const usePostMemos = () => {
     };
     console.log(sendData);
     await client.post("memos", sendData).then((response) => {
-      navigate(`/${response.data.fileName}`, {
-        state: { id: response.data.fileId },
-      });
+      navigate(`/memo/${response.data.id}`);
     });
   };
 
-  return { newMemo, setNewMemo, SendPostMemo };
+  return { SendPostMemo };
 };
