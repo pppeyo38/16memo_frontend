@@ -11,14 +11,13 @@ import { Font } from "../../style/Font";
 import styled from "styled-components";
 
 type Props = {
-  newMemo: Memo;
-  setNewMemo: Dispatch<SetStateAction<Memo>>;
+  memoData: Memo;
   isNew: boolean;
 };
 
-// POST /memos
 export const MemoCreateLayout: FC<Props> = (props) => {
-  const { newMemo, setNewMemo, isNew } = props;
+  const { memoData, isNew } = props;
+  const [newMemo, setNewMemo] = useState<Memo>(memoData);
   const { SendPostMemo } = usePostMemos();
   const { SendPutMemo } = usePutMemo();
   const [openedModal, setOpenedModal] = useState(false);

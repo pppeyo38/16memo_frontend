@@ -1,17 +1,26 @@
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
-import { Memo } from "../../types/memo";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useLoginUser } from "../../hooks/useLoginUser";
+import { useShowMemo } from "../../hooks/memos/useShowMemo";
 import { MemoCreateLayout } from "../templates/MemoCreateLayout";
 
 export const MemoEdit = () => {
-  const location = useLocation();
-  const [memoContent, setMemoContent] = useState<Memo>(location.state as Memo);
+  const { loginUser } = useLoginUser();
+  const { memoData, getMemoData } = useShowMemo();
+  const { memoId } = useParams();
+
+  useEffect(() => {
+    getMemoData(memoId);
+  }, []);
 
   return (
-    <MemoCreateLayout
-      newMemo={memoContent}
-      setNewMemo={setMemoContent}
-      isNew={false}
-    />
+    <>
+      {!memoData.loading &&
+        (loginUser?.id === memoData.getData.userId ? (
+          <MemoCreateLayout memoData={memoData.getData.memo} isNew={false} />
+        ) : (
+          <div>メモが見つかりません</div>
+        ))}
+    </>
   );
 };
