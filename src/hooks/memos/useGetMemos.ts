@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from "react";
-import { Memo } from "../../types/memo";
+import { useState, useCallback } from "react";
 import { client } from "../../lib/axios";
+import { Memo } from "../../types/memo";
 
 type getDataType = {
   id: number;
