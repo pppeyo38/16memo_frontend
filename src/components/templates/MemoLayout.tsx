@@ -46,8 +46,16 @@ export const MemoLayout: FC<Props> = (props) => {
   const cmyk = setRGBtoCMYK(rgb);
   const hsv = setRGBtoHSV(rgb);
 
+  const backMemosFile = () => {
+    if (memoData.getData.userId === loginUser?.id) {
+      navigate(`/${memoContent.fileName}`);
+    } else {
+      navigate("/");
+    }
+  };
+
   const handleClick = () => {
-    navigate(`/memo/${memoContent.id}/edit`, { state: memoContent });
+    navigate(`/memo/${memoContent.id}/edit`);
   };
 
   const onCloseLink = () => setIsOpenLink(false);
@@ -57,10 +65,7 @@ export const MemoLayout: FC<Props> = (props) => {
     <Display bg={memoContent.colorCode}>
       <Content>
         <Head>
-          <ReturnArrow
-            onClick={() => navigate(`/${memoContent.fileName}`)}
-            color={"white"}
-          />
+          <ReturnArrow onClick={() => backMemosFile()} color={"white"} />
           {canEdit && <EditButton onClick={handleClick} />}
         </Head>
         <Main>

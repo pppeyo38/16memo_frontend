@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Memo } from "../../types/memo";
 import { usePostMemos } from "../../hooks/memos/usePostMemo";
