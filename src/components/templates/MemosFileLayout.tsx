@@ -1,28 +1,27 @@
-import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useGetMemos } from "../../hooks/memos/useGetMemos";
+import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { PageTitle } from "../molecules/PageTitle";
 import { ColorMemoThumb } from "../atoms/ColorMemoThumb";
 import { Center, Spinner } from "@chakra-ui/react";
 import styled from "styled-components";
+import { memosDataType } from "../../hooks/memos/useGetMemos";
 
-export const MemosFileLayout = () => {
-  const location = useLocation();
+type Props = {
+  memosData: memosDataType;
+};
+
+export const MemosFileLayout: FC<Props> = (props) => {
+  const { memosData } = props;
+  const memosList = memosData.getData;
   const navigate = useNavigate();
-  const [selectValue, setSelectValue] = useState<{ id: number }>(
-    location.state as { id: number }
-  );
-
-  const { memosData, memosLoading, memosError } = useGetMemos(selectValue.id);
 
   return (
     <ContentInner>
       <ArrowWrap>
         <ReturnArrow onClick={() => navigate("/")} color={"#161616"} />
       </ArrowWrap>
-      <PageTitle>{memosData.name}</PageTitle>
-      {memosLoading ? (
+      {memosData.loading ? (
         <Center h="50vh">
           <Spinner
             thickness="4px"
@@ -33,18 +32,21 @@ export const MemosFileLayout = () => {
           />
         </Center>
       ) : (
-        <MemosWrap>
-          {memosData &&
-            memosData.memos.map((memo, index) => (
-              <ColorMemoThumb
-                key={index}
-                memoId={memo.id}
-                content={{ ...memo, fileName: memosData.name }}
-                deleteMode={false}
-                canEdit={true}
-              />
-            ))}
-        </MemosWrap>
+        <>
+          <PageTitle>{memosList.name}</PageTitle>
+          <MemosWrap>
+            {memosList &&
+              memosList.memos.map((memo, index) => (
+                <ColorMemoThumb
+                  key={index}
+                  memoId={memo.id}
+                  content={{ ...memo, fileName: memosList.name }}
+                  deleteMode={false}
+                  canEdit={true}
+                />
+              ))}
+          </MemosWrap>
+        </>
       )}
     </ContentInner>
   );
