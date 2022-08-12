@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoginUser } from "../../hooks/useLoginUser";
+import { useDestroyMemo } from "../../hooks/memos/useDestroyMemo";
 import { memoDataType } from "../../hooks/memos/useShowMemo";
 import { useHexToRgb } from "../../hooks/color/useHexToRgb";
 import { useCmykToRgb } from "../../hooks/color/useCmykToRgb";
@@ -31,6 +32,7 @@ export const MemoLayout: FC<Props> = (props) => {
   const [canEdit, setCanEdit] = useState(
     loginUser?.id === memoData.getData.userId
   );
+  const { DestroyMemo } = useDestroyMemo();
 
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -99,7 +101,11 @@ export const MemoLayout: FC<Props> = (props) => {
         isOpenLink={isOpenLink}
         onClose={onCloseLink}
       />
-      <TrashPopup isOpenTrash={isOpenTrash} onClose={onCloseTrash} />
+      <TrashPopup
+        isOpenTrash={isOpenTrash}
+        onClose={onCloseTrash}
+        onClick={() => DestroyMemo(memoContent.id!, memoContent.fileName)}
+      />
     </Display>
   );
 };
