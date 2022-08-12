@@ -1,28 +1,32 @@
-import { useState, useEffect } from "react";
-import { Memo } from "../../types/memo";
+import { useState, useCallback } from "react";
 import { client } from "../../lib/axios";
+import { Memo } from "../../types/memo";
 
-type Response = {
-  userId: number;
+type getDataType = {
+  useId: number;
   memo: Memo;
 };
 
-export const useShowMemo = (memoId: number) => {
-  const [state, setState] = useState(<Response>{});
+export type memoDataType = {
+  getData: getDataType;
+  loading: boolean;
+  error?: Error;
+};
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await client
-        .get(`memos/${memoId}`)
-        .then((response) => {
-          console.log("メモ取得");
-          setState(response.data);
-        })
-        .catch((error) => console.log("メモ取得失敗..."));
-    };
+export const useShowMemo = () => {
+  const [memoData, setMemoData] = useState<memoDataType>({
+    getData: <getDataType>{},
+    loading: true,
+  });
 
-    fetchData();
+  const getMemoData = useCallback(async (memoId: string | undefined) => {
+    await client
+      .get<getDataType>(`memos/${memoId}`)
+      .then((res) => {
+        setMemoData({ getData: res.data, loading: false });
+      })
+      .catch((err) => console.log(err));
   }, []);
 
-  return state;
+  return { memoData, setMemoData, getMemoData };
 };

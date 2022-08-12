@@ -1,29 +1,33 @@
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Memo } from "../../types/memo";
+import { memoDataType } from "../../hooks/memos/useShowMemo";
 import { useHexToRgb } from "../../hooks/color/useHexToRgb";
 import { useCmykToRgb } from "../../hooks/color/useCmykToRgb";
 import { useHsvToRgb } from "../../hooks/color/useHsvToRgb";
+
 import { useDisclosure } from "@chakra-ui/react";
+import styled from "styled-components";
+
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { EditButton } from "../atoms/EditButton";
 import { CommentIcon } from "../atoms/Icon/CommentIcon";
 import { LinkIcon } from "../atoms/Icon/LinkIcon";
 import { TrashIcon } from "../atoms/Icon/TrashIcon";
-import { ColorTheme } from "../../style/ColorTheme";
-import { Font } from "../../style/Font";
-import styled from "styled-components";
 import { CommentDrawer } from "../organisms/Memo/CommentDrawer";
 import { LinkPopup } from "../organisms/Memo/LinkPopup";
 import { TrashPopup } from "../organisms/Memo/TrashPopup";
+import { ColorTheme } from "../../style/ColorTheme";
+import { Font } from "../../style/Font";
 
 type Props = {
-  memoContent: Memo;
+  memoData: memoDataType;
   editMode: boolean;
 };
 
 export const MemoLayout: FC<Props> = (props) => {
-  const { memoContent, editMode } = props;
+  const { memoData, editMode } = props;
+  const memoContent = memoData.getData.memo;
+
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isOpenLink, setIsOpenLink] = useState<boolean>(false);
