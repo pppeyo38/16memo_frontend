@@ -2,6 +2,7 @@ import { Dispatch, FC, SetStateAction, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Memo } from "../../types/memo";
 import { usePostMemos } from "../../hooks/memos/usePostMemo";
+import { usePutMemo } from "../../hooks/memos/usePutMemo";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { ColorSetting } from "../organisms/ColorSetting";
 import { MemoForm } from "../organisms/Memo/MemoForm";
@@ -12,12 +13,14 @@ import styled from "styled-components";
 type Props = {
   newMemo: Memo;
   setNewMemo: Dispatch<SetStateAction<Memo>>;
+  isNew: boolean;
 };
 
 // POST /memos
 export const MemoCreateLayout: FC<Props> = (props) => {
-  const { newMemo, setNewMemo } = props;
+  const { newMemo, setNewMemo, isNew } = props;
   const { SendPostMemo } = usePostMemos();
+  const { SendPutMemo } = usePutMemo();
   const [openedModal, setOpenedModal] = useState(false);
   const navigate = useNavigate();
 
@@ -26,7 +29,13 @@ export const MemoCreateLayout: FC<Props> = (props) => {
       <Content>
         <Head>
           <ReturnArrow onClick={() => navigate(-1)} color={"#161616"} />
-          <CompleteButton onClick={() => SendPostMemo(newMemo)}>
+          <CompleteButton
+            onClick={
+              isNew
+                ? () => SendPostMemo(newMemo)
+                : () => SendPutMemo(newMemo, newMemo.id!)
+            }
+          >
             完了
           </CompleteButton>
         </Head>

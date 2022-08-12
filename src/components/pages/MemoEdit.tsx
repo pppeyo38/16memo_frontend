@@ -7,5 +7,11 @@ export const MemoEdit = () => {
   const location = useLocation();
   const [memoContent, setMemoContent] = useState<Memo>(location.state as Memo);
 
-  return <MemoCreateLayout newMemo={memoContent} setNewMemo={setMemoContent} />;
+  return (
+    <MemoCreateLayout
+      newMemo={memoContent}
+      setNewMemo={setMemoContent}
+      isNew={false}
+    />
+  );
 };

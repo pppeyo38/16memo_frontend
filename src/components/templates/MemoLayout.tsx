@@ -55,7 +55,10 @@ export const MemoLayout: FC<Props> = (props) => {
     <Display bg={memoContent.colorCode}>
       <Content>
         <Head>
-          <ReturnArrow onClick={() => navigate(-1)} color={"white"} />
+          <ReturnArrow
+            onClick={() => navigate(`/${memoContent.fileName}`)}
+            color={"white"}
+          />
           {canEdit && <EditButton onClick={handleClick} />}
         </Head>
         <Main>

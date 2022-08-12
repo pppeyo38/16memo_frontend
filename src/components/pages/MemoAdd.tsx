@@ -15,5 +15,7 @@ const defaultValue = {
 export const MemoAdd: FC = () => {
   const [newMemo, setNewMemo] = useState<Memo>(defaultValue);
 
-  return <MemoCreateLayout newMemo={newMemo} setNewMemo={setNewMemo} />;
+  return (
+    <MemoCreateLayout newMemo={newMemo} setNewMemo={setNewMemo} isNew={true} />
+  );
 };
