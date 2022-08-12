@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLoginUser } from "../../hooks/useLoginUser";
 import { memoDataType } from "../../hooks/memos/useShowMemo";
 import { useHexToRgb } from "../../hooks/color/useHexToRgb";
 import { useCmykToRgb } from "../../hooks/color/useCmykToRgb";
@@ -21,12 +22,15 @@ import { Font } from "../../style/Font";
 
 type Props = {
   memoData: memoDataType;
-  editMode: boolean;
 };
 
 export const MemoLayout: FC<Props> = (props) => {
-  const { memoData, editMode } = props;
+  const { loginUser } = useLoginUser();
+  const { memoData } = props;
   const memoContent = memoData.getData.memo;
+  const [canEdit, setCanEdit] = useState(
+    loginUser?.id === memoData.getData.userId
+  );
 
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -52,7 +56,7 @@ export const MemoLayout: FC<Props> = (props) => {
       <Content>
         <Head>
           <ReturnArrow onClick={() => navigate(-1)} color={"white"} />
-          {editMode && <EditButton onClick={handleClick} />}
+          {canEdit && <EditButton onClick={handleClick} />}
         </Head>
         <Main>
           <MemoInfo>
@@ -78,7 +82,7 @@ export const MemoLayout: FC<Props> = (props) => {
           <ActionIcons>
             <CommentIcon onClick={onOpen} color={"white"} />
             <LinkIcon onClick={() => setIsOpenLink(true)} color={"white"} />
-            {editMode && (
+            {canEdit && (
               <TrashIcon onClick={() => setIsOpenTrash(true)} color={"white"} />
             )}
           </ActionIcons>

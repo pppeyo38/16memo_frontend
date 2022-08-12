@@ -3,7 +3,7 @@ import { client } from "../../lib/axios";
 import { Memo } from "../../types/memo";
 
 type getDataType = {
-  useId: number;
+  userId: number;
   memo: Memo;
 };
 
