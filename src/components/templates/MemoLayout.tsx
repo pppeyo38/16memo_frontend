@@ -1,43 +1,39 @@
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLoginUser } from "../../hooks/useLoginUser";
+import { useDestroyMemo } from "../../hooks/memos/useDestroyMemo";
+import { memoDataType } from "../../hooks/memos/useShowMemo";
 import { useHexToRgb } from "../../hooks/color/useHexToRgb";
 import { useCmykToRgb } from "../../hooks/color/useCmykToRgb";
 import { useHsvToRgb } from "../../hooks/color/useHsvToRgb";
+
 import { useDisclosure } from "@chakra-ui/react";
+import styled from "styled-components";
+
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { EditButton } from "../atoms/EditButton";
 import { CommentIcon } from "../atoms/Icon/CommentIcon";
 import { LinkIcon } from "../atoms/Icon/LinkIcon";
 import { TrashIcon } from "../atoms/Icon/TrashIcon";
-import { ColorTheme } from "../../style/ColorTheme";
-import { Font } from "../../style/Font";
-import styled from "styled-components";
 import { CommentDrawer } from "../organisms/Memo/CommentDrawer";
 import { LinkPopup } from "../organisms/Memo/LinkPopup";
 import { TrashPopup } from "../organisms/Memo/TrashPopup";
-
-type FileInfo = {
-  id: number;
-  name: string;
-};
-
-type MemoDisplay = {
-  id: number;
-  colorCode: string;
-  tagName: string;
-  comment: string;
-  url: string;
-  createdAt: string;
-  fileInfo: FileInfo;
-};
+import { ColorTheme } from "../../style/ColorTheme";
+import { Font } from "../../style/Font";
 
 type Props = {
-  memoContent: MemoDisplay;
-  editMode: boolean;
+  memoData: memoDataType;
 };
 
 export const MemoLayout: FC<Props> = (props) => {
-  const { memoContent, editMode } = props;
+  const { loginUser } = useLoginUser();
+  const { memoData } = props;
+  const memoContent = memoData.getData.memo;
+  const [canEdit, setCanEdit] = useState(
+    loginUser?.id === memoData.getData.userId
+  );
+  const { DestroyMemo } = useDestroyMemo();
+
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isOpenLink, setIsOpenLink] = useState<boolean>(false);
@@ -50,8 +46,16 @@ export const MemoLayout: FC<Props> = (props) => {
   const cmyk = setRGBtoCMYK(rgb);
   const hsv = setRGBtoHSV(rgb);
 
+  const backMemosFile = () => {
+    if (memoData.getData.userId === loginUser?.id) {
+      navigate(`/${memoContent.fileName}`);
+    } else {
+      navigate("/");
+    }
+  };
+
   const handleClick = () => {
-    navigate(`/memo/${memoContent.id}/edit`, { state: memoContent });
+    navigate(`/memo/${memoContent.id}/edit`);
   };
 
   const onCloseLink = () => setIsOpenLink(false);
@@ -61,13 +65,13 @@ export const MemoLayout: FC<Props> = (props) => {
     <Display bg={memoContent.colorCode}>
       <Content>
         <Head>
-          <ReturnArrow onClick={() => navigate(-1)} color={"white"} />
-          {editMode && <EditButton onClick={handleClick} />}
+          <ReturnArrow onClick={() => backMemosFile()} color={"white"} />
+          {canEdit && <EditButton onClick={handleClick} />}
         </Head>
         <Main>
           <MemoInfo>
             <MemoHeadingWrap>
-              <MemoHeading>{memoContent.tagName}</MemoHeading>
+              <MemoHeading># {memoContent.tagName}</MemoHeading>
               <ColorCode># {memoContent.colorCode}</ColorCode>
             </MemoHeadingWrap>
           </MemoInfo>
@@ -88,7 +92,7 @@ export const MemoLayout: FC<Props> = (props) => {
           <ActionIcons>
             <CommentIcon onClick={onOpen} color={"white"} />
             <LinkIcon onClick={() => setIsOpenLink(true)} color={"white"} />
-            {editMode && (
+            {canEdit && (
               <TrashIcon onClick={() => setIsOpenTrash(true)} color={"white"} />
             )}
           </ActionIcons>
@@ -102,7 +106,11 @@ export const MemoLayout: FC<Props> = (props) => {
         isOpenLink={isOpenLink}
         onClose={onCloseLink}
       />
-      <TrashPopup isOpenTrash={isOpenTrash} onClose={onCloseTrash} />
+      <TrashPopup
+        isOpenTrash={isOpenTrash}
+        onClose={onCloseTrash}
+        onClick={() => DestroyMemo(memoContent.id!, memoContent.fileName)}
+      />
     </Display>
   );
 };

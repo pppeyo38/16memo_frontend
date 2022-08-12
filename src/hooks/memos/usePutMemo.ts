@@ -1,7 +1,8 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { client } from "../../lib/axios";
 
-export type PostMemo = {
+export type PutMemo = {
   colorCode: string;
   tagName: string;
   comment: string;
@@ -9,10 +10,11 @@ export type PostMemo = {
   fileName: string;
 };
 
-export const usePostMemos = () => {
+export const usePutMemo = () => {
+  const [newMemo, setNewMemo] = useState<PutMemo>();
   const navigate = useNavigate();
 
-  const SendPostMemo = async (data: PostMemo) => {
+  const SendPutMemo = async (data: PutMemo, id: number) => {
     const sendData = {
       colorCode: data.colorCode,
       tag_name: data.tagName,
@@ -21,10 +23,10 @@ export const usePostMemos = () => {
       color_file_name: data.fileName,
     };
     console.log(sendData);
-    await client.post("memos", sendData).then((response) => {
-      navigate(`/memo/${response.data.id}`);
+    await client.put(`memos/${id}`, sendData).then(() => {
+      navigate(`/memo/${id}`);
     });
   };
 
-  return { SendPostMemo };
+  return { newMemo, setNewMemo, SendPutMemo };
 };

@@ -1,4 +1,5 @@
 import { Dispatch, FC, SetStateAction } from "react";
+import { Memo } from "../../../types/memo";
 import styled from "styled-components";
 import { Font } from "../../../style/Font";
 import {
@@ -9,12 +10,11 @@ import {
   InputLeftElement,
   Textarea,
 } from "@chakra-ui/react";
-import { PostMemo } from "../../../hooks/memos/usePostMemo";
 import { FilesDrawer } from "../../organisms/Memo/FilesDrawer";
 
 type Props = {
-  newMemo: PostMemo;
-  setNewMemo: Dispatch<SetStateAction<PostMemo>>;
+  newMemo: Memo;
+  setNewMemo: Dispatch<SetStateAction<Memo>>;
 };
 
 export const MemoForm: FC<Props> = (props) => {

@@ -1,24 +1,22 @@
+import { FC } from "react";
+import { filesDataType } from "../../hooks/files/useGetFiles";
 import { Center, Spinner } from "@chakra-ui/react";
-import { PageTitle } from "../molecules/PageTitle";
 import { FileThumb } from "../atoms/FileThumb";
+import { PageTitle } from "../molecules/PageTitle";
 import styled from "styled-components";
-import { FileWithMemoInfoType } from "../../api/handler/file/type";
 
 type Props = {
-  state: {
-    filesData: FileWithMemoInfoType[];
-    filesLoading: boolean;
-    filesError?: Error;
-  };
+  filesData: filesDataType;
 };
 
-export const FilesLayout = ({ state }: Props) => {
-  const { filesData, filesError, filesLoading } = state;
+export const FilesLayout: FC<Props> = (props) => {
+  const { filesData } = props;
+  const filesList = filesData.getData;
 
   return (
     <ContentInner>
       <PageTitle>ファイル</PageTitle>
-      {filesLoading ? (
+      {filesData.loading ? (
         <Center h="50vh">
           <Spinner
             thickness="4px"
@@ -30,8 +28,8 @@ export const FilesLayout = ({ state }: Props) => {
         </Center>
       ) : (
         <FilesWrap>
-          {filesData &&
-            filesData.map((file, index) => (
+          {filesList &&
+            filesList.map((file, index) => (
               <FileThumb
                 key={index}
                 fileId={file.id}

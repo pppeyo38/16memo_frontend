@@ -1,27 +1,13 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
+import { Memo } from "../../types/memo";
 import styled from "styled-components";
 import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
 
-type FileInfo = {
-  id: number;
-  name: string;
-};
-
-type MemoContent = {
-  id: number;
-  colorCode: string;
-  tagName: string;
-  comment: string;
-  url: string;
-  createdAt: string;
-  fileInfo: FileInfo;
-};
-
 type Props = {
-  memoId: number;
-  content: MemoContent;
+  memoId: number | undefined;
+  content: Memo;
   deleteMode: boolean;
   canEdit: boolean;
 };

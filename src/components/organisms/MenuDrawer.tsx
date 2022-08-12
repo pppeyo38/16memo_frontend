@@ -16,7 +16,7 @@ export const MenuDrawer = ({ isOpen, onClose }: Props) => {
       <DrawerContent style={DrawerStyle}>
         <MenuList>
           <MenuListItems onClick={onClose}>
-            <Link to="/">メモ</Link>
+            <Link to="/">ファイル</Link>
           </MenuListItems>
           <MenuListItems onClick={onClose}>
             <Link to="/search">検索</Link>
