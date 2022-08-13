@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { filesDataType } from "../../hooks/files/useGetFiles";
 import { Center, Spinner } from "@chakra-ui/react";
+import { SettingIcon } from "../atoms/Icon/SettingIcon";
 import { FileThumb } from "../atoms/FileThumb";
 import { PageTitle } from "../molecules/PageTitle";
 import styled from "styled-components";
@@ -15,7 +16,10 @@ export const FilesLayout: FC<Props> = (props) => {
 
   return (
     <ContentInner>
-      <PageTitle>ファイル</PageTitle>
+      <Head>
+        <PageTitle>ファイル</PageTitle>
+        <SettingIcon onClick={() => console.log("メニュー")} />
+      </Head>
       {filesData.loading ? (
         <Center h="50vh">
           <Spinner
@@ -47,6 +51,11 @@ export const FilesLayout: FC<Props> = (props) => {
 const ContentInner = styled.div`
   max-width: 340px;
   margin: 95px auto 0;
+`;
+
+const Head = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const FilesWrap = styled.div`

@@ -1,6 +1,7 @@
 import { FC } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
+import { SettingIcon } from "../atoms/Icon/SettingIcon";
 import { PageTitle } from "../molecules/PageTitle";
 import { ColorMemoThumb } from "../atoms/ColorMemoThumb";
 import { Center, Spinner } from "@chakra-ui/react";
@@ -15,12 +16,17 @@ export const MemosFileLayout: FC<Props> = (props) => {
   const { memosData } = props;
   const memosList = memosData.getData;
   const navigate = useNavigate();
+  const { fileName } = useParams();
 
   return (
     <ContentInner>
       <ArrowWrap>
         <ReturnArrow onClick={() => navigate("/")} color={"#161616"} />
       </ArrowWrap>
+      <Head>
+        <PageTitle>{fileName}</PageTitle>
+        <SettingIcon onClick={() => console.log("メニュー")} />
+      </Head>
       {memosData.loading ? (
         <Center h="50vh">
           <Spinner
@@ -33,7 +39,6 @@ export const MemosFileLayout: FC<Props> = (props) => {
         </Center>
       ) : (
         <>
-          <PageTitle>{memosList.name}</PageTitle>
           <MemosWrap>
             {memosList &&
               memosList.memos.map((memo, index) => (
@@ -59,6 +64,11 @@ const ContentInner = styled.div`
 
 const ArrowWrap = styled.div`
   margin-bottom: 25px;
+`;
+
+const Head = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const MemosWrap = styled.div`
