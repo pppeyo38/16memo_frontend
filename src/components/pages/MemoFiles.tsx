@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useGetMemos } from "../../hooks/memos/useGetMemos";
-import { HeaderLayout } from "../templates/HeaderLayout";
 import { MemosFileLayout } from "../templates/MemosFileLayout";
 
 export const MemoFiles = () => {
@@ -12,9 +11,5 @@ export const MemoFiles = () => {
     getMemosData(fileName);
   }, [fileName]);
 
-  return (
-    <HeaderLayout>
-      <MemosFileLayout memosData={memosData} />
-    </HeaderLayout>
-  );
+  return <MemosFileLayout memosData={memosData} />;
 };

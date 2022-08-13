@@ -1,12 +1,15 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useDisclosure } from "@chakra-ui/react";
+import { memosDataType } from "../../hooks/memos/useGetMemos";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { SettingIcon } from "../atoms/Icon/SettingIcon";
 import { PageTitle } from "../atoms/PageTitle";
 import { ColorMemoThumb } from "../molecules/ColorMemoThumb";
-import { Center, Spinner } from "@chakra-ui/react";
+import { Header } from "../organisms/Header";
+import { MemosFileDrawer } from "../organisms/File/MemosFileDrawer";
+import { Loading } from "../pages/Loading";
 import styled from "styled-components";
-import { memosDataType } from "../../hooks/memos/useGetMemos";
 
 type Props = {
   memosData: memosDataType;
@@ -17,43 +20,47 @@ export const MemosFileLayout: FC<Props> = (props) => {
   const memosList = memosData.getData;
   const navigate = useNavigate();
   const { fileName } = useParams();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isDelete, setIsDelete] = useState(false);
 
   return (
-    <ContentInner>
-      <ArrowWrap>
-        <ReturnArrow onClick={() => navigate("/")} color={"#161616"} />
-      </ArrowWrap>
-      <Head>
-        <PageTitle>{fileName}</PageTitle>
-        <SettingIcon onClick={() => console.log("メニュー")} />
-      </Head>
-      {memosData.loading ? (
-        <Center h="50vh">
-          <Spinner
-            thickness="4px"
-            speed="0.65s"
-            emptyColor="gray.200"
-            color="#00A8A6"
-            size="xl"
-          />
-        </Center>
-      ) : (
-        <>
-          <MemosWrap>
-            {memosList &&
-              memosList.memos.map((memo, index) => (
-                <ColorMemoThumb
-                  key={index}
-                  memoId={memo.id}
-                  content={{ ...memo, fileName: memosList.name }}
-                  deleteMode={false}
-                  canEdit={true}
-                />
-              ))}
-          </MemosWrap>
-        </>
-      )}
-    </ContentInner>
+    <>
+      <Header />
+      <ContentInner>
+        <ArrowWrap>
+          <ReturnArrow onClick={() => navigate("/")} color={"#161616"} />
+        </ArrowWrap>
+        <Head>
+          <PageTitle>{fileName}</PageTitle>
+          <SettingIcon onClick={onOpen} />
+        </Head>
+        {memosData.loading ? (
+          <Loading />
+        ) : (
+          <>
+            <MemosWrap>
+              {memosList &&
+                memosList.memos.map((memo, index) => (
+                  <ColorMemoThumb
+                    key={index}
+                    memoId={memo.id}
+                    content={{ ...memo, fileName: memosList.name }}
+                    deleteMode={false}
+                    canEdit={true}
+                  />
+                ))}
+            </MemosWrap>
+            <MemosFileDrawer
+              fileName={memosData.getData.name}
+              isDelete={isDelete}
+              setIsDelete={setIsDelete}
+              isOpen={isOpen}
+              onClose={onClose}
+            />
+          </>
+        )}
+      </ContentInner>
+    </>
   );
 };
 
