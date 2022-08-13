@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { CheckboxGroup, useDisclosure } from "@chakra-ui/react";
 import { memosDataType } from "../../hooks/memos/useGetMemos";
+import { useDestroyMemo } from "../../hooks/memos/useDestroyMemo";
 import { useTrash } from "../../hooks/popup/useTrash";
 import { CancelButton } from "../atoms/Button/CancelButton";
 import { DeleteButton } from "../atoms/Button/DeleteButton";
@@ -23,6 +24,7 @@ type Props = {
 export const MemosFileLayout: FC<Props> = (props) => {
   const { memosData } = props;
   const memosList = memosData.getData;
+  const { DestroyMemo } = useDestroyMemo();
   const { isOpenTrash, onOpenTrash, onCloseTrash } = useTrash();
   const navigate = useNavigate();
   const { fileName } = useParams();
@@ -38,6 +40,7 @@ export const MemosFileLayout: FC<Props> = (props) => {
   const onClickDelete = () => {
     setIsDelete(false);
     onCloseTrash();
+    DestroyMemo(checkedItems, fileName!);
   };
 
   return (
