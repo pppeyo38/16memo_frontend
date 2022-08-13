@@ -1,8 +1,8 @@
 import { FC, Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
 import { Stack, Input } from "@chakra-ui/react";
-import { Button } from "../../atoms/Button";
-import { PrimaryButton } from "../../atoms/PrimaryButton";
+import { Button } from "../../atoms/Button/Button";
+import { PrimaryButton } from "../../atoms/Button/PrimaryButton";
 import styled from "styled-components";
 
 import { Data } from "../../../hooks/useSignUp";

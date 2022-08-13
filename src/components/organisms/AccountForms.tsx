@@ -3,7 +3,7 @@ import { auth } from "../../FirebaseConfig";
 import { useLoginUser } from "../../hooks/useLoginUser";
 import { Stack } from "@chakra-ui/react";
 import { SettingLink } from "../atoms/SettingLink";
-import { SettingButton } from "../atoms/SettingButton";
+import { SettingButton } from "../atoms/Button/SettingButton";
 
 export const AccountForms = () => {
   const user = auth.currentUser;

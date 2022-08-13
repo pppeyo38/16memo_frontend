@@ -1,4 +1,4 @@
-import { PageTitle } from "../molecules/PageTitle";
+import { PageTitle } from "../atoms/PageTitle";
 import styled from "styled-components";
 import { AccountForms } from "../organisms/AccountForms";
 

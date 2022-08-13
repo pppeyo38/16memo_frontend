@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { Singup } from "../components/pages/Singup";
 import { Files } from "../components/pages/Files";
+import { FileAdd } from "../components/pages/FileAdd";
 import { MemoFiles } from "../components/pages/MemoFiles";
 import { MemoId } from "../components/pages/MemoId";
 import { Setting } from "../components/pages/account/Setting";
@@ -25,6 +26,7 @@ export const Router = memo(() => {
       <Route element={<ProtectedRoute />}>
         <Route path="/" element={<Files />} />
         <Route path="/:fileName" element={<MemoFiles />} />
+        <Route path="/file/add" element={<FileAdd />} />
         <Route path="/memo/:memoId" element={<MemoId />} />
         <Route path="/memo/add" element={<MemoAdd />} />
         <Route path="/memo/:memoId/edit" element={<MemoEdit />} />

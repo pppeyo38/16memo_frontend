@@ -1,19 +1,24 @@
+import { FC, ReactNode } from "react";
 import { Popup } from "../../molecules/Popup";
 import styled from "styled-components";
 import { ColorTheme } from "../../../style/ColorTheme";
 
 type Props = {
+  children: ReactNode;
+  subText?: string;
   isOpenTrash: boolean;
   onClose: () => void;
   onClick: () => void;
 };
 
-export const TrashPopup = ({ isOpenTrash, onClose, onClick }: Props) => {
+export const TrashPopup: FC<Props> = (props) => {
+  const { children, subText, isOpenTrash, onClose, onClick } = props;
   return (
     <Popup
       isOpen={isOpenTrash}
       onClose={onClose}
-      proposalText={"メモを削除しますか？"}
+      proposalText={`${children}`}
+      subtext={subText}
     >
       <DeleteButton onClick={onClick}>削除する</DeleteButton>
     </Popup>

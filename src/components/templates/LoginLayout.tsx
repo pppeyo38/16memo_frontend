@@ -4,9 +4,9 @@ import { useLogin } from "../../hooks/useLogin";
 import Div100vh from "react-div-100vh";
 import { Stack, Input } from "@chakra-ui/react";
 import styled from "styled-components";
-import { IromemoIcon } from "../atoms/IromemoIcon";
-import { PrimaryButton } from "../atoms/PrimaryButton";
-import { Button } from "../atoms/Button";
+import { IromemoIcon } from "../atoms/Icon/IromemoIcon";
+import { PrimaryButton } from "../atoms/Button/PrimaryButton";
+import { Button } from "../atoms/Button/Button";
 
 type Data = {
   email: string;

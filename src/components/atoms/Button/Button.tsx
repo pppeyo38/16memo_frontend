@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import styled, { css } from "styled-components";
-import { ColorTheme } from "../../style/ColorTheme";
-import { Font } from "../../style/Font";
+import styled from "styled-components";
+import { ColorTheme } from "../../../style/ColorTheme";
+import { Font } from "../../../style/Font";
 
 type Props = {
   text: string;

@@ -9,10 +9,11 @@ type Props = {
   name: string;
   colorNum: number;
   mainColors: string[];
+  isDelete: boolean;
 };
 
 export const FileThumb: FC<Props> = (props) => {
-  const { fileId, name, colorNum, mainColors } = props;
+  const { fileId, name, colorNum, mainColors, isDelete } = props;
   const navigate = useNavigate();
 
   const handleClick = (id: number, name: string) => {
@@ -20,7 +21,10 @@ export const FileThumb: FC<Props> = (props) => {
   };
 
   return (
-    <FileThumbContainer onClick={() => handleClick(fileId, name)}>
+    <FileThumbContainer
+      isDelete={isDelete}
+      onClick={() => !isDelete && handleClick(fileId, name)}
+    >
       <MainColorsWrapper>
         {mainColors.length ? (
           <>
@@ -48,13 +52,15 @@ export const FileThumb: FC<Props> = (props) => {
 const { black, gray } = ColorTheme.palette;
 const { Roboto, Noto } = Font.fontFamily;
 
-const FileThumbContainer = styled.div`
+const FileThumbContainer = styled.div<{ isDelete: boolean }>`
   display: inline-block;
   overflow: hidden;
-  width: 100%;
+  flex-shrink: 0;
+  width: 340px;
   height: 60px;
   border-bottom-right-radius: 13px;
   box-shadow: 0px 2px 3px 2px rgba(22, 22, 22, 0.15);
+  transform: ${({ isDelete }) => isDelete && "translateX(14px)"};
 `;
 
 const MainColorsWrapper = styled.div`
