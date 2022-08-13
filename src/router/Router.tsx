@@ -16,6 +16,7 @@ import { SettingDeactivate } from "../components/pages/account/SettingDeactivate
 import { MemoAdd } from "../components/pages/MemoAdd";
 import { MemoEdit } from "../components/pages/MemoEdit";
 import { Login } from "../components/pages/Login";
+import { FileEdit } from "../components/pages/FileEdit";
 
 export const Router = memo(() => {
   return (
@@ -27,6 +28,7 @@ export const Router = memo(() => {
         <Route path="/" element={<Files />} />
         <Route path="/:fileName" element={<MemoFiles />} />
         <Route path="/file/add" element={<FileAdd />} />
+        <Route path="/:fileName/edit" element={<FileEdit />} />
         <Route path="/memo/:memoId" element={<MemoId />} />
         <Route path="/memo/add" element={<MemoAdd />} />
         <Route path="/memo/:memoId/edit" element={<MemoEdit />} />
