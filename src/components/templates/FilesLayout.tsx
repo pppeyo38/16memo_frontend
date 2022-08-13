@@ -1,5 +1,7 @@
 import { FC, useState } from "react";
 import { filesDataType } from "../../hooks/files/useGetFiles";
+import { useDestroyFiles } from "../../hooks/files/useDestroyFiles";
+import { useTrash } from "../../hooks/popup/useTrash";
 import { CheckboxGroup, useDisclosure } from "@chakra-ui/react";
 import { SettingIcon } from "../atoms/Icon/SettingIcon";
 import { CheckBox } from "../atoms/CheckBox";
@@ -8,6 +10,7 @@ import { DeleteButton } from "../atoms/Button/DeleteButton";
 import { FileThumb } from "../atoms/FileThumb";
 import { PageTitle } from "../molecules/PageTitle";
 import { FileOperateDrawer } from "../organisms/File/FileOperateDrawer";
+import { TrashPopup } from "../organisms/Memo/TrashPopup";
 import { Loading } from "../pages/Loading";
 import styled from "styled-components";
 
@@ -16,6 +19,8 @@ type Props = {
 };
 
 export const FilesLayout: FC<Props> = (props) => {
+  const { DestroyFiles } = useDestroyFiles();
+  const { isOpenTrash, setIsOpenTrash, onOpenTrash, onCloseTrash } = useTrash();
   const { filesData } = props;
   const filesList = filesData.getData;
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -34,9 +39,7 @@ export const FilesLayout: FC<Props> = (props) => {
           <>
             <CancelButton onClick={() => onClickCancelButton()} />
             {checkedItems.length !== 0 && (
-              <DeleteButton
-                onClick={() => console.log("削除: " + checkedItems)}
-              />
+              <DeleteButton onClick={() => onOpenTrash()} />
             )}
           </>
         ) : (
@@ -79,6 +82,14 @@ export const FilesLayout: FC<Props> = (props) => {
         isOpen={isOpen}
         onClose={onClose}
       />
+      <TrashPopup
+        subText={"ファイル内のメモが全て削除されます。"}
+        isOpenTrash={isOpenTrash}
+        onClose={onCloseTrash}
+        onClick={() => console.log("delete")}
+      >
+        ファイルを削除しますか？
+      </TrashPopup>
     </ContentInner>
   );
 };

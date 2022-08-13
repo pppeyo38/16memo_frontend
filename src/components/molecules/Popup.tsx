@@ -13,11 +13,12 @@ type Props = {
   isOpen: boolean;
   onClose: () => void;
   proposalText: string;
+  subtext?: string;
   children: ReactNode;
 };
 
 export const Popup: FC<Props> = (props) => {
-  const { isOpen, onClose, proposalText, children } = props;
+  const { isOpen, onClose, proposalText, subtext, children } = props;
 
   return (
     <Modal isOpen={isOpen} isCentered onClose={onClose}>
@@ -25,6 +26,7 @@ export const Popup: FC<Props> = (props) => {
       <ModalContent width="250px" height="170px" borderRadius="10px">
         <TxtWrapper>
           <h2>{proposalText}</h2>
+          {subtext && <span>{subtext}</span>}
         </TxtWrapper>
         <BtnWrapper>
           {children}
@@ -50,10 +52,12 @@ const TxtWrapper = styled.div`
   flex-direction: column;
   font-family: ${Noto};
   h2 {
+    line-height: 1.42;
     font-size: 14px;
     font-weight: ${medium};
   }
-  p {
+  span {
+    margin-top: 5px;
     font-size: 12px;
   }
 `;

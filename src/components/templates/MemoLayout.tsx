@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useLoginUser } from "../../hooks/useLoginUser";
 import { useDestroyMemo } from "../../hooks/memos/useDestroyMemo";
 import { memoDataType } from "../../hooks/memos/useShowMemo";
+import { useTrash } from "../../hooks/popup/useTrash";
 import { useHexToRgb } from "../../hooks/color/useHexToRgb";
 import { useCmykToRgb } from "../../hooks/color/useCmykToRgb";
 import { useHsvToRgb } from "../../hooks/color/useHsvToRgb";
@@ -36,8 +37,8 @@ export const MemoLayout: FC<Props> = (props) => {
 
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpenTrash, onOpenTrash, onCloseTrash } = useTrash();
   const [isOpenLink, setIsOpenLink] = useState<boolean>(false);
-  const [isOpenTrash, setIsOpenTrash] = useState<boolean>(false);
 
   const { setHextoRGB } = useHexToRgb();
   const { setRGBtoCMYK } = useCmykToRgb();
@@ -59,7 +60,6 @@ export const MemoLayout: FC<Props> = (props) => {
   };
 
   const onCloseLink = () => setIsOpenLink(false);
-  const onCloseTrash = () => setIsOpenTrash(false);
 
   return (
     <Display bg={memoContent.colorCode}>
@@ -93,7 +93,7 @@ export const MemoLayout: FC<Props> = (props) => {
             <CommentIcon onClick={onOpen} color={"white"} />
             <LinkIcon onClick={() => setIsOpenLink(true)} color={"white"} />
             {canEdit && (
-              <TrashIcon onClick={() => setIsOpenTrash(true)} color={"white"} />
+              <TrashIcon onClick={() => onOpenTrash()} color={"white"} />
             )}
           </ActionIcons>
         </Main>
@@ -110,7 +110,9 @@ export const MemoLayout: FC<Props> = (props) => {
         isOpenTrash={isOpenTrash}
         onClose={onCloseTrash}
         onClick={() => DestroyMemo(memoContent.id!, memoContent.fileName)}
-      />
+      >
+        メモを削除しますか？
+      </TrashPopup>
     </Display>
   );
 };
