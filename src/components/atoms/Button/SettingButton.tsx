@@ -1,8 +1,7 @@
-import { FC, ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { FC } from "react";
 import styled from "styled-components";
-import { ColorTheme } from "../../style/ColorTheme";
-import { Font } from "../../style/Font";
+import { ColorTheme } from "../../../style/ColorTheme";
+import { Font } from "../../../style/Font";
 import arrow from "../../images/grayArrow.svg";
 
 type Props = {

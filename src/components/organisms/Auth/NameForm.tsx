@@ -1,7 +1,7 @@
 import { FC, Dispatch, SetStateAction } from "react";
 import { Stack, Input } from "@chakra-ui/react";
-import { Button } from "../../atoms/Button";
-import { PrimaryButton } from "../../atoms/PrimaryButton";
+import { Button } from "../../atoms/Button/Button";
+import { PrimaryButton } from "../../atoms/Button/PrimaryButton";
 import { Data } from "../../../hooks/useSignUp";
 
 type Props = {

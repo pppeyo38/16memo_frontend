@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { useSearchMemos } from "../../hooks/memos/useSearchMemos";
-import { ColorThumb } from "../atoms/ColorThumb";
+import { ColorThumb } from "../molecules/ColorThumb";
 import styled from "styled-components";
 import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";

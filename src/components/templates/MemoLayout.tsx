@@ -11,8 +11,8 @@ import { useHsvToRgb } from "../../hooks/color/useHsvToRgb";
 import { useDisclosure } from "@chakra-ui/react";
 import styled from "styled-components";
 
+import { EditButton } from "../atoms/Button/EditButton";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
-import { EditButton } from "../atoms/EditButton";
 import { CommentIcon } from "../atoms/Icon/CommentIcon";
 import { LinkIcon } from "../atoms/Icon/LinkIcon";
 import { TrashIcon } from "../atoms/Icon/TrashIcon";

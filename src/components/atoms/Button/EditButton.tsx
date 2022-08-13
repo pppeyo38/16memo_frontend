@@ -1,5 +1,5 @@
-import { ColorTheme } from "../../style/ColorTheme";
-import { Font } from "../../style/Font";
+import { ColorTheme } from "../../../style/ColorTheme";
+import { Font } from "../../../style/Font";
 import styled from "styled-components";
 
 type Props = {

@@ -1,7 +1,7 @@
 import { FC, memo, ReactNode } from "react";
 import styled from "styled-components";
-import { ColorTheme } from "../../style/ColorTheme";
-import { Font } from "../../style/Font";
+import { ColorTheme } from "../../../style/ColorTheme";
+import { Font } from "../../../style/Font";
 
 type Props = {
   children: ReactNode;

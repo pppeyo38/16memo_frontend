@@ -3,7 +3,7 @@ import Div100vh from "react-div-100vh";
 import { Stack } from "@chakra-ui/react";
 import styled from "styled-components";
 import { Font } from "../../style/Font";
-import { IromemoIcon } from "../atoms/IromemoIcon";
+import { IromemoIcon } from "../atoms/Icon/IromemoIcon";
 import { MailPwForm } from "../organisms/Auth/MailPwForm";
 import { NameForm } from "../organisms/Auth/NameForm";
 
