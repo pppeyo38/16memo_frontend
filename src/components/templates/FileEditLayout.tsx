@@ -1,10 +1,11 @@
-import { FC, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { Input } from "@chakra-ui/react";
 import styled from "styled-components";
 import { ColorTheme } from "../../style/ColorTheme";
 import { Font } from "../../style/Font";
+import { usePutFile } from "../../hooks/files/usePutFile";
 
 type Props = {
   fileName: string;
@@ -12,6 +13,7 @@ type Props = {
 
 export const FileEditLayout = ({ fileName }: Props) => {
   const navigate = useNavigate();
+  const { SendPutFile } = usePutFile();
   const [updateFileName, setUpdateFileName] = useState<string>(fileName);
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +37,7 @@ export const FileEditLayout = ({ fileName }: Props) => {
             value={updateFileName}
             onChange={onChangeName}
           />
-          <CompleteButton onClick={() => console.log("PUT")}>
+          <CompleteButton onClick={() => SendPutFile(fileName, updateFileName)}>
             変更する
           </CompleteButton>
         </Form>
