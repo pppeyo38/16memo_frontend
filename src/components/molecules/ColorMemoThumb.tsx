@@ -43,7 +43,6 @@ const MemoThumb = styled.div<{ isDelete: boolean }>`
   overflow: hidden;
   width: 340px;
   height: 60px;
-  margin-bottom: 13px;
   border-bottom-right-radius: 13px;
   box-shadow: 0px 2px 3px 2px rgba(22, 22, 22, 0.15);
   transform: ${({ isDelete }) => isDelete && "translateX(14px)"};

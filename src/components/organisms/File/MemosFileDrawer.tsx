@@ -34,7 +34,7 @@ export const MemosFileDrawer: FC<Props> = (props) => {
           <Label>{fileName}</Label>
           <Stack spacing={"14px"}>
             <Button onClick={() => onClickDelete()}>メモを削除</Button>
-            <Button onClick={() => console.log("PUT ColorFile")}>
+            <Button onClick={() => navigate(`/${fileName}/edit`)}>
               ファイルの名称変更
             </Button>
           </Stack>
