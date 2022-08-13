@@ -1,9 +1,14 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { filesDataType } from "../../hooks/files/useGetFiles";
-import { Center, Spinner } from "@chakra-ui/react";
+import { CheckboxGroup, useDisclosure } from "@chakra-ui/react";
 import { SettingIcon } from "../atoms/Icon/SettingIcon";
+import { CheckBox } from "../atoms/CheckBox";
+import { CancelButton } from "../atoms/Button/CancelButton";
+import { DeleteButton } from "../atoms/Button/DeleteButton";
 import { FileThumb } from "../atoms/FileThumb";
 import { PageTitle } from "../molecules/PageTitle";
+import { FileOperateDrawer } from "../organisms/File/FileOperateDrawer";
+import { Loading } from "../pages/Loading";
 import styled from "styled-components";
 
 type Props = {
@@ -13,55 +18,103 @@ type Props = {
 export const FilesLayout: FC<Props> = (props) => {
   const { filesData } = props;
   const filesList = filesData.getData;
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isDelete, setIsDelete] = useState(false);
+  const [checkedItems, setCheckedItems] = useState<string[]>([]);
+
+  const onClickCancelButton = () => {
+    setIsDelete(!isDelete);
+    setCheckedItems([]);
+  };
 
   return (
     <ContentInner>
       <Head>
-        <PageTitle>ファイル</PageTitle>
-        <SettingIcon onClick={() => console.log("メニュー")} />
+        {isDelete ? (
+          <>
+            <CancelButton onClick={() => onClickCancelButton()} />
+            {checkedItems.length !== 0 && (
+              <DeleteButton
+                onClick={() => console.log("削除: " + checkedItems)}
+              />
+            )}
+          </>
+        ) : (
+          <>
+            <PageTitle>ファイル</PageTitle>
+            <SettingIcon onClick={onOpen} />
+          </>
+        )}
       </Head>
       {filesData.loading ? (
-        <Center h="50vh">
-          <Spinner
-            thickness="4px"
-            speed="0.65s"
-            emptyColor="gray.200"
-            color="#00A8A6"
-            size="xl"
-          />
-        </Center>
+        <Loading />
       ) : (
         <FilesWrap>
-          {filesList &&
-            filesList.map((file, index) => (
-              <FileThumb
-                key={index}
-                fileId={file.id}
-                name={file.name}
-                colorNum={file.memo.colorNum}
-                mainColors={file.memo.mainColor}
-              ></FileThumb>
-            ))}
+          <CheckboxGroup value={checkedItems}>
+            {filesList &&
+              filesList.map((file, index) => (
+                <ThumbContiner key={index}>
+                  {isDelete && (
+                    <CheckBox
+                      checkedItems={checkedItems}
+                      setCheckedItems={setCheckedItems}
+                      id={String(file.id)}
+                    />
+                  )}
+                  <FileThumb
+                    fileId={file.id}
+                    name={file.name}
+                    colorNum={file.memo.colorNum}
+                    mainColors={file.memo.mainColor}
+                    isDelete={isDelete}
+                  />
+                </ThumbContiner>
+              ))}
+          </CheckboxGroup>
         </FilesWrap>
       )}
+      <FileOperateDrawer
+        isDelete={isDelete}
+        setIsDelete={setIsDelete}
+        isOpen={isOpen}
+        onClose={onClose}
+      />
     </ContentInner>
   );
 };
 
 const ContentInner = styled.div`
-  max-width: 340px;
-  margin: 95px auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 95px;
 `;
 
 const Head = styled.div`
+  width: 340px;
+  height: 35px;
   display: flex;
   justify-content: space-between;
 `;
 
 const FilesWrap = styled.div`
-  max-width: 340px;
-  margin: 15px auto;
+  margin-top: 15px;
   display: flex;
   flex-direction: column;
   gap: 13px;
 `;
+
+const ThumbContiner = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const checkBoxStyle = {
+  width: "25px",
+  height: "25px",
+  border: "solid 2px #9b9b9b",
+  borderRadius: "50%",
+  span: {
+    display: "none",
+  },
+};
