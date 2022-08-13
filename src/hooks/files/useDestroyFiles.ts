@@ -5,8 +5,8 @@ export const useDestroyFiles = () => {
   const navigate = useNavigate();
 
   const DestroyFiles = async (fileIds: string[]) => {
-    await client.delete(`color_files/${fileIds}`).then(() => {
-      navigate("/");
+    await client.delete(`color_files/${fileIds}`).then((res) => {
+      navigate("/", { state: res.status });
     });
   };
 

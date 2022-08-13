@@ -20,7 +20,7 @@ type Props = {
 
 export const FilesLayout: FC<Props> = (props) => {
   const { DestroyFiles } = useDestroyFiles();
-  const { isOpenTrash, setIsOpenTrash, onOpenTrash, onCloseTrash } = useTrash();
+  const { isOpenTrash, onOpenTrash, onCloseTrash } = useTrash();
   const { filesData } = props;
   const filesList = filesData.getData;
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -30,6 +30,12 @@ export const FilesLayout: FC<Props> = (props) => {
   const onClickCancelButton = () => {
     setIsDelete(!isDelete);
     setCheckedItems([]);
+  };
+
+  const onClickDelete = () => {
+    setIsDelete(false);
+    onCloseTrash();
+    DestroyFiles(checkedItems);
   };
 
   return (
@@ -86,7 +92,7 @@ export const FilesLayout: FC<Props> = (props) => {
         subText={"ファイル内のメモが全て削除されます。"}
         isOpenTrash={isOpenTrash}
         onClose={onCloseTrash}
-        onClick={() => console.log("delete")}
+        onClick={() => onClickDelete()}
       >
         ファイルを削除しますか？
       </TrashPopup>
