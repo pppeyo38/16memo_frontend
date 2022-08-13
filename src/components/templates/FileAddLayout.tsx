@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { usePostFile } from "../../hooks/files/usePostFIle";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { Input } from "@chakra-ui/react";
 import styled from "styled-components";
@@ -8,6 +9,7 @@ import { Font } from "../../style/Font";
 
 export const FileAddLayout: FC = () => {
   const navigate = useNavigate();
+  const { SendPostFile } = usePostFile();
   const [newFileName, setNewFileName] = useState<string>("");
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +30,7 @@ export const FileAddLayout: FC = () => {
             value={newFileName}
             onChange={onChangeName}
           />
-          <CompleteButton onClick={() => console.log("PostFile")}>
+          <CompleteButton onClick={() => SendPostFile(newFileName)}>
             作成する
           </CompleteButton>
         </Form>
