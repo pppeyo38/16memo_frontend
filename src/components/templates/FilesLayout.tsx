@@ -98,23 +98,17 @@ const Head = styled.div`
 `;
 
 const FilesWrap = styled.div`
+  height: calc(100vh - 145px);
   margin-top: 15px;
+  padding-bottom: 20px;
   display: flex;
   flex-direction: column;
   gap: 13px;
+  overflow-y: scroll;
 `;
 
 const ThumbContiner = styled.div`
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 `;
-
-const checkBoxStyle = {
-  width: "25px",
-  height: "25px",
-  border: "solid 2px #9b9b9b",
-  borderRadius: "50%",
-  span: {
-    display: "none",
-  },
-};

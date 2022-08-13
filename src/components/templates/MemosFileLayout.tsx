@@ -76,7 +76,7 @@ const MemosWrap = styled.div`
   height: calc(100vh - 125px);
   overflow-y: scroll;
   margin: 15px auto 0;
-  padding-bottom: 15px;
+  padding-bottom: 20px;
   display: flex;
   flex-direction: column;
 `;

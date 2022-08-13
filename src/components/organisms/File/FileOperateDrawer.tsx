@@ -1,4 +1,5 @@
 import { Dispatch, FC, SetStateAction } from "react";
+import { useNavigate } from "react-router-dom";
 import { Stack } from "@chakra-ui/react";
 import { DrawerWrap } from "../../molecules/DrawerWrap";
 import styled from "styled-components";
@@ -13,6 +14,7 @@ type Props = {
 };
 
 export const FileOperateDrawer: FC<Props> = (props) => {
+  const navigate = useNavigate();
   const { isDelete, setIsDelete, isOpen, onClose } = props;
 
   const onClickDelete = () => {
@@ -30,7 +32,9 @@ export const FileOperateDrawer: FC<Props> = (props) => {
         <ButtonsWrap>
           <Label>ファイル</Label>
           <Stack spacing={"14px"}>
-            <Button>ファイルを新規作成</Button>
+            <Button onClick={() => navigate("/file/add")}>
+              ファイルを新規作成
+            </Button>
             <Button onClick={() => onClickDelete()}>ファイルを削除</Button>
           </Stack>
         </ButtonsWrap>

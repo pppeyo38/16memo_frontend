@@ -55,6 +55,7 @@ const { Roboto, Noto } = Font.fontFamily;
 const FileThumbContainer = styled.div<{ isDelete: boolean }>`
   display: inline-block;
   overflow: hidden;
+  flex-shrink: 0;
   width: 340px;
   height: 60px;
   border-bottom-right-radius: 13px;
