@@ -2,7 +2,7 @@ import { FC } from "react";
 import styled from "styled-components";
 import { ColorTheme } from "../../../style/ColorTheme";
 import { Font } from "../../../style/Font";
-import arrow from "../../images/grayArrow.svg";
+import arrow from "../../../images/grayArrow.svg";
 
 type Props = {
   label: string;
