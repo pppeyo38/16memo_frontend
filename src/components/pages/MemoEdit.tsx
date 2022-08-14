@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useLoginUser } from "../../hooks/useLoginUser";
 import { useShowMemo } from "../../hooks/memos/useShowMemo";
+import { PageTemplate } from "../templates/PageTemplate";
 import { MemoCreateLayout } from "../templates/MemoCreateLayout";
 
 export const MemoEdit = () => {
@@ -17,7 +18,9 @@ export const MemoEdit = () => {
     <>
       {!memoData.loading &&
         (loginUser?.id === memoData.getData.userId ? (
-          <MemoCreateLayout memoData={memoData.getData.memo} isNew={false} />
+          <PageTemplate>
+            <MemoCreateLayout memoData={memoData.getData.memo} isNew={false} />
+          </PageTemplate>
         ) : (
           <div>メモが見つかりません</div>
         ))}

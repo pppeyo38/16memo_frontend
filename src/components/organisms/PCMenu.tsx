@@ -15,6 +15,9 @@ export const PCMenu = () => {
       <Menu>
         <MenuList>
           <MenuListItems>
+            <Link to="/memo/add">メモを作成</Link>
+          </MenuListItems>
+          <MenuListItems>
             <Link to="/">ファイル</Link>
           </MenuListItems>
           <MenuListItems>
