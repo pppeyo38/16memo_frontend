@@ -20,9 +20,9 @@ export const PrimaryButton: FC<Props> = memo((props) => {
 const Button = styled.button<{ disabled: boolean }>`
   width: 340px;
   height: 40px;
-  border-radius: 20px;
+  border-radius: 100px;
   font-family: ${(props) => props.theme.fontFamily.Noto};
-  font-weight: ${(props) => props.theme.fontWeight.bold};
+  font-weight: ${(props) => props.theme.fontWeight.medium};
   color: ${(props) => props.theme.colors.white};
   background-color: ${(props) =>
     props.disabled ? "#93D6D5" : props.theme.colors.blueGreen};

@@ -50,7 +50,7 @@ const { fontWeight, fontFamily } = Font;
 const GridStyle = {
   backgroundColor: "#F2F2F2",
   backgroundImage:
-    "linear-gradient(0deg, transparent calc(100% - 0.4px), #9B9B9B calc(100% - 0.4px)), linear-gradient(90deg, transparent calc(100% - 0.4px), #9B9B9B calc(100% - 0.4px))",
+    "linear-gradient(0deg, transparent calc(100% - 0.6px), #D2D2D2 calc(100% - 0.6px)), linear-gradient(90deg, transparent calc(100% - 0.6px), #D2D2D2 calc(100% - 0.6px))",
   backgroundSize: "20px 20px",
   backgroundRepeat: "repeat",
   backgroundPosition: "center center",

@@ -1,8 +1,9 @@
 import { FC, Dispatch, SetStateAction } from "react";
 import { Stack, Input } from "@chakra-ui/react";
-import { Button } from "../../atoms/Button/Button";
+import { StrokeButton } from "../../atoms/Button/StrokeButton";
 import { PrimaryButton } from "../../atoms/Button/PrimaryButton";
 import { Data } from "../../../hooks/useSignUp";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   onClickSignUp: () => void;
@@ -12,6 +13,7 @@ type Props = {
 
 export const NameForm: FC<Props> = (props) => {
   const { onClickSignUp, setData, data } = props;
+  const navigate = useNavigate();
 
   const onChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -50,7 +52,7 @@ export const NameForm: FC<Props> = (props) => {
         >
           アカウントを作成
         </PrimaryButton>
-        <Button text="ログイン" size="m" link="/login" />
+        <StrokeButton onClick={() => navigate("/login")}>ログイン</StrokeButton>
       </Stack>
     </div>
   );
