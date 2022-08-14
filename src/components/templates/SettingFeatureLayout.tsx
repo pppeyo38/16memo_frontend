@@ -10,9 +10,10 @@ import { FormDelete } from "../atoms/Icon/FormDelete";
 type Props = {
   title: string;
   data: string | null | undefined;
+  onClick: (newData: string) => void;
 };
 
-export const SettingFeatureLayout = ({ title, data }: Props) => {
+export const SettingFeatureLayout = ({ title, data, onClick }: Props) => {
   const navigate = useNavigate();
   const [value, setValue] = useState<string>("");
 
@@ -33,7 +34,7 @@ export const SettingFeatureLayout = ({ title, data }: Props) => {
       <Head>
         <ReturnArrow onClick={() => navigate("/setting")} color={"#161616"} />
         <SettingTitle>{title}</SettingTitle>
-        <CompleteButton>完了</CompleteButton>
+        <CompleteButton onClick={() => onClick(value)}>完了</CompleteButton>
       </Head>
       <InputArea>
         <InputGroup sx={{ width: "340px" }}>
