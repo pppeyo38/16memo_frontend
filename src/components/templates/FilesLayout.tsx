@@ -115,11 +115,13 @@ const Head = styled.div`
 `;
 
 const FilesWrap = styled.div`
+  width: 400px;
   height: calc(100vh - 145px);
   margin-top: 15px;
   padding-bottom: 20px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 13px;
   overflow-y: scroll;
 `;

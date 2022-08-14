@@ -50,7 +50,8 @@ export const FileThumb: FC<Props> = (props) => {
 
 const FileThumbContainer = styled.div<{ isDelete: boolean }>`
   display: inline-block;
-  overflow: hidden;
+  overflow-x: visible;
+  overflow-y: hidden;
   flex-shrink: 0;
   width: 340px;
   height: 60px;
