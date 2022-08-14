@@ -10,10 +10,9 @@ export const usePutAccount = () => {
     const sendData = {
       nickname: newData,
     };
-    console.log(sendData);
     await client.put("settings_account", sendData).then((res) => {
       navigate("/setting", { state: res.status });
-      console.log(loginUser);
+      setLoginUser({ ...res.data, isAdmin: true });
     });
   };
 
@@ -21,9 +20,9 @@ export const usePutAccount = () => {
     const sendData = {
       createdID: newData,
     };
-    console.log(sendData);
-    await client.put("settings_account", sendData).then(() => {
-      navigate("/setting");
+    await client.put("settings_account", sendData).then((res) => {
+      navigate("/setting", { state: res.status });
+      setLoginUser({ ...res.data, isAdmin: true });
     });
   };
 
@@ -32,7 +31,8 @@ export const usePutAccount = () => {
       email: newData,
     };
     console.log(sendData);
-    await client.put("settings_authAccount", sendData).then(() => {
+    await client.put("settings_authAccount", sendData).then((res) => {
+      console.log(res);
       navigate("/setting");
     });
   };
