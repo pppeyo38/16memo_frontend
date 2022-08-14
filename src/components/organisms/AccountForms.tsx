@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../FirebaseConfig";
 import { useLoginUser } from "../../hooks/useLoginUser";
-import { Stack, useDisclosure } from "@chakra-ui/react";
+import { useSignOut } from "../../hooks/account/useSignOut";
+import { useSignOutPopup } from "../../hooks/popup/useSignOutPopup";
+import { Stack } from "@chakra-ui/react";
 import { SettingLink } from "../atoms/SettingLink";
 import { SettingButton } from "../atoms/Button/SettingButton";
 import { SignOutPopup } from "./Auth/SignOutPopup";
@@ -10,7 +12,9 @@ export const AccountForms = () => {
   const user = auth.currentUser;
   const { loginUser } = useLoginUser();
   const navigate = useNavigate();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { SignOut } = useSignOut();
+  const { isOpenSignOut, onOpenSignOutPopup, onCloseSignOutPopup } =
+    useSignOutPopup();
 
   return (
     <>
@@ -32,7 +36,7 @@ export const AccountForms = () => {
         <Stack spacing={"14px"}>
           <SettingButton
             label="ログアウト"
-            onClick={() => onOpen()}
+            onClick={() => onOpenSignOutPopup()}
             textcolor="#161616"
           />
           <SettingButton
@@ -43,9 +47,9 @@ export const AccountForms = () => {
         </Stack>
       </Stack>
       <SignOutPopup
-        isOpen={isOpen}
-        onClose={onClose}
-        onClick={() => console.log("ログアウト")}
+        isOpen={isOpenSignOut}
+        onClose={onCloseSignOutPopup}
+        onClick={() => SignOut()}
       >
         ログアウトしますか？
       </SignOutPopup>
