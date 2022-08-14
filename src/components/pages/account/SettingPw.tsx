@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { SettingPwLayout } from "../../templates/SettingPwLayout";
-import { DotBg } from "../../../style/DotBg";
+import { DotBg } from "../../templates/bg/DotBg";
 
 export const SettingPw: FC = () => {
   return (

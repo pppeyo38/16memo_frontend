@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { HeaderLayout } from "../../templates/HeaderLayout";
 import { SettingLayout } from "../../templates/SettingLayout";
-import { DotBg } from "../../../style/DotBg";
+import { DotBg } from "../../templates/bg/DotBg";
 
 type Props = {};
 

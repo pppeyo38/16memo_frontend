@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useGetFiles } from "../../hooks/files/useGetFiles";
 import { HeaderLayout } from "../templates/HeaderLayout";
 import { FilesLayout } from "../templates/FilesLayout";
-import { DotBg } from "../../style/DotBg";
+import { DotBg } from "../templates/bg/DotBg";
 
 export const Files = () => {
   const { filesData, getFilesData } = useGetFiles();

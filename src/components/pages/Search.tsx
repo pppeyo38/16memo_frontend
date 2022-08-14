@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { HeaderLayout } from "../templates/HeaderLayout";
 import { SearchLayout } from "../templates/SearchLayout";
-import { DotBg } from "../../style/DotBg";
+import { DotBg } from "../templates/bg/DotBg";
 
 export const Search: FC = () => {
   const [searchParams] = useSearchParams();
