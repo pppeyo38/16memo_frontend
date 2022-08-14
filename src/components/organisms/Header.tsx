@@ -1,37 +1,27 @@
 import { Link } from "react-router-dom";
-import { useDisclosure, useMediaQuery } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 import { MenuDrawer } from "./MenuDrawer";
-import { PCMenu } from "./PCMenu";
 import styled from "styled-components";
 
 export const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [isDesktop] = useMediaQuery("(min-width: 960px)");
 
   return (
-    <>
-      {isDesktop ? (
-        <PCMenu />
-      ) : (
-        <>
-          <HeaderWrap>
-            <HeaderContent>
-              <CreateMemoBtn to={"/memo/add"}>
-                <img src="./src/images/penIcon.svg" />
-              </CreateMemoBtn>
-              <ToggleDrawer onClick={isOpen ? onClose : onOpen}>
-                <ToggleDrawerBtn isOpen={isOpen}>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </ToggleDrawerBtn>
-              </ToggleDrawer>
-              <MenuDrawer isOpen={isOpen} onClose={onClose} />
-            </HeaderContent>
-          </HeaderWrap>
-        </>
-      )}
-    </>
+    <HeaderWrap>
+      <HeaderContent>
+        <CreateMemoBtn to={"/memo/add"}>
+          <img src="./src/images/penIcon.svg" />
+        </CreateMemoBtn>
+        <ToggleDrawer onClick={isOpen ? onClose : onOpen}>
+          <ToggleDrawerBtn isOpen={isOpen}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </ToggleDrawerBtn>
+        </ToggleDrawer>
+        <MenuDrawer isOpen={isOpen} onClose={onClose} />
+      </HeaderContent>
+    </HeaderWrap>
   );
 };
 

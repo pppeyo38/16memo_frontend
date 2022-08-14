@@ -120,6 +120,11 @@ const Display = styled.div<{ bg: string }>`
   height: 100%;
   overflow: hidden;
   background-color: ${(props) => `#${props.bg}`};
+
+  ${({ theme }) => theme.media.desktop`
+    width: 600px;
+    height: 100vh;
+  `}
 `;
 
 const Content = styled.div`
