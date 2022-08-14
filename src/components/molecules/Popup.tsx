@@ -6,8 +6,6 @@ import {
 } from "@chakra-ui/react";
 import { ReactNode, FC } from "react";
 import styled from "styled-components";
-import { ColorTheme } from "../../style/ColorTheme";
-import { Font } from "../../style/Font";
 
 type Props = {
   isOpen: boolean;
@@ -39,10 +37,6 @@ export const Popup: FC<Props> = (props) => {
   );
 };
 
-const { red, lightGray, gray } = ColorTheme.palette;
-const { Noto } = Font.fontFamily;
-const { medium } = Font.fontWeight;
-
 const TxtWrapper = styled.div`
   width: 100%;
   height: 90px;
@@ -50,11 +44,11 @@ const TxtWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  font-family: ${Noto};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
   h2 {
     line-height: 1.42;
     font-size: 14px;
-    font-weight: ${medium};
+    font-weight: ${(props) => props.theme.fontWeight.medium};
   }
   span {
     margin-top: 5px;
@@ -65,17 +59,17 @@ const TxtWrapper = styled.div`
 const BtnWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  font-family: ${Noto};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
   button {
     width: 100%;
     height: 40px;
     font-size: 14px;
-    border-top: 1px solid ${lightGray};
+    border-top: 1px solid ${(props) => props.theme.colors.lightGray};
     &:first-child {
-      color: ${red};
+      color: ${(props) => props.theme.colors.red};
     }
     &:last-child {
-      color: ${gray};
+      color: ${(props) => props.theme.colors.gray};
     }
   }
 `;

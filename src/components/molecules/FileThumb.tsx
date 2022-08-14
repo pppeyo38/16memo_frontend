@@ -1,8 +1,6 @@
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { ColorTheme } from "../../style/ColorTheme";
-import { Font } from "../../style/Font";
 
 type Props = {
   fileId: number;
@@ -31,12 +29,12 @@ export const FileThumb: FC<Props> = (props) => {
             {mainColors.map((mainColor, index) => (
               <BgMainColor
                 key={index}
-                theme={{ width: 100 / mainColors.length, bgColor: mainColor }}
+                split={{ width: 100 / mainColors.length, bgColor: mainColor }}
               />
             ))}
           </>
         ) : (
-          <BgMainColor theme={{ width: 100, bgColor: "fff" }} />
+          <BgMainColor split={{ width: 100, bgColor: "fff" }} />
         )}
       </MainColorsWrapper>
       <FileTextWrapper>
@@ -49,8 +47,6 @@ export const FileThumb: FC<Props> = (props) => {
     </FileThumbContainer>
   );
 };
-const { black, gray } = ColorTheme.palette;
-const { Roboto, Noto } = Font.fontFamily;
 
 const FileThumbContainer = styled.div<{ isDelete: boolean }>`
   display: inline-block;
@@ -71,10 +67,10 @@ const MainColorsWrapper = styled.div`
   align-items: center;
 `;
 
-const BgMainColor = styled.div`
-  width: ${({ theme }) => `${theme.width}%`};
+const BgMainColor = styled.div<{ split: { width: number; bgColor: string } }>`
+  width: ${({ split }) => `${split.width}%`};
   height: 20px;
-  background-color: ${({ theme }) => `#${theme.bgColor}`};
+  background-color: ${({ split }) => `#${split.bgColor}`};
 `;
 
 const FileTextWrapper = styled.div`
@@ -89,15 +85,15 @@ const FileTextWrapper = styled.div`
 `;
 
 const FileTitle = styled.h2`
-  color: ${black};
-  font-family: ${Noto};
+  color: ${(props) => props.theme.colors.black};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
 `;
 
 const ColorNum = styled.p`
-  color: ${gray};
+  color: ${(props) => props.theme.colors.gray};
   font-size: 14px;
-  font-family: ${Roboto};
+  font-family: ${(props) => props.theme.fontFamily.Roboto};
   span {
-    font-family: ${Noto};
+    font-family: ${(props) => props.theme.fontFamily.Noto};
   }
 `;

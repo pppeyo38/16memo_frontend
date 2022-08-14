@@ -1,10 +1,5 @@
 import { ReactNode } from "react";
-import {
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  background,
-} from "@chakra-ui/react";
+import { Drawer, DrawerOverlay, DrawerContent } from "@chakra-ui/react";
 
 type Props = {
   isOpen: boolean;
