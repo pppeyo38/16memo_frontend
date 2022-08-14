@@ -39,8 +39,9 @@ const HeaderWrap = styled.header`
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  position: absolute;
   z-index: 10000;
+  position: absolute;
+  top: 0;
   right: 15px;
   width: 105px;
   height: 70px;
