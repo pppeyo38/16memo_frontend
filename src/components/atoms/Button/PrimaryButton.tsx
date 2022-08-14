@@ -1,7 +1,5 @@
 import { FC, memo, ReactNode } from "react";
 import styled from "styled-components";
-import { ColorTheme } from "../../../style/ColorTheme";
-import { Font } from "../../../style/Font";
 
 type Props = {
   children: ReactNode;
@@ -19,16 +17,13 @@ export const PrimaryButton: FC<Props> = memo((props) => {
   );
 });
 
-const { palette } = ColorTheme;
-const { fontWeight, fontFamily } = Font;
-
 const Button = styled.button<{ disabled: boolean }>`
   width: 340px;
   height: 40px;
   border-radius: 20px;
-  font-family: ${fontFamily.Noto};
-  font-weight: ${fontWeight.bold};
-  color: ${palette.white};
-  background-color: ${({ disabled }) =>
-    disabled ? "#93D6D5" : `${palette.blueGreen}`};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
+  font-weight: ${(props) => props.theme.fontWeight.bold};
+  color: ${(props) => props.theme.colors.white};
+  background-color: ${(props) =>
+    props.disabled ? "#93D6D5" : props.theme.colors.blueGreen};
 `;

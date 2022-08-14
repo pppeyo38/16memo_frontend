@@ -1,8 +1,6 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { ColorTheme } from "../../../style/ColorTheme";
-import { Font } from "../../../style/Font";
 
 type Props = {
   text: string;
@@ -10,35 +8,40 @@ type Props = {
   link: string;
 };
 
-let theme = {};
+type btnStyle = {
+  fw: string;
+  fs: string;
+  width: string;
+  height: string;
+  bg: string;
+  color: string;
+  border: string;
+};
 
 export const Button: FC<Props> = (props) => {
   const { text, size, link } = props;
+  const [style, setStyle] = useState<btnStyle>({} as btnStyle);
 
   switch (size) {
     case "s":
-      theme = s;
+      setStyle(s);
       break;
     case "m":
-      theme = m;
+      setStyle(m);
       break;
     case "l":
-      theme = l;
+      setStyle(l);
       break;
   }
 
   return (
     <StyledBtnWrapper>
-      <StyledBtn to={link} theme={theme}>
+      <StyledBtn to={link} styleBtn={style}>
         {text}
       </StyledBtn>
     </StyledBtnWrapper>
   );
 };
-
-const { blueGreen, lightGray, white, black } = ColorTheme.palette;
-const { regular, medium } = Font.fontWeight;
-const { Noto } = Font.fontFamily;
 
 const StyledBtnWrapper = styled.div`
   display: flex;
@@ -46,48 +49,48 @@ const StyledBtnWrapper = styled.div`
   width: 100%;
 `;
 
-const StyledBtn = styled(Link)`
+const StyledBtn = styled(Link)<{ styleBtn: btnStyle }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: ${(props) => props.theme.width};
-  height: ${(props) => props.theme.height};
-  font-family: ${Noto};
-  font-size: ${(props) => props.theme.fs};
-  font-weight: ${(props) => props.theme.fw};
-  color: ${(props) => props.theme.color};
-  background-color: ${(props) => props.theme.bg};
+  width: ${(props) => props.styleBtn.width};
+  height: ${(props) => props.styleBtn.height};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
+  font-size: ${(props) => props.styleBtn.fs};
+  font-weight: ${(props) => props.styleBtn.fw};
+  color: ${(props) => props.styleBtn.color};
+  background-color: ${(props) => props.styleBtn.bg};
   border-radius: 100vh;
   text-decoration: none;
-  border: ${(props) => props.theme.border};
+  border: ${(props) => props.styleBtn.border};
 `;
 
 const s = {
-  fw: regular,
+  fw: "400",
   fs: "16px",
   width: "43%",
   height: "50px",
-  bg: blueGreen,
-  color: white,
+  bg: "#00A8A6",
+  color: "FFF",
   border: "none",
 };
 
 const m = {
-  fw: regular,
+  fw: "500",
   fs: "14px",
   width: "180px",
   height: "35px",
-  bg: lightGray,
-  color: black,
-  border: `1px solid ${black}`,
+  bg: "#F2F2F2",
+  color: "161616",
+  border: "1px solid #16161",
 };
 
 const l = {
-  fw: medium,
+  fw: "500",
   fs: "16px",
   width: "340px",
   height: "40px",
-  bg: blueGreen,
-  color: white,
+  bg: "#00A8A6",
+  color: "#F2F2F2",
   border: "none",
 };

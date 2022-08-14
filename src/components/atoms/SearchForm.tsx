@@ -1,8 +1,6 @@
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { ColorTheme } from "../../style/ColorTheme";
-import { Font } from "../../style/Font";
 import search from "../../images/search.svg";
 
 type Props = {
@@ -43,9 +41,6 @@ export const SearchForm = ({ searchTag, setSearchTag, setIsResult }: Props) => {
   );
 };
 
-const { black, gray, white } = ColorTheme.palette;
-const { Noto } = Font.fontFamily;
-
 const SearchFormContainer = styled.div`
   width: 340px;
   height: 30px;
@@ -69,13 +64,13 @@ const SearchInputForm = styled.input`
   width: 100%;
   height: 100%;
   padding: 8px 18px 8px 37px;
-  color: ${black};
-  background-color: ${white};
-  font-family: ${Noto};
+  color: ${(props) => props.theme.colors.black};
+  background-color: ${(props) => props.theme.colors.white};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
   font-size: 14px;
   border-radius: 15px;
   ::placeholder {
-    color: ${gray};
+    color: ${(props) => props.theme.colors.gray};
   }
   :focus {
     outline: none;

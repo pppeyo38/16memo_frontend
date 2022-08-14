@@ -1,7 +1,5 @@
 import { FC } from "react";
 import styled from "styled-components";
-import { ColorTheme } from "../../../style/ColorTheme";
-import { Font } from "../../../style/Font";
 import arrow from "../../../images/grayArrow.svg";
 
 type Props = {
@@ -20,9 +18,6 @@ export const SettingButton: FC<Props> = (props) => {
   );
 };
 
-const { white } = ColorTheme.palette;
-const { Noto } = Font.fontFamily;
-
 const SettingLinkContainer = styled.button<{ textcolor: string }>`
   display: flex;
   justify-content: space-between;
@@ -31,9 +26,9 @@ const SettingLinkContainer = styled.button<{ textcolor: string }>`
   height: 40px;
   position: relative;
   padding: 8px 30px 8px 13px;
-  background-color: ${white};
+  background-color: ${(props) => props.theme.colors.white};
   color: ${({ textcolor }) => textcolor};
-  font-family: ${Noto};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
   border-radius: 5px;
 
   ::before {
