@@ -42,7 +42,7 @@ export const PCMenu = () => {
 const Menu = styled.header`
   width: 296px;
   padding-left: 48px;
-  background-image: url(./src/images/menuDrawerBg.svg);
+  background-image: url(/src/images/menuDrawerBg.svg);
   background-repeat: no-repeat;
 `;
 

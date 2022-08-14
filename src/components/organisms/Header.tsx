@@ -10,7 +10,7 @@ export const Header = () => {
     <HeaderWrap>
       <HeaderContent>
         <CreateMemoBtn to={"/memo/add"}>
-          <img src="./src/images/penIcon.svg" />
+          <img src="/src/images/penIcon.svg" />
         </CreateMemoBtn>
         <ToggleDrawer onClick={isOpen ? onClose : onOpen}>
           <ToggleDrawerBtn isOpen={isOpen}>

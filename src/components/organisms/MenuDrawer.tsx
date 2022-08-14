@@ -75,5 +75,5 @@ const ContentLogout = styled.h3`
 const DrawerStyle = {
   width: "296px",
   paddingLeft: "65px",
-  background: "url(./src/images/menuDrawerBg.svg)",
+  background: "url(/src/images/menuDrawerBg.svg)",
 };
