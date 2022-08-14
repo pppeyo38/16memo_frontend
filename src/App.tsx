@@ -25,6 +25,9 @@ export default App;
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
+  body {
+    background: #9B9B9B;
+  }
   a {
     cursor: pointer;
     text-decoration: none;
@@ -33,7 +36,4 @@ const GlobalStyle = createGlobalStyle`
 
 const Display100vh = {
   overflow: "hidden",
-  backgroundImage: "radial-gradient(#9B9B9B 3%, #F2F2F2 3%)",
-  backgroundSize: "20px 20px",
-  backgroundRepeat: "repeat",
 };

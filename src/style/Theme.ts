@@ -1,4 +1,10 @@
 import "styled-components";
+import {
+  CSSObject,
+  FlattenSimpleInterpolation,
+  SimpleInterpolation,
+  css,
+} from "styled-components";
 
 export const Theme = {
   colors: {
@@ -18,6 +24,24 @@ export const Theme = {
     regular: "400",
     medium: "500",
     bold: "700",
+  },
+  media: {
+    desktop: (
+      desktop: CSSObject | TemplateStringsArray,
+      ...interpolations: SimpleInterpolation[]
+    ): FlattenSimpleInterpolation => css`
+      @media screen and (min-width: 960px) {
+        ${css(desktop, ...interpolations)}
+      }
+    `,
+    tablet: (
+      desktop: CSSObject | TemplateStringsArray,
+      ...interpolations: SimpleInterpolation[]
+    ): FlattenSimpleInterpolation => css`
+      @media (min-width: 520px) {
+        ${css(desktop, ...interpolations)}
+      }
+    `,
   },
 } as const;
 
