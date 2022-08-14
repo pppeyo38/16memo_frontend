@@ -9,8 +9,6 @@ import { ColorPicker, Input, Select } from "@mantine/core";
 import { CancelArrow } from "../atoms/Icon/CancelArrow";
 import { ChevronDown } from "../atoms/Icon/ChevronDown";
 import styled from "styled-components";
-import { ColorTheme } from "../../style/ColorTheme";
-import { Font } from "../../style/Font";
 import "./ColorSetting.css";
 
 type Props = {
@@ -137,9 +135,6 @@ export const ColorSetting: FC<Props> = memo((props) => {
   );
 });
 
-const { palette } = ColorTheme;
-const { fontFamily } = Font;
-
 const SettingModal = styled.section`
   position: absolute;
   top: 0;
@@ -156,8 +151,8 @@ const Head = styled.div`
 `;
 
 const CompleteButton = styled.button`
-  color: ${palette.black};
-  font-family: ${fontFamily.Noto};
+  color: ${(props) => props.theme.colors.black};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
   font-size: 16px;
 `;
 

@@ -1,8 +1,6 @@
 import { FC, Dispatch, SetStateAction } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Font } from "../../style/Font";
-import { ColorTheme } from "../../style/ColorTheme";
 import { SearchForm } from "../atoms/SearchForm";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { SearchResult } from "../organisms/SearchResult";
@@ -49,9 +47,6 @@ export const SearchLayout: FC<Props> = (props) => {
   );
 };
 
-const { fontFamily, fontWeight } = Font;
-const { palette } = ColorTheme;
-
 const Content = styled.div`
   width: 340px;
   margin: 35px auto 0;
@@ -64,24 +59,9 @@ const Head = styled.div`
 
 const Title = styled.h1`
   margin-bottom: 13px;
-  color: ${palette.black};
-  font-family: ${fontFamily.Noto};
+  color: ${(props) => props.theme.colors.black};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
   font-size: 24px;
   line-height: 1.45;
-  font-weight: ${fontWeight.bold};
-`;
-
-const FormWrapper = styled.div<{ isSearchResult: boolean }>`
-  display: ${(props) => (props.isSearchResult ? "none" : "block")};
-  position: fixed;
-  top: 143px;
-`;
-
-const Overflow = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: calc(100% - 186px);
-  margin-top: 186px;
-  overflow: scroll;
+  font-weight: ${(props) => props.theme.fontWeight.bold};
 `;

@@ -1,8 +1,6 @@
 import { ReactNode } from "react";
 import { DrawerWrap } from "../../molecules/DrawerWrap";
 import styled from "styled-components";
-import { ColorTheme } from "../../../style/ColorTheme";
-import { Font } from "../../../style/Font";
 
 type Props = {
   isOpen: boolean;
@@ -24,9 +22,6 @@ export const CommentDrawer = ({ isOpen, onClose, children }: Props) => {
   );
 };
 
-const { palette } = ColorTheme;
-const { fontWeight, fontFamily } = Font;
-
 const DrawerContent = styled.div`
   position: relative;
   padding: 80px 35px;
@@ -46,7 +41,7 @@ const CloseButton = styled.button`
     width: 26px;
     height: 1px;
     border-radius: 50%;
-    background-color: #161616;
+    background-color: ${(props) => props.theme.colors.black};
 
     &:nth-child(1) {
       transform: rotate(45deg);
@@ -59,8 +54,8 @@ const CloseButton = styled.button`
 `;
 
 const Comment = styled.p`
-  color: ${palette.black};
-  font-family: ${fontFamily.Noto};
+  color: ${(props) => props.theme.colors.black};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
   font-size: 16px;
-  font-weight: ${fontWeight.regular};
+  font-weight: ${(props) => props.theme.fontWeight.regular};
 `;

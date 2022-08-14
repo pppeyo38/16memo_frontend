@@ -2,16 +2,11 @@ import type { FC } from "react";
 import { useSearchMemos } from "../../hooks/memos/useSearchMemos";
 import { ColorThumb } from "../molecules/ColorThumb";
 import styled from "styled-components";
-import { ColorTheme } from "../../style/ColorTheme";
-import { Font } from "../../style/Font";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 
 type Props = {
   tagName: string;
 };
-
-const { palette } = ColorTheme;
-const { fontWeight, fontFamily } = Font;
 
 export const SearchResult: FC<Props> = (props) => {
   const { tagName } = props;
@@ -24,13 +19,13 @@ export const SearchResult: FC<Props> = (props) => {
         <TabList sx={TabListStyle}>
           <Tab
             sx={TabStyle}
-            _selected={{ color: "black", borderColor: palette.gray }}
+            _selected={{ color: "black", borderColor: "#9B9B9B" }}
           >
             古い順
           </Tab>
           <Tab
             sx={TabStyle}
-            _selected={{ color: "black", borderColor: palette.gray }}
+            _selected={{ color: "black", borderColor: "#9B9B9B" }}
           >
             新しい順
           </Tab>
@@ -69,12 +64,12 @@ const TabListStyle = {
   border: "none",
   justifyContent: "space-around",
   fontSize: "16px",
-  fontFamily: `${fontFamily.Noto}`,
+  fontFamily: "Noto Sans JP, sans-serif",
 };
 
 const TabStyle = {
-  color: `${palette.gray}`,
-  fontWeight: `${fontWeight.medium}`,
+  color: "#9B9B9B",
+  fontWeight: "500",
   padding: "0px 0px 3px 0px",
   lineHeight: 1.43,
 };

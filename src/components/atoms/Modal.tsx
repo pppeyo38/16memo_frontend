@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { ReactNode, FC, useState, useCallback } from "react";
-import { ColorTheme } from "../../style/ColorTheme";
+import { ReactNode, FC, useState } from "react";
 
 type Props = {
   children: ReactNode;
@@ -30,8 +29,6 @@ export const Modal: FC<Props> = (props) => {
   );
 };
 
-const { black, lightGray } = ColorTheme.palette;
-
 const BackgroundModal = styled.div<{ isOpen: boolean }>`
   position: fixed;
   top: 48px;
@@ -50,7 +47,7 @@ const StyledModalWrapper = styled.div<{ isOpen: boolean }>`
   bottom: 0px;
   width: calc(100% - 70px);
   padding: 33px 35px 76px 35px;
-  background-color: ${lightGray};
+  background-color: ${(props) => props.theme.colors.lightGray};
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
   /* アニメーションつけたいなと思って↓ */
@@ -82,7 +79,7 @@ const StyledExitBtnWrapper = styled.div`
       width: 25px;
       height: 1.5px;
       border-radius: 100vw;
-      background-color: ${black};
+      background-color: ${(props) => props.theme.colors.black};
     }
     &::before {
       transform: translate(-50%, -50%) rotate(-45deg);

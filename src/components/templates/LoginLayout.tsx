@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLogin } from "../../hooks/useLogin";
-import Div100vh from "react-div-100vh";
 import { Stack, Input } from "@chakra-ui/react";
 import styled from "styled-components";
 import { IromemoIcon } from "../atoms/Icon/IromemoIcon";
 import { PrimaryButton } from "../atoms/Button/PrimaryButton";
-import { Button } from "../atoms/Button/Button";
+import { StrokeButton } from "../atoms/Button/StrokeButton";
 
 type Data = {
   email: string;
@@ -21,6 +20,7 @@ const initialData: Data = {
 export const LoginLayout = () => {
   const { login } = useLogin();
   const [data, setData] = useState<Data>(initialData);
+  const navigate = useNavigate();
 
   const onChangeMail = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -37,7 +37,7 @@ export const LoginLayout = () => {
   };
 
   return (
-    <Div100vh style={GridStyle}>
+    <GridStyle>
       <Container>
         <Stack alignItems="center" mb="39px">
           <IromemoIcon />
@@ -69,22 +69,38 @@ export const LoginLayout = () => {
           >
             ログイン
           </PrimaryButton>
-          <Button text="アカウントを作成" size="m" link="/login" />
+          <StrokeButton onClick={() => navigate("/signup")}>
+            アカウントを作成
+          </StrokeButton>
         </Stack>
       </Container>
-    </Div100vh>
+    </GridStyle>
   );
 };
 
-const GridStyle = {
-  backgroundColor: "#F2F2F2",
-  backgroundImage:
-    "linear-gradient(0deg, transparent calc(100% - 0.4px), #9B9B9B calc(100% - 0.4px)), linear-gradient(90deg, transparent calc(100% - 0.4px), #9B9B9B calc(100% - 0.4px))",
-  backgroundSize: "20px 20px",
-  backgroundRepeat: "repeat",
-  backgroundPosition: "center center",
-  overflow: "hidden",
-};
+const GridStyle = styled.section`
+  height: 100%;
+  background-color: #f2f2f2;
+  background-image: linear-gradient(
+      0deg,
+      transparent calc(100% - 0.6px),
+      #d2d2d2 calc(100% - 0.6px)
+    ),
+    linear-gradient(
+      90deg,
+      transparent calc(100% - 0.6px),
+      #d2d2d2 calc(100% - 0.6px)
+    );
+  background-size: 20px 20px;
+  background-repeat: repeat;
+  background-position: center center;
+  overflow: hidden;
+
+  ${({ theme }) => theme.media.desktop`
+    width: 600px;
+    margin: 0 auto;
+  `}
+`;
 
 const Container = styled.section`
   margin-top: 70px;

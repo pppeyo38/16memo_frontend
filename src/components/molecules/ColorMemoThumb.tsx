@@ -2,8 +2,6 @@ import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { Memo } from "../../types/memo";
 import styled from "styled-components";
-import { ColorTheme } from "../../style/ColorTheme";
-import { Font } from "../../style/Font";
 
 type Props = {
   content: Memo;
@@ -32,10 +30,6 @@ export const ColorMemoThumb: FC<Props> = (props) => {
   );
 };
 
-const { white, black } = ColorTheme.palette;
-const { Roboto, Noto } = Font.fontFamily;
-const { regular } = Font.fontWeight;
-
 const MemoThumb = styled.div<{ isDelete: boolean }>`
   display: inline-block;
   flex-shrink: 0;
@@ -61,19 +55,19 @@ const WhiteBox = styled.div`
   width: 280px;
   height: 55px;
   padding: 7px 13px 8px;
-  background-color: ${white};
+  background-color: ${(props) => props.theme.colors.white};
   box-sizing: border-box;
-  font-weight: ${regular};
+  font-weight: ${(props) => props.theme.fontWeight.regular};
   h2 {
     line-height: 1.43;
-    color: ${black};
+    color: ${(props) => props.theme.colors.black};
     font-size: 16px;
-    font-family: ${Noto};
+    font-family: ${(props) => props.theme.fontFamily.Noto};
   }
   p {
     line-height: 1.15;
     color: #9b9b9b;
     font-size: 13px;
-    font-family: ${Roboto};
+    font-family: ${(props) => props.theme.fontFamily.Roboto};
   }
 `;

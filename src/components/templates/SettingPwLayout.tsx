@@ -2,8 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { Input } from "@chakra-ui/react";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import styled from "styled-components";
-import { ColorTheme } from "../../style/ColorTheme";
-import { Font } from "../../style/Font";
 import { useState } from "react";
 
 type Props = {
@@ -58,9 +56,6 @@ export const SettingPwLayout = ({ title }: Props) => {
   );
 };
 
-const { palette } = ColorTheme;
-const { fontFamily } = Font;
-
 const Content = styled.div`
   width: 100%;
   height: 100%;
@@ -91,14 +86,14 @@ const NewPw = styled.div`
 
 const SettingTitle = styled.h1`
   line-height: 1.43;
-  color: ${palette.black};
-  font-family: ${fontFamily.Noto};
+  color: ${(props) => props.theme.colors.black};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
   font-size: 16px;
 `;
 
 const CompleteButton = styled.button`
-  color: ${palette.black};
-  font-family: ${fontFamily.Noto};
+  color: ${(props) => props.theme.colors.black};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
   font-size: 16px;
 `;
 

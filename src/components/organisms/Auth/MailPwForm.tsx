@@ -1,7 +1,7 @@
 import { FC, Dispatch, SetStateAction } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Stack, Input } from "@chakra-ui/react";
-import { Button } from "../../atoms/Button/Button";
+import { StrokeButton } from "../../atoms/Button/StrokeButton";
 import { PrimaryButton } from "../../atoms/Button/PrimaryButton";
 import styled from "styled-components";
 
@@ -16,6 +16,7 @@ type Props = {
 
 export const MailPwForm: FC<Props> = (props) => {
   const { isPwForget, onClick, setData, data } = props;
+  const navigate = useNavigate();
 
   const onChangeMail = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -58,7 +59,7 @@ export const MailPwForm: FC<Props> = (props) => {
         >
           次へ
         </PrimaryButton>
-        <Button text="ログイン" size="m" link="/login" />
+        <StrokeButton onClick={() => navigate("/login")}>ログイン</StrokeButton>
       </Stack>
     </div>
   );

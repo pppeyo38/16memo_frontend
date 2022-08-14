@@ -1,8 +1,6 @@
 import { FC, ReactNode } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { ColorTheme } from "../../style/ColorTheme";
-import { Font } from "../../style/Font";
 import arrow from "../../images/grayArrow.svg";
 
 type Props = {
@@ -24,9 +22,6 @@ export const SettingLink: FC<Props> = (props) => {
   );
 };
 
-const { black, gray, white, lightGray } = ColorTheme.palette;
-const { Noto } = Font.fontFamily;
-
 const SettingLinkContainer = styled(Link)`
   display: flex;
   justify-content: space-between;
@@ -35,12 +30,12 @@ const SettingLinkContainer = styled(Link)`
   height: 40px;
   position: relative;
   padding: 8px 30px 8px 13px;
-  background-color: ${white};
-  color: ${black};
-  font-family: ${Noto};
+  background-color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.black};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
   border-radius: 5px;
   span {
-    color: ${gray};
+    color: ${(props) => props.theme.colors.gray};
     font-size: 14px;
   }
   ::before {

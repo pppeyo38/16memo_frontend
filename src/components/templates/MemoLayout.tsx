@@ -19,8 +19,6 @@ import { TrashIcon } from "../atoms/Icon/TrashIcon";
 import { CommentDrawer } from "../organisms/Memo/CommentDrawer";
 import { LinkPopup } from "../organisms/Memo/LinkPopup";
 import { TrashPopup } from "../organisms/Memo/TrashPopup";
-import { ColorTheme } from "../../style/ColorTheme";
-import { Font } from "../../style/Font";
 
 type Props = {
   memoData: memoDataType;
@@ -117,9 +115,6 @@ export const MemoLayout: FC<Props> = (props) => {
   );
 };
 
-const { palette } = ColorTheme;
-const { fontWeight, fontFamily } = Font;
-
 const Display = styled.div<{ bg: string }>`
   width: 100%;
   height: 100%;
@@ -151,24 +146,24 @@ const MemoHeadingWrap = styled.div`
 `;
 
 const MemoHeading = styled.h1`
-  color: ${palette.white};
-  font-family: ${fontFamily.Noto};
+  color: ${(props) => props.theme.colors.white};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
   font-size: 24px;
-  font-weight: ${fontWeight.bold};
+  font-weight: ${(props) => props.theme.fontWeight.bold};
 `;
 
 const ColorCode = styled.h1`
-  color: ${palette.white};
-  font-family: ${fontFamily.Roboto};
+  color: ${(props) => props.theme.colors.white};
+  font-family: ${(props) => props.theme.fontFamily.Roboto};
   font-size: 24px;
-  font-weight: ${fontWeight.bold};
+  font-weight: ${(props) => props.theme.fontWeight.medium};
 `;
 
 const CodeList = styled.ul`
   margin-top: 26px;
-  color: ${palette.white};
+  color: ${(props) => props.theme.colors.white};
   font-size: 15px;
-  font-family: ${fontFamily.Roboto};
+  font-family: ${(props) => props.theme.fontFamily.Roboto};
 `;
 
 const CodeListItem = styled.li`

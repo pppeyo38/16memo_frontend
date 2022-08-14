@@ -1,7 +1,6 @@
 import { Dispatch, FC, SetStateAction } from "react";
 import { Memo } from "../../../types/memo";
 import styled from "styled-components";
-import { Font } from "../../../style/Font";
 import {
   Stack,
   Input,
@@ -56,8 +55,6 @@ export const MemoForm: FC<Props> = (props) => {
   );
 };
 
-const { fontFamily } = Font;
-
 const FileSelect = styled.button`
   width: 340px;
   height: 40px;
@@ -81,7 +78,7 @@ const FileSelect = styled.button`
 `;
 
 const InputStyle = {
-  fontFamily: fontFamily.Noto,
+  fontFamily: "Noto Sans JP, sans-serif",
   fontSize: "16px",
   border: "none",
   background: "#F2F2F2",
@@ -90,7 +87,7 @@ const InputStyle = {
 
 const TextAreaStyle = {
   height: "115px",
-  fontFamily: fontFamily.Noto,
+  fontFamily: "Noto Sans JP, sans-serif",
   fontSize: "16px",
   border: "none",
   background: "#F2F2F2",
@@ -98,7 +95,7 @@ const TextAreaStyle = {
 };
 
 const InputURLStyle = {
-  fontFamily: fontFamily.Roboto,
+  fontFamily: "Roboto, sans-serif",
   fontSize: "16px",
   border: "none",
   background: "#F2F2F2",
