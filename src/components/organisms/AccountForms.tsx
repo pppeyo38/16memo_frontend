@@ -18,8 +18,8 @@ export const AccountForms = () => {
 
   return (
     <>
-      <Stack spacing={"26px"}>
-        <Stack spacing={"14px"}>
+      <Stack spacing={"26px"} align="center">
+        <Stack spacing={"14px"} w="fit-content">
           <SettingLink label="ニックネーム" link="/setting/nickname">
             {loginUser?.nickname}
           </SettingLink>
@@ -33,7 +33,7 @@ export const AccountForms = () => {
             パスワードの変更
           </SettingLink>
         </Stack>
-        <Stack spacing={"14px"}>
+        <Stack spacing={"14px"} w="fit-content">
           <SettingButton
             label="ログアウト"
             onClick={() => onOpenSignOutPopup()}

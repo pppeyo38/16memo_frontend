@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { HeaderLayout } from "../../templates/HeaderLayout";
+import { PageTemplate } from "../../templates/PageTemplate";
 import { SettingLayout } from "../../templates/SettingLayout";
 import { DotBg } from "../../templates/bg/DotBg";
 
@@ -7,10 +7,10 @@ type Props = {};
 
 export const Setting: FC<Props> = (props) => {
   return (
-    <HeaderLayout>
+    <PageTemplate>
       <DotBg>
         <SettingLayout />
       </DotBg>
-    </HeaderLayout>
+    </PageTemplate>
   );
 };

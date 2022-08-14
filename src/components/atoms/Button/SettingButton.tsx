@@ -22,7 +22,7 @@ const SettingLinkContainer = styled.button<{ textcolor: string }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 340px;
   height: 40px;
   position: relative;
   padding: 8px 30px 8px 13px;
