@@ -2,7 +2,6 @@ import { useState } from "react";
 import Div100vh from "react-div-100vh";
 import { Stack } from "@chakra-ui/react";
 import styled from "styled-components";
-import { Font } from "../../style/Font";
 import { IromemoIcon } from "../atoms/Icon/IromemoIcon";
 import { MailPwForm } from "../organisms/Auth/MailPwForm";
 import { NameForm } from "../organisms/Auth/NameForm";
@@ -45,8 +44,6 @@ export const SignUpLayout = () => {
   );
 };
 
-const { fontWeight, fontFamily } = Font;
-
 const GridStyle = {
   backgroundColor: "#F2F2F2",
   backgroundImage:
@@ -62,7 +59,7 @@ const Container = styled.section`
 `;
 
 const Heading = styled.h1`
-  font-family: ${fontFamily.Noto};
-  font-weight: ${fontWeight.bold};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
+  font-weight: ${(props) => props.theme.fontWeight.bold};
   font-size: 24px;
 `;

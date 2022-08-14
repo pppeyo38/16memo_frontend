@@ -4,8 +4,6 @@ import { useSignOutPopup } from "../../hooks/popup/useSignOutPopup";
 import { SignOutPopup } from "./Auth/SignOutPopup";
 import { Drawer, DrawerOverlay, DrawerContent } from "@chakra-ui/react";
 import styled from "styled-components";
-import { ColorTheme } from "../../style/ColorTheme";
-import { Font } from "../../style/Font";
 
 type Props = {
   isOpen: boolean;
@@ -49,9 +47,6 @@ export const MenuDrawer = ({ isOpen, onClose }: Props) => {
   );
 };
 
-const { palette } = ColorTheme;
-const { fontWeight, fontFamily } = Font;
-
 const MenuList = styled.ul`
   margin-top: 130px;
 
@@ -61,20 +56,20 @@ const MenuList = styled.ul`
 `;
 
 const MenuListItems = styled.li`
-  font-weight: ${fontWeight.bold};
-  font-family: ${fontFamily.Noto};
+  font-weight: ${(props) => props.theme.fontWeight.bold};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
   font-size: 24px;
   line-height: 1.45;
-  color: ${palette.blueGreen};
+  color: ${(props) => props.theme.colors.blueGreen};
 `;
 
 const ContentLogout = styled.h3`
   margin-top: 39px;
-  font-weight: ${fontWeight.bold};
-  font-family: ${fontFamily.Noto};
+  font-weight: ${(props) => props.theme.fontWeight.bold};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
   font-size: 20px;
   line-height: 1.45;
-  color: ${palette.black};
+  color: ${(props) => props.theme.colors.black};
 `;
 
 const DrawerStyle = {

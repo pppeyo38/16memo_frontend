@@ -2,8 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { Input } from "@chakra-ui/react";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import styled from "styled-components";
-import { ColorTheme } from "../../style/ColorTheme";
-import { Font } from "../../style/Font";
 import { useState } from "react";
 
 export const AccountDeleteLayout = ({ title }: { title: string }) => {
@@ -30,9 +28,6 @@ export const AccountDeleteLayout = ({ title }: { title: string }) => {
     </Content>
   );
 };
-
-const { palette } = ColorTheme;
-const { fontFamily } = Font;
 
 const Content = styled.div`
   width: 100%;
@@ -64,8 +59,8 @@ const InputArea = styled.div`
 
 const SettingTitle = styled.h1`
   line-height: 1.43;
-  color: ${palette.black};
-  font-family: ${fontFamily.Noto};
+  color: ${(props) => props.theme.colors.black};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
   font-size: 16px;
 `;
 
@@ -73,11 +68,11 @@ const DeleteButton = styled.button`
   width: 340px;
   padding: 7px 9px;
   line-height: 1.42;
-  color: ${palette.red};
-  font-family: ${fontFamily.Noto};
+  color: ${(props) => props.theme.colors.red};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
   font-size: 14px;
-  background-color: ${palette.lightGray};
-  border: solid 2px ${palette.red};
+  background-color: ${(props) => props.theme.colors.lightGray};
+  border: solid 2px ${(props) => props.theme.colors.red};
   border-radius: 100px;
 `;
 

@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { Stack } from "@chakra-ui/react";
 import { DrawerWrap } from "../../molecules/DrawerWrap";
 import styled from "styled-components";
-import { ColorTheme } from "../../../style/ColorTheme";
-import { Font } from "../../../style/Font";
 
 type Props = {
   fileName: string;
@@ -44,9 +42,6 @@ export const MemosFileDrawer: FC<Props> = (props) => {
   );
 };
 
-const { palette } = ColorTheme;
-const { fontWeight, fontFamily } = Font;
-
 const DrawerContent = styled.div`
   position: relative;
   padding: 60px 25px 43px;
@@ -66,7 +61,7 @@ const CloseButton = styled.button`
     width: 26px;
     height: 1px;
     border-radius: 50%;
-    background-color: #161616;
+    background-color: ${(props) => props.theme.colors.black};
 
     &:nth-child(1) {
       transform: rotate(45deg);
@@ -83,8 +78,8 @@ const ButtonsWrap = styled.div``;
 const Label = styled.h3`
   margin: 0 0 11px 13px;
   line-height: 1.43;
-  color: ${palette.black};
-  font-family: ${fontFamily.Noto};
+  color: ${(props) => props.theme.colors.black};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
   font-size: 16px;
 `;
 
@@ -92,7 +87,7 @@ const Button = styled.button`
   padding: 9px 13px 8px;
   text-align: start;
   line-height: 1.43;
-  color: ${palette.black};
+  color: ${(props) => props.theme.colors.black};
   border-radius: 5px;
-  background: ${palette.white};
+  background: ${(props) => props.theme.colors.white};
 `;

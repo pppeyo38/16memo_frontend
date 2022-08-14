@@ -1,7 +1,6 @@
 import { FC, ReactNode } from "react";
 import { Popup } from "../../molecules/Popup";
 import styled from "styled-components";
-import { ColorTheme } from "../../../style/ColorTheme";
 
 type Props = {
   children: ReactNode;
@@ -25,12 +24,10 @@ export const TrashPopup: FC<Props> = (props) => {
   );
 };
 
-const { palette } = ColorTheme;
-
 const DeleteButton = styled.button`
   width: 100%;
   height: 40px;
   display: grid;
   place-content: center;
-  border-top: 1px solid ${palette.red};
+  border-top: 1px solid ${(props) => props.theme.colors.red};
 `;

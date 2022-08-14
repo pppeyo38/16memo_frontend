@@ -1,6 +1,5 @@
 import { Popup } from "../../molecules/Popup";
 import styled from "styled-components";
-import { ColorTheme } from "../../../style/ColorTheme";
 
 type Props = {
   url: string;
@@ -22,12 +21,10 @@ export const LinkPopup = ({ url, isOpenLink, onClose }: Props) => {
   );
 };
 
-const { palette } = ColorTheme;
-
 const LinkButton = styled.a`
   width: 100%;
   height: 40px;
   display: grid;
   place-content: center;
-  border-top: 1px solid ${palette.lightGray};
+  border-top: 1px solid ${(props) => props.theme.colors.lightGray};
 `;

@@ -6,8 +6,6 @@ import { usePutMemo } from "../../hooks/memos/usePutMemo";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { ColorSetting } from "../organisms/ColorSetting";
 import { MemoForm } from "../organisms/Memo/MemoForm";
-import { ColorTheme } from "../../style/ColorTheme";
-import { Font } from "../../style/Font";
 import styled from "styled-components";
 
 type Props = {
@@ -55,9 +53,6 @@ export const MemoCreateLayout: FC<Props> = (props) => {
   );
 };
 
-const { palette } = ColorTheme;
-const { fontWeight, fontFamily } = Font;
-
 const Content = styled.div`
   width: 100%;
   height: 100%;
@@ -73,8 +68,8 @@ const Head = styled.div`
 `;
 
 const CompleteButton = styled.button`
-  color: ${palette.black};
-  font-family: ${fontFamily.Noto};
+  color: ${(props) => props.theme.colors.black};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
   font-size: 16px;
 `;
 
@@ -90,16 +85,16 @@ const Color = styled.div<{ bg: string }>`
 
 const ColorEdit = styled.h1`
   line-height: 1.45;
-  color: ${palette.white};
-  font-family: ${fontFamily.Noto};
-  font-weight: ${fontWeight.bold};
+  color: ${(props) => props.theme.colors.white};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
+  font-weight: ${(props) => props.theme.fontWeight.bold};
   font-size: 24px;
 `;
 
 const ColorCode = styled.h2`
   line-height: 1.18;
-  color: ${palette.white};
-  font-family: ${fontFamily.Roboto};
-  font-weight: ${fontWeight.medium};
+  color: ${(props) => props.theme.colors.white};
+  font-family: ${(props) => props.theme.fontFamily.Roboto};
+  font-weight: ${(props) => props.theme.fontWeight.medium};
   font-size: 16px;
 `;

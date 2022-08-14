@@ -3,8 +3,6 @@ import { PostMemo } from "../../../hooks/memos/usePostMemo";
 import { useFilesList } from "../../../hooks/files/useFilesList";
 import { DrawerWrap } from "../../molecules/DrawerWrap";
 import styled from "styled-components";
-import { ColorTheme } from "../../../style/ColorTheme";
-import { Font } from "../../../style/Font";
 import { ReturnArrow } from "../../atoms/Icon/ReturnArrow";
 import { Input } from "@chakra-ui/react";
 
@@ -87,9 +85,6 @@ export const FilesDrawer: FC<Props> = (props) => {
   );
 };
 
-const { palette } = ColorTheme;
-const { fontWeight, fontFamily } = Font;
-
 const DrawerContent = styled.div`
   height: 98vh;
   position: relative;
@@ -98,7 +93,7 @@ const DrawerContent = styled.div`
 
 const Head = styled.div`
   padding-bottom: 25px;
-  border-bottom: 1px solid ${palette.gray};
+  border-bottom: 1px solid ${(props) => props.theme.colors.gray};
 `;
 
 const HeadInner = styled.div`
@@ -119,7 +114,7 @@ const CloseButton = styled.button`
     width: 26px;
     height: 1px;
     border-radius: 50%;
-    background-color: #161616;
+    background-color: ${(props) => props.theme.colors.black};
 
     &:nth-child(1) {
       transform: rotate(45deg);
@@ -132,9 +127,9 @@ const CloseButton = styled.button`
 `;
 
 const Heading = styled.h2`
-  color: ${palette.black};
-  font-family: ${fontFamily.Noto};
-  font-weight: ${fontWeight.medium};
+  color: ${(props) => props.theme.colors.black};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
+  font-weight: ${(props) => props.theme.fontWeight.medium};
 `;
 
 const FlowList = styled.div`
@@ -148,11 +143,11 @@ const FilesList = styled.ul`
 
 const ListItem = styled.li`
   padding: 8px 13px 9px;
-  border-bottom: 1px solid ${palette.gray};
-  color: ${palette.black};
+  border-bottom: 1px solid ${(props) => props.theme.colors.gray};
+  color: ${(props) => props.theme.colors.black};
   line-height: 1.43;
-  font-family: ${fontFamily.Noto};
-  font-weight: ${fontWeight.regular};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
+  font-weight: ${(props) => props.theme.fontWeight.regular};
 `;
 
 const CreateFileButton = styled.button`
@@ -163,10 +158,10 @@ const CreateFileButton = styled.button`
   width: 170px;
   height: 50px;
   font-size: 16px;
-  font-family: ${fontFamily.Noto};
-  color: ${palette.white};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
+  color: ${(props) => props.theme.colors.white};
   border-radius: 100px;
-  background: ${palette.blueGreen};
+  background: ${(props) => props.theme.colors.blueGreen};
 `;
 
 const FormHead = styled.div``;
@@ -183,8 +178,8 @@ const CompleteButton = styled.button`
   width: 170px;
   height: 50px;
   font-size: 16px;
-  font-family: ${fontFamily.Noto};
-  color: ${palette.white};
+  font-family: ${(props) => props.theme.fontFamily.Noto};
+  color: ${(props) => props.theme.colors.white};
   border-radius: 100px;
-  background: ${palette.blueGreen};
+  background: ${(props) => props.theme.colors.blueGreen};
 `;
