@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { HeaderLayout } from "../templates/HeaderLayout";
 import { SearchLayout } from "../templates/SearchLayout";
+import { DotBg } from "../../style/DotBg";
 
 export const Search: FC = () => {
   const [searchParams] = useSearchParams();
@@ -14,12 +15,14 @@ export const Search: FC = () => {
 
   return (
     <HeaderLayout>
-      <SearchLayout
-        isResult={isResult}
-        setIsResult={setIsResult}
-        searchTag={searchTag}
-        setSearchTag={setSearchTag}
-      />
+      <DotBg>
+        <SearchLayout
+          isResult={isResult}
+          setIsResult={setIsResult}
+          searchTag={searchTag}
+          setSearchTag={setSearchTag}
+        />
+      </DotBg>
     </HeaderLayout>
   );
 };
