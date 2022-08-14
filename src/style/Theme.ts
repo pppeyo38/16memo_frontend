@@ -1,3 +1,5 @@
+import "styled-components";
+
 export const Theme = {
   colors: {
     blueGreen: "#00A8A6",
@@ -17,4 +19,10 @@ export const Theme = {
     medium: "500",
     bold: "700",
   },
-};
+} as const;
+
+type AppTheme = typeof Theme;
+
+declare module "styled-components" {
+  interface DefaultTheme extends AppTheme {}
+}
