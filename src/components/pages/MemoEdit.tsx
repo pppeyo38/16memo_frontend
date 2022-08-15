@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "../../hooks/account/useAuth";
 import { useShowMemo } from "../../hooks/memos/useShowMemo";
 import { MemoCreateLayout } from "../templates/MemoCreateLayout";
+import { NotFoundLayout } from "../templates/NotFoundLayout";
 
 export const MemoEdit = () => {
   const { currentUser } = useAuth();
@@ -13,14 +14,13 @@ export const MemoEdit = () => {
     getMemoData(memoId);
   }, []);
 
-  // TODO: ユーザーに編集権限があるか確かめる
   return (
     <>
       {!memoData.loading &&
-        (currentUser?.uid ? (
+        (currentUser?.uid === memoData.getData.uid ? (
           <MemoCreateLayout memoData={memoData.getData.memo} isNew={false} />
         ) : (
-          <div>メモが見つかりません</div>
+          <NotFoundLayout>メモが見つかりません</NotFoundLayout>
         ))}
     </>
   );

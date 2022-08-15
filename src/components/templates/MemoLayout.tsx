@@ -29,9 +29,7 @@ export const MemoLayout: FC<Props> = (props) => {
   const { memoData } = props;
   const memoContent = memoData.getData.memo;
   const [canEdit, setCanEdit] = useState(
-    true
-    // TODO: 編集権限
-    // currentUser?.uid === memoData.getData.userId
+    currentUser?.uid === memoData.getData.uid
   );
   const { DestroyMemo } = useDestroyMemo();
 
@@ -48,7 +46,7 @@ export const MemoLayout: FC<Props> = (props) => {
   const hsv = setRGBtoHSV(rgb);
 
   const backMemosFile = () => {
-    if (memoData.getData.userId) {
+    if (memoData.getData.uid) {
       navigate(`/${memoContent.fileName}`);
     } else {
       navigate("/");
