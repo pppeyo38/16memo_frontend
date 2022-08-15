@@ -5,6 +5,7 @@ import reset from "styled-reset";
 
 import { Router } from "./router/Router";
 import { LoginUserProvider } from "./providers/LoginUserProvider";
+import { Header } from "./components/organisms/Header";
 
 function App() {
   return (
@@ -12,9 +13,7 @@ function App() {
       <GlobalStyle />
       <LoginUserProvider>
         <BrowserRouter basename="/">
-          <Div100vh style={Display100vh}>
-            <Router />
-          </Div100vh>
+          <Router />
         </BrowserRouter>
       </LoginUserProvider>
     </>
@@ -32,8 +31,16 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
     text-decoration: none;
   }
-`;
 
-const Display100vh = {
-  overflow: "hidden",
-};
+  #Div100vh {
+    width: 100vw;
+    overflow: hidden;
+    background-image: radial-gradient(#9B9B9B 3%, #F2F2F2 3%);
+    background-size: 20px 20px;
+    background-repeat: repeat;
+
+    @media screen and (min-width: 960px){
+      width: 600px;
+    }
+  }
+`;

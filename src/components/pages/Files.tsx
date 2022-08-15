@@ -13,11 +13,5 @@ export const Files = () => {
     getFilesData();
   }, [location.state]);
 
-  return (
-    <PageTemplate>
-      <DotBg>
-        <FilesLayout filesData={filesData} />
-      </DotBg>
-    </PageTemplate>
-  );
+  return <FilesLayout filesData={filesData} />;
 };

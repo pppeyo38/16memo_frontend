@@ -1,5 +1,6 @@
 import { memo } from "react";
 import { Routes, Route } from "react-router-dom";
+import { PublicRoute } from "./PublicRoute";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { Singup } from "../components/pages/Singup";
 import { Files } from "../components/pages/Files";
@@ -21,8 +22,10 @@ import { FileEdit } from "../components/pages/FileEdit";
 export const Router = memo(() => {
   return (
     <Routes>
-      <Route path="/signup" element={<Singup />} />
-      <Route path="/login" element={<Login />} />
+      <Route element={<PublicRoute />}>
+        <Route path="/signup" element={<Singup />} />
+        <Route path="/login" element={<Login />} />
+      </Route>
 
       <Route element={<ProtectedRoute />}>
         <Route path="/" element={<Files />} />

@@ -14,11 +14,5 @@ export const MemoFiles = () => {
     getMemosData(fileName);
   }, [location.state]);
 
-  return (
-    <PageTemplate>
-      <DotBg>
-        <MemosFileLayout memosData={memosData} />
-      </DotBg>
-    </PageTemplate>
-  );
+  return <MemosFileLayout memosData={memosData} />;
 };
