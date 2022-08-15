@@ -70,8 +70,11 @@ export const LogoWhite = () => {
 };
 
 const Content = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc((100vw - 600px) / 2);
   height: 100vh;
   display: grid;
   place-content: center;
-  margin-right: 5%;
 `;

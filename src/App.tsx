@@ -5,7 +5,6 @@ import reset from "styled-reset";
 
 import { Router } from "./router/Router";
 import { LoginUserProvider } from "./providers/LoginUserProvider";
-import { Header } from "./components/organisms/Header";
 
 function App() {
   return (
@@ -41,6 +40,7 @@ const GlobalStyle = createGlobalStyle`
 
     @media screen and (min-width: 960px){
       width: 600px;
+      margin: 0 auto;
     }
   }
 `;
