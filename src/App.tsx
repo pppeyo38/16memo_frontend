@@ -1,20 +1,20 @@
 import { BrowserRouter } from "react-router-dom";
-import Div100vh from "react-div-100vh";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 import { Router } from "./router/Router";
+import { AuthProvider } from "./providers/AuthProvider";
 import { LoginUserProvider } from "./providers/LoginUserProvider";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <LoginUserProvider>
+      <AuthProvider>
         <BrowserRouter basename="/">
           <Router />
         </BrowserRouter>
-      </LoginUserProvider>
+      </AuthProvider>
     </>
   );
 }
