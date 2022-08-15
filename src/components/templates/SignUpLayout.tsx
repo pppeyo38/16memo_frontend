@@ -31,12 +31,7 @@ export const SignUpLayout = () => {
             data={data}
           />
         ) : (
-          <MailPwForm
-            onClick={onClickNext}
-            setData={setData}
-            data={data}
-            isPwForget={true}
-          />
+          <MailPwForm onClick={onClickNext} setData={setData} data={data} />
         )}
       </Container>
     </GridStyle>

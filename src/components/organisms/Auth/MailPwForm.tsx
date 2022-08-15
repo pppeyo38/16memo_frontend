@@ -8,14 +8,13 @@ import styled from "styled-components";
 import { Data } from "../../../hooks/useSignUp";
 
 type Props = {
-  isPwForget?: boolean;
   onClick: () => void;
   setData: Dispatch<SetStateAction<Data>>;
   data: Data;
 };
 
 export const MailPwForm: FC<Props> = (props) => {
-  const { isPwForget, onClick, setData, data } = props;
+  const { onClick, setData, data } = props;
   const navigate = useNavigate();
 
   const onChangeMail = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,9 +47,6 @@ export const MailPwForm: FC<Props> = (props) => {
           value={data.password}
           onChange={onChangePw}
         />
-        {isPwForget && (
-          <InputHelper to={"/"}>パスワードを忘れた方はこちら</InputHelper>
-        )}
       </Stack>
       <Stack spacing="13px" alignItems="center" mt="26px">
         <PrimaryButton
@@ -64,9 +60,3 @@ export const MailPwForm: FC<Props> = (props) => {
     </div>
   );
 };
-
-const InputHelper = styled(Link)`
-  margin: 0;
-  font-size: 14px;
-  color: #9b9b9b;
-`;
