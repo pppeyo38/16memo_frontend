@@ -1,3 +1,9 @@
+import {
+  updateEmail,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+} from "firebase/auth";
+import { auth } from "../../FirebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { useLoginUser } from "../useLoginUser";
 import { client } from "../../lib/axios";
@@ -26,15 +32,19 @@ export const usePutAccount = () => {
     });
   };
 
-  const SendPutMail = async (newData: string) => {
-    const sendData = {
-      email: newData,
-    };
-    console.log(sendData);
-    await client.put("settings_authAccount", sendData).then((res) => {
-      console.log(res);
+  const SendPutMail = async (newEmail: string, password: string) => {
+    const user = auth.currentUser;
+    try {
+      const credential = await EmailAuthProvider.credential(
+        user?.email ?? "",
+        password
+      );
+      user && (await reauthenticateWithCredential(user, credential));
+      user && (await updateEmail(user, newEmail));
       navigate("/setting");
-    });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return { SendPutNickName, SendPutCreatedId, SendPutMail };

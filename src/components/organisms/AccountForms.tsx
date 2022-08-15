@@ -15,6 +15,7 @@ export const AccountForms = () => {
   const { SignOut } = useSignOut();
   const { isOpenSignOut, onOpenSignOutPopup, onCloseSignOutPopup } =
     useSignOutPopup();
+  console.log("currentUser: " + user);
 
   return (
     <>
