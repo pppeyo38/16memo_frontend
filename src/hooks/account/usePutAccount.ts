@@ -1,5 +1,6 @@
 import {
   updateEmail,
+  updatePassword,
   EmailAuthProvider,
   reauthenticateWithCredential,
 } from "firebase/auth";
@@ -47,5 +48,20 @@ export const usePutAccount = () => {
     }
   };
 
-  return { SendPutNickName, SendPutCreatedId, SendPutMail };
+  const SendPutPw = async (newPassword: string, password: string) => {
+    const user = auth.currentUser;
+    try {
+      const credential = await EmailAuthProvider.credential(
+        user?.email ?? "",
+        password
+      );
+      user && (await reauthenticateWithCredential(user, credential));
+      user && (await updatePassword(user, newPassword));
+      navigate("/setting");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  return { SendPutNickName, SendPutCreatedId, SendPutMail, SendPutPw };
 };
