@@ -1,11 +1,12 @@
 import { Input, Stack } from "@chakra-ui/react";
 import { useState } from "react";
+import { useResetPw } from "../../hooks/account/useResetPw";
 import styled from "styled-components";
 import { PrimaryButton } from "../atoms/Button/PrimaryButton";
 
 export const ResetPwlayout = () => {
   const [email, setEmail] = useState("");
-
+  const { ResetPw } = useResetPw();
   const onChangeMail = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setEmail(value);
@@ -25,10 +26,7 @@ export const ResetPwlayout = () => {
             value={email}
             onChange={onChangeMail}
           />
-          <PrimaryButton
-            disabled={email === ""}
-            onClick={() => console.log("送信")}
-          >
+          <PrimaryButton disabled={email === ""} onClick={() => ResetPw(email)}>
             送信する
           </PrimaryButton>
         </Stack>
