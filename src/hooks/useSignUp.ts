@@ -1,8 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useLoginUser } from "./useLoginUser";
-import { API_URL } from "../api/endpoint";
+import { client } from "../lib/axios";
 
 export type Data = {
   email: string;
@@ -20,17 +18,16 @@ const initialData: Data = {
 
 export const useSignUp = () => {
   const navigate = useNavigate();
-  const { setLoginUser } = useLoginUser();
   const [data, setData] = useState<Data>(initialData);
 
-  const signup = () => {
-    axios.post(`${API_URL}/signup`, data).then((response) => {
-      if (response.data) {
-        const isAdmin = true;
-        setLoginUser({ ...response.data, isAdmin });
-        navigate("/");
-      }
-    });
+  const signup = async () => {
+    await client
+      .post("/signup", data)
+      .then((response) => {
+        console.log(response);
+        navigate("/login");
+      })
+      .catch((error) => console.log(error));
   };
 
   return { data, setData, signup };

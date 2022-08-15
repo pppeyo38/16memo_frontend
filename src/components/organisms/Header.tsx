@@ -3,6 +3,7 @@ import { useDisclosure } from "@chakra-ui/react";
 import { MenuDrawer } from "./MenuDrawer";
 import { PCMenu } from "./PCMenu";
 import styled from "styled-components";
+import PenIcon from "/src/images/penIcon.svg";
 
 export const Header = ({ isDesktop }: { isDesktop: boolean }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -15,7 +16,7 @@ export const Header = ({ isDesktop }: { isDesktop: boolean }) => {
         <HeaderWrap>
           <HeaderContent>
             <CreateMemoBtn to={"/memo/add"}>
-              <img src="/src/images/penIcon.svg" />
+              <img src={PenIcon} />
             </CreateMemoBtn>
             <ToggleDrawer onClick={isOpen ? onClose : onOpen}>
               <ToggleDrawerBtn isOpen={isOpen}>

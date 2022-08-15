@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import Iromemo from "/src/images/iromemo-logo.svg";
 
 export const IromemoIcon = () => {
   return (
     <IromemoIconWrap>
-      <img src="./src/images/iromemo-logo.svg" alt="イロメモ" />
+      <img src={Iromemo} alt="イロメモ" />
     </IromemoIconWrap>
   );
 };
