@@ -40,7 +40,7 @@ export const ProtectedRoute: FC = () => {
       {loginUser?.isAdmin ? (
         <>
           {isDesktop && <LogoWhite />}
-          {isHeader && <Header />}
+          {isHeader && <Header isDesktop={isDesktop} />}
           <Outlet />
         </>
       ) : (

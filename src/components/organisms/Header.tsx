@@ -1,27 +1,34 @@
 import { Link } from "react-router-dom";
 import { useDisclosure } from "@chakra-ui/react";
 import { MenuDrawer } from "./MenuDrawer";
+import { PCMenu } from "./PCMenu";
 import styled from "styled-components";
 
-export const Header = () => {
+export const Header = ({ isDesktop }: { isDesktop: boolean }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <HeaderWrap>
-      <HeaderContent>
-        <CreateMemoBtn to={"/memo/add"}>
-          <img src="/src/images/penIcon.svg" />
-        </CreateMemoBtn>
-        <ToggleDrawer onClick={isOpen ? onClose : onOpen}>
-          <ToggleDrawerBtn isOpen={isOpen}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </ToggleDrawerBtn>
-        </ToggleDrawer>
-        <MenuDrawer isOpen={isOpen} onClose={onClose} />
-      </HeaderContent>
-    </HeaderWrap>
+    <>
+      {isDesktop ? (
+        <PCMenu />
+      ) : (
+        <HeaderWrap>
+          <HeaderContent>
+            <CreateMemoBtn to={"/memo/add"}>
+              <img src="/src/images/penIcon.svg" />
+            </CreateMemoBtn>
+            <ToggleDrawer onClick={isOpen ? onClose : onOpen}>
+              <ToggleDrawerBtn isOpen={isOpen}>
+                <span></span>
+                <span></span>
+                <span></span>
+              </ToggleDrawerBtn>
+            </ToggleDrawer>
+            <MenuDrawer isOpen={isOpen} onClose={onClose} />
+          </HeaderContent>
+        </HeaderWrap>
+      )}
+    </>
   );
 };
 

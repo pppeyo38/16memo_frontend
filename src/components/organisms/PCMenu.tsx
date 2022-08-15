@@ -26,10 +26,10 @@ export const PCMenu = () => {
           <MenuListItems>
             <Link to="/setting">アカウント</Link>
           </MenuListItems>
+          <ContentLogout onClick={() => onOpenSignOutPopup()}>
+            ログアウト
+          </ContentLogout>
         </MenuList>
-        <ContentLogout onClick={() => onOpenSignOutPopup()}>
-          ログアウト
-        </ContentLogout>
       </Menu>
       <SignOutPopup
         isOpen={isOpenSignOut}
@@ -43,14 +43,20 @@ export const PCMenu = () => {
 };
 
 const Menu = styled.header`
-  width: 296px;
-  padding-left: 48px;
-  background-image: url(/src/images/menuDrawerBg.svg);
-  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc((100vw - 600px) / 2);
+  height: 100vh;
 `;
 
 const MenuList = styled.ul`
-  margin-top: 130px;
+  max-width: 296px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 139px 0 0 48px;
+  background-image: url(/src/images/menuDrawerBg.svg);
+  background-repeat: no-repeat;
 
   * + * {
     margin-top: 13px;
