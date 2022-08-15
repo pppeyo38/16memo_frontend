@@ -33,6 +33,10 @@ const Content = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
+
+  ${({ theme }) => theme.media.desktop`
+    height: 100vh;
+  `}
 `;
 
 const Head = styled.div`

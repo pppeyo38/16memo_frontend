@@ -14,9 +14,7 @@ export const PageTitle = ({ children }: Props) => {
 };
 
 const TitleWrap = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  width: 340px;
 `;
 
 const Title = styled.h1`

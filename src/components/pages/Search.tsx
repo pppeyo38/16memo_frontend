@@ -1,6 +1,5 @@
 import { FC, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { HeaderLayout } from "../templates/HeaderLayout";
 import { SearchLayout } from "../templates/SearchLayout";
 
 export const Search: FC = () => {
@@ -13,13 +12,11 @@ export const Search: FC = () => {
   );
 
   return (
-    <HeaderLayout>
-      <SearchLayout
-        isResult={isResult}
-        setIsResult={setIsResult}
-        searchTag={searchTag}
-        setSearchTag={setSearchTag}
-      />
-    </HeaderLayout>
+    <SearchLayout
+      isResult={isResult}
+      setIsResult={setIsResult}
+      searchTag={searchTag}
+      setSearchTag={setSearchTag}
+    />
   );
 };

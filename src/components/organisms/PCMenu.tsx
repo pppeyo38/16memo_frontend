@@ -2,40 +2,35 @@ import { Link } from "react-router-dom";
 import { useSignOut } from "../../hooks/account/useSignOut";
 import { useSignOutPopup } from "../../hooks/popup/useSignOutPopup";
 import { SignOutPopup } from "./Auth/SignOutPopup";
-import { Drawer, DrawerOverlay, DrawerContent } from "@chakra-ui/react";
+import { Box, DrawerContent } from "@chakra-ui/react";
 import styled from "styled-components";
 
-type Props = {
-  isOpen: boolean;
-  onClose: () => void;
-};
-
-export const MenuDrawer = ({ isOpen, onClose }: Props) => {
+export const PCMenu = () => {
   const { SignOut } = useSignOut();
   const { isOpenSignOut, onOpenSignOutPopup, onCloseSignOutPopup } =
     useSignOutPopup();
 
   return (
     <>
-      <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
-        <DrawerOverlay />
-        <DrawerContent style={DrawerStyle}>
-          <MenuList>
-            <MenuListItems onClick={onClose}>
-              <Link to="/">ファイル</Link>
-            </MenuListItems>
-            <MenuListItems onClick={onClose}>
-              <Link to="/search">検索</Link>
-            </MenuListItems>
-            <MenuListItems onClick={onClose}>
-              <Link to="/setting">アカウント</Link>
-            </MenuListItems>
-          </MenuList>
+      <Menu>
+        <MenuList>
+          <MenuListItems>
+            <Link to="/memo/add">メモを作成</Link>
+          </MenuListItems>
+          <MenuListItems>
+            <Link to="/">ファイル</Link>
+          </MenuListItems>
+          <MenuListItems>
+            <Link to="/search">検索</Link>
+          </MenuListItems>
+          <MenuListItems>
+            <Link to="/setting">アカウント</Link>
+          </MenuListItems>
           <ContentLogout onClick={() => onOpenSignOutPopup()}>
             ログアウト
           </ContentLogout>
-        </DrawerContent>
-      </Drawer>
+        </MenuList>
+      </Menu>
       <SignOutPopup
         isOpen={isOpenSignOut}
         onClose={onCloseSignOutPopup}
@@ -47,8 +42,21 @@ export const MenuDrawer = ({ isOpen, onClose }: Props) => {
   );
 };
 
+const Menu = styled.header`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc((100vw - 600px) / 2);
+  height: 100vh;
+`;
+
 const MenuList = styled.ul`
-  margin-top: 130px;
+  max-width: 296px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 139px 0 0 48px;
+  background-image: url(/src/images/menuDrawerBg.svg);
+  background-repeat: no-repeat;
 
   * + * {
     margin-top: 13px;
@@ -71,9 +79,3 @@ const ContentLogout = styled.h3`
   line-height: 1.45;
   color: ${(props) => props.theme.colors.black};
 `;
-
-const DrawerStyle = {
-  width: "296px",
-  paddingLeft: "65px",
-  background: "url(/src/images/menuDrawerBg.svg)",
-};

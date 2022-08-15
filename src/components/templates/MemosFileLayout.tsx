@@ -11,7 +11,6 @@ import { SettingIcon } from "../atoms/Icon/SettingIcon";
 import { CheckBox } from "../atoms/CheckBox";
 import { PageTitle } from "../atoms/PageTitle";
 import { ColorMemoThumb } from "../molecules/ColorMemoThumb";
-import { Header } from "../organisms/Header";
 import { MemosFileDrawer } from "../organisms/File/MemosFileDrawer";
 import { TrashPopup } from "../organisms/Memo/TrashPopup";
 import { Loading } from "../pages/Loading";
@@ -45,7 +44,6 @@ export const MemosFileLayout: FC<Props> = (props) => {
 
   return (
     <>
-      {!isDelete && <Header />}
       <ContentInner>
         <ArrowWrap>
           {!isDelete && (

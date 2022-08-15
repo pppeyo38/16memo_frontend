@@ -58,6 +58,11 @@ const Content = styled.div`
   height: 100%;
   overflow: hidden;
   background: white;
+
+  ${({ theme }) => theme.media.desktop`
+    width: 600px;
+    height: 100vh;
+  `}
 `;
 
 const Head = styled.div`
@@ -81,6 +86,11 @@ const Color = styled.div<{ bg: string }>`
   width: 100vw;
   height: 170px;
   background-color: ${({ bg }) => `#${bg}`};
+
+  ${({ theme }) => theme.media.desktop`
+    width: 340px;
+    margin: 25px auto;
+  `}
 `;
 
 const ColorEdit = styled.h1`

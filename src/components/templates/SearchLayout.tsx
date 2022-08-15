@@ -48,16 +48,25 @@ export const SearchLayout: FC<Props> = (props) => {
 };
 
 const Content = styled.div`
-  width: 340px;
-  margin: 35px auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 35px;
+
+  ${({ theme }) => theme.media.desktop`
+    max-width: 600px;
+    height: 100vh;
+  `}
 `;
 
 const Head = styled.div`
+  width: 340px;
   height: 35px;
   margin-bottom: 25px;
 `;
 
 const Title = styled.h1`
+  width: 340px;
   margin-bottom: 13px;
   color: ${(props) => props.theme.colors.black};
   font-family: ${(props) => props.theme.fontFamily.Noto};

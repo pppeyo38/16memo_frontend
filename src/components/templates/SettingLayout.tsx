@@ -14,8 +14,15 @@ export const SettingLayout = () => {
 };
 
 const ContentInner = styled.div`
-  max-width: 340px;
-  margin: 95px auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 95px;
+
+  ${({ theme }) => theme.media.desktop`
+    max-width: 600px;
+    height: 100vh;
+  `}
 `;
 
 const FromsWrap = styled.div`
