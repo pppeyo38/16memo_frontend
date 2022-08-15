@@ -13,7 +13,7 @@ import { LogoWhite } from "../components/atoms/LogoWhite";
 export const ProtectedRoute: FC = () => {
   const { loginUser, setLoginUser } = useLoginUser();
   const navigate = useNavigate();
-  const location = useLocation();
+  const { pathname } = useLocation();
   const [isDesktop] = useMediaQuery("(min-width: 960px)");
   const [isHeader, setIsHeader] = useState(false);
 
@@ -32,8 +32,12 @@ export const ProtectedRoute: FC = () => {
 
   useEffect(() => {
     console.log("--- useEffect ---");
-    setIsHeader(HeaderControl(location.pathname));
-  }, [location.pathname]);
+    if (pathname.includes("memo") && pathname.search(/[0-9]/g)) {
+      setIsHeader(false);
+    } else {
+      setIsHeader(HeaderControl(pathname));
+    }
+  }, [pathname]);
 
   return (
     <Div100vh id="Div100vh">

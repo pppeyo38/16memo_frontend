@@ -4,9 +4,6 @@ export const HeaderControl = (path: string) => {
     case "/memo/add":
       visible = false;
       break;
-    case "/memo/edit":
-      visible = false;
-      break;
     case "/setting/nickname":
       visible = false;
       break;
