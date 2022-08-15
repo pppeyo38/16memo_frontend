@@ -21,9 +21,12 @@ const AuthProvider = (props: { children: ReactNode }) => {
   );
 
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
     });
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return (
