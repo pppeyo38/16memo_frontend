@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { PublicRoute } from "./PublicRoute";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { Singup } from "../components/pages/Singup";
+import { ResetPw } from "../components/pages/ResetPw";
 import { Files } from "../components/pages/Files";
 import { FileAdd } from "../components/pages/FileAdd";
 import { MemoFiles } from "../components/pages/MemoFiles";
@@ -25,6 +26,7 @@ export const Router = memo(() => {
       <Route element={<PublicRoute />}>
         <Route path="/signup" element={<Singup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/password_reset" element={<ResetPw />} />
       </Route>
 
       <Route element={<ProtectedRoute />}>

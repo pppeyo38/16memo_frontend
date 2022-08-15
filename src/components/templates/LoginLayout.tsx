@@ -60,7 +60,9 @@ export const LoginLayout = () => {
             value={data.password}
             onChange={onChangePw}
           />
-          <InputHelper to={"/"}>パスワードを忘れた方はこちら</InputHelper>
+          <InputHelper to={"/password_reset"}>
+            パスワードを忘れた方はこちら
+          </InputHelper>
         </Stack>
         <Stack spacing="13px" alignItems="center" mt="26px">
           <PrimaryButton
