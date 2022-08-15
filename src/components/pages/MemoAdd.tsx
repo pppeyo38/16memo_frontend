@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { MemoCreateLayout } from "../templates/MemoCreateLayout";
-import { PageTemplate } from "../templates/PageTemplate";
 
 export const MemoAdd: FC = () => {
   const defaultValue = {
@@ -11,9 +10,5 @@ export const MemoAdd: FC = () => {
     fileName: "",
   };
 
-  return (
-    <PageTemplate>
-      <MemoCreateLayout memoData={defaultValue} isNew={true} />
-    </PageTemplate>
-  );
+  return <MemoCreateLayout memoData={defaultValue} isNew={true} />;
 };
