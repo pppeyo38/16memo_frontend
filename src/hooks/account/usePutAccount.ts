@@ -6,12 +6,10 @@ import {
 } from "firebase/auth";
 import { auth } from "../../FirebaseConfig";
 import { useNavigate } from "react-router-dom";
-import { useLoginUser } from "../useLoginUser";
 import { client } from "../../lib/axios";
 
 export const usePutAccount = () => {
   const navigate = useNavigate();
-  const { loginUser, setLoginUser } = useLoginUser();
 
   const SendPutNickName = async (newData: string) => {
     const sendData = {
@@ -19,7 +17,6 @@ export const usePutAccount = () => {
     };
     await client.put("settings_account", sendData).then((res) => {
       navigate("/setting", { state: res.status });
-      setLoginUser({ ...res.data, isAdmin: true });
     });
   };
 
@@ -29,7 +26,6 @@ export const usePutAccount = () => {
     };
     await client.put("settings_account", sendData).then((res) => {
       navigate("/setting", { state: res.status });
-      setLoginUser({ ...res.data, isAdmin: true });
     });
   };
 

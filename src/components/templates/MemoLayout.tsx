@@ -1,6 +1,5 @@
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLoginUser } from "../../hooks/useLoginUser";
 import { useDestroyMemo } from "../../hooks/memos/useDestroyMemo";
 import { memoDataType } from "../../hooks/memos/useShowMemo";
 import { useTrash } from "../../hooks/popup/useTrash";
@@ -19,17 +18,20 @@ import { TrashIcon } from "../atoms/Icon/TrashIcon";
 import { CommentDrawer } from "../organisms/Memo/CommentDrawer";
 import { LinkPopup } from "../organisms/Memo/LinkPopup";
 import { TrashPopup } from "../organisms/Memo/TrashPopup";
+import { useAuth } from "../../hooks/account/useAuth";
 
 type Props = {
   memoData: memoDataType;
 };
 
 export const MemoLayout: FC<Props> = (props) => {
-  const { loginUser } = useLoginUser();
+  const { currentUser } = useAuth();
   const { memoData } = props;
   const memoContent = memoData.getData.memo;
   const [canEdit, setCanEdit] = useState(
-    loginUser?.id === memoData.getData.userId
+    true
+    // TODO: 編集権限
+    // currentUser?.uid === memoData.getData.userId
   );
   const { DestroyMemo } = useDestroyMemo();
 
@@ -46,7 +48,7 @@ export const MemoLayout: FC<Props> = (props) => {
   const hsv = setRGBtoHSV(rgb);
 
   const backMemosFile = () => {
-    if (memoData.getData.userId === loginUser?.id) {
+    if (memoData.getData.userId) {
       navigate(`/${memoContent.fileName}`);
     } else {
       navigate("/");

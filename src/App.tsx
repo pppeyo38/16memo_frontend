@@ -4,7 +4,6 @@ import reset from "styled-reset";
 
 import { Router } from "./router/Router";
 import { AuthProvider } from "./providers/AuthProvider";
-import { LoginUserProvider } from "./providers/LoginUserProvider";
 
 function App() {
   return (
