@@ -27,6 +27,7 @@ const GlobalStyle = createGlobalStyle`
   ${reset}
   body {
     background: #9B9B9B;
+    font-family: ${({ theme }) => theme.fontFamily.Noto};
   }
   a {
     cursor: pointer;
