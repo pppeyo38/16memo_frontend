@@ -1,34 +1,23 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { client } from "../lib/axios";
+import { useLogin } from "./useLogin";
 
 export type Data = {
   email: string;
   password: string;
   nickname: string;
-  createdID: string;
-};
-
-const initialData: Data = {
-  email: "",
-  password: "",
-  nickname: "",
-  createdID: "",
 };
 
 export const useSignUp = () => {
-  const navigate = useNavigate();
-  const [data, setData] = useState<Data>(initialData);
+  const { login } = useLogin();
 
-  const signup = async () => {
+  const signup = async (data: Data) => {
     await client
       .post("/signup", data)
-      .then((response) => {
-        console.log(response);
-        navigate("/login");
+      .then(async (response) => {
+        response && (await login(data));
       })
       .catch((error) => console.log(error));
   };
 
-  return { data, setData, signup };
+  return { signup };
 };

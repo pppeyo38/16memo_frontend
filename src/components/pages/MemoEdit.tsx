@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useLoginUser } from "../../hooks/useLoginUser";
+import { useAuth } from "../../hooks/account/useAuth";
 import { useShowMemo } from "../../hooks/memos/useShowMemo";
 import { MemoCreateLayout } from "../templates/MemoCreateLayout";
+import { NotFoundLayout } from "../templates/NotFoundLayout";
 
 export const MemoEdit = () => {
-  const { loginUser } = useLoginUser();
+  const { currentUser } = useAuth();
   const { memoData, getMemoData } = useShowMemo();
   const { memoId } = useParams();
 
@@ -16,10 +17,10 @@ export const MemoEdit = () => {
   return (
     <>
       {!memoData.loading &&
-        (loginUser?.id === memoData.getData.userId ? (
+        (currentUser?.uid === memoData.getData.uid ? (
           <MemoCreateLayout memoData={memoData.getData.memo} isNew={false} />
         ) : (
-          <div>メモが見つかりません</div>
+          <NotFoundLayout>メモが見つかりません</NotFoundLayout>
         ))}
     </>
   );

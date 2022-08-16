@@ -1,6 +1,7 @@
+import { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../FirebaseConfig";
-import { useLoginUser } from "../../hooks/useLoginUser";
+import { useAuth } from "../../hooks/account/useAuth";
+import { useAccount } from "../../hooks/account/useAccount";
 import { useSignOut } from "../../hooks/account/useSignOut";
 import { useSignOutPopup } from "../../hooks/popup/useSignOutPopup";
 import { Stack } from "@chakra-ui/react";
@@ -8,27 +9,26 @@ import { SettingLink } from "../atoms/SettingLink";
 import { SettingButton } from "../atoms/Button/SettingButton";
 import { SignOutPopup } from "./Auth/SignOutPopup";
 
-export const AccountForms = () => {
-  const user = auth.currentUser;
-  const { loginUser } = useLoginUser();
+export const AccountForms: FC = () => {
+  const { account } = useAccount();
+  const { currentUser } = useAuth();
   const navigate = useNavigate();
   const { SignOut } = useSignOut();
   const { isOpenSignOut, onOpenSignOutPopup, onCloseSignOutPopup } =
     useSignOutPopup();
-  console.log("currentUser: " + user);
 
   return (
     <>
       <Stack spacing={"26px"} align="center">
         <Stack spacing={"14px"} w="fit-content">
           <SettingLink label="ニックネーム" link="/setting/nickname">
-            {loginUser?.nickname}
+            {account.nickname}
           </SettingLink>
           <SettingLink label="ユーザー名" link="/setting/username">
-            @{loginUser?.createdID}
+            @{account.createdID}
           </SettingLink>
           <SettingLink label="メール" link="/setting/mail">
-            {user?.email}
+            {currentUser?.email}
           </SettingLink>
           <SettingLink label="パスワード" link="/setting/password">
             パスワードの変更

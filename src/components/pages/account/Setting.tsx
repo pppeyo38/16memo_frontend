@@ -1,8 +1,14 @@
-import type { FC } from "react";
+import { FC, useEffect } from "react";
+import { useGetAccount } from "../../../hooks/account/useGetAccount";
 import { SettingLayout } from "../../templates/SettingLayout";
+import { Loading } from "../Loading";
 
-type Props = {};
+export const Setting: FC = () => {
+  const { accountData, getAccountData } = useGetAccount();
 
-export const Setting: FC<Props> = (props) => {
-  return <SettingLayout />;
+  useEffect(() => {
+    getAccountData();
+  }, []);
+
+  return <>{accountData.loading ? <Loading /> : <SettingLayout />}</>;
 };

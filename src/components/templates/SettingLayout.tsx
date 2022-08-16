@@ -1,8 +1,9 @@
 import { PageTitle } from "../atoms/PageTitle";
 import styled from "styled-components";
 import { AccountForms } from "../organisms/AccountForms";
+import { FC } from "react";
 
-export const SettingLayout = () => {
+export const SettingLayout: FC = () => {
   return (
     <ContentInner>
       <PageTitle>アカウント管理</PageTitle>

@@ -1,20 +1,22 @@
 import { BrowserRouter } from "react-router-dom";
-import Div100vh from "react-div-100vh";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 import { Router } from "./router/Router";
-import { LoginUserProvider } from "./providers/LoginUserProvider";
+import { AuthProvider } from "./providers/AuthProvider";
+import { AccountProvider } from "./providers/AccountProvider";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <LoginUserProvider>
-        <BrowserRouter basename="/">
-          <Router />
-        </BrowserRouter>
-      </LoginUserProvider>
+      <AuthProvider>
+        <AccountProvider>
+          <BrowserRouter basename="/">
+            <Router />
+          </BrowserRouter>
+        </AccountProvider>
+      </AuthProvider>
     </>
   );
 }

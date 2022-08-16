@@ -1,8 +1,16 @@
-import type { FC } from "react";
+import { FC, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/account/useAuth";
 import { SignUpLayout } from "../templates/SignUpLayout";
 
-type Props = {};
+export const Singup: FC = () => {
+  const { currentUser } = useAuth();
+  const navigate = useNavigate();
+  console.log(currentUser);
 
-export const Singup: FC<Props> = (props) => {
-  return <SignUpLayout />;
+  useEffect(() => {
+    currentUser && navigate("/");
+  }, [currentUser]);
+
+  return <>{currentUser === null && <SignUpLayout />}</>;
 };

@@ -52,6 +52,7 @@ export const SettingEmail = ({ data }: Props) => {
         </InputGroup>
         <InputGroup sx={{ width: "340px" }}>
           <Input
+            placeholder="パスワードの確認"
             type="password"
             value={pw}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>

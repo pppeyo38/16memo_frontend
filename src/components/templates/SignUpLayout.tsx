@@ -1,20 +1,28 @@
 import { useState } from "react";
-import { Stack } from "@chakra-ui/react";
+import { Stack, Input } from "@chakra-ui/react";
 import styled from "styled-components";
+import { Data, useSignUp } from "../../hooks/useSignUp";
 import { IromemoIcon } from "../atoms/Icon/IromemoIcon";
-import { MailPwForm } from "../organisms/Auth/MailPwForm";
-import { NameForm } from "../organisms/Auth/NameForm";
+import { StrokeButton } from "../atoms/Button/StrokeButton";
+import { PrimaryButton } from "../atoms/Button/PrimaryButton";
+import { useNavigate } from "react-router-dom";
 
-import { useSignUp } from "../../hooks/useSignUp";
+const initialData: Data = {
+  email: "",
+  password: "",
+  nickname: "",
+};
 
 export const SignUpLayout = () => {
-  const [isNext, setIsNext] = useState(false);
-  const { data, setData, signup } = useSignUp();
-  const onClickNext = () => {
-    setIsNext(true);
-  };
-  const onClickSignUp = () => {
-    signup();
+  const { signup } = useSignUp();
+  const [data, setData] = useState<Data>(initialData);
+  const navigate = useNavigate();
+
+  const onChangeData = (type: string, data: string) => {
+    setData((prev) => ({
+      ...prev,
+      [type]: data,
+    }));
   };
 
   return (
@@ -24,15 +32,48 @@ export const SignUpLayout = () => {
           <IromemoIcon />
           <Heading>アカウントを作成</Heading>
         </Stack>
-        {isNext ? (
-          <NameForm
-            onClickSignUp={onClickSignUp}
-            setData={setData}
-            data={data}
+        <Stack width="fit-content" spacing="13px" m="13px auto 0">
+          <Input
+            variant="white"
+            size="md"
+            style={{ width: "340px" }}
+            placeholder="メールアドレス"
+            value={data.email}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              onChangeData("email", e.target.value);
+            }}
           />
-        ) : (
-          <MailPwForm onClick={onClickNext} setData={setData} data={data} />
-        )}
+          <Input
+            variant="white"
+            size="md"
+            style={{ width: "340px" }}
+            placeholder="パスワード"
+            type="password"
+            value={data.password}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              onChangeData("password", e.target.value);
+            }}
+            minLength={6}
+          />
+          <Input
+            variant="white"
+            size="md"
+            style={{ width: "340px" }}
+            placeholder="ニックネーム"
+            value={data.nickname}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              onChangeData("nickname", e.target.value);
+            }}
+          />
+        </Stack>
+        <Stack spacing="13px" alignItems="center" mt="26px">
+          <PrimaryButton disabled={false} onClick={() => signup(data)}>
+            アカウントを作成
+          </PrimaryButton>
+          <StrokeButton onClick={() => navigate("/login")}>
+            ログイン
+          </StrokeButton>
+        </Stack>
       </Container>
     </GridStyle>
   );
