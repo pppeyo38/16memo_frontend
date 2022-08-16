@@ -86,9 +86,9 @@ export const FilesDrawer: FC<Props> = (props) => {
 };
 
 const DrawerContent = styled.div`
-  height: 98vh;
+  height: 92vh;
   position: relative;
-  padding: 25px 25px 100px;
+  padding: 25px 25px 0;
 `;
 
 const Head = styled.div`
@@ -133,7 +133,7 @@ const Heading = styled.h2`
 `;
 
 const FlowList = styled.div`
-  height: 85vh;
+  height: 85%;
   overflow-y: scroll;
 `;
 

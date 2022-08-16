@@ -4,6 +4,7 @@ import { useSignOutPopup } from "../../hooks/popup/useSignOutPopup";
 import { SignOutPopup } from "./Auth/SignOutPopup";
 import { Drawer, DrawerOverlay, DrawerContent } from "@chakra-ui/react";
 import styled from "styled-components";
+import drawerBg from "../../images/menuDrawerBg.svg";
 
 type Props = {
   isOpen: boolean;
@@ -75,5 +76,5 @@ const ContentLogout = styled.h3`
 const DrawerStyle = {
   width: "296px",
   paddingLeft: "65px",
-  background: "url(/src/images/menuDrawerBg.svg)",
+  background: `url(${drawerBg})`,
 };
