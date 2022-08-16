@@ -1,5 +1,7 @@
+import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/account/useAuth";
+import { useAccount } from "../../hooks/account/useAccount";
 import { useSignOut } from "../../hooks/account/useSignOut";
 import { useSignOutPopup } from "../../hooks/popup/useSignOutPopup";
 import { Stack } from "@chakra-ui/react";
@@ -7,23 +9,23 @@ import { SettingLink } from "../atoms/SettingLink";
 import { SettingButton } from "../atoms/Button/SettingButton";
 import { SignOutPopup } from "./Auth/SignOutPopup";
 
-export const AccountForms = () => {
+export const AccountForms: FC = () => {
+  const { account } = useAccount();
   const { currentUser } = useAuth();
   const navigate = useNavigate();
   const { SignOut } = useSignOut();
   const { isOpenSignOut, onOpenSignOutPopup, onCloseSignOutPopup } =
     useSignOutPopup();
-  console.log("currentUser: " + currentUser);
 
   return (
     <>
       <Stack spacing={"26px"} align="center">
         <Stack spacing={"14px"} w="fit-content">
           <SettingLink label="ニックネーム" link="/setting/nickname">
-            ニックネーム
+            {account.nickname}
           </SettingLink>
           <SettingLink label="ユーザー名" link="/setting/username">
-            @ID
+            @{account.createdID}
           </SettingLink>
           <SettingLink label="メール" link="/setting/mail">
             {currentUser?.email}

@@ -4,15 +4,18 @@ import reset from "styled-reset";
 
 import { Router } from "./router/Router";
 import { AuthProvider } from "./providers/AuthProvider";
+import { AccountProvider } from "./providers/AccountProvider";
 
 function App() {
   return (
     <>
       <GlobalStyle />
       <AuthProvider>
-        <BrowserRouter basename="/">
-          <Router />
-        </BrowserRouter>
+        <AccountProvider>
+          <BrowserRouter basename="/">
+            <Router />
+          </BrowserRouter>
+        </AccountProvider>
       </AuthProvider>
     </>
   );
