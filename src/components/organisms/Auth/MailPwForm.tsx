@@ -46,6 +46,7 @@ export const MailPwForm: FC<Props> = (props) => {
           type="password"
           value={data.password}
           onChange={onChangePw}
+          minLength={6}
         />
       </Stack>
       <Stack spacing="13px" alignItems="center" mt="26px">
