@@ -7,6 +7,7 @@ import {
 } from "react";
 
 export type Account = {
+  id: number;
   nickname: string;
   createdID: string;
 };

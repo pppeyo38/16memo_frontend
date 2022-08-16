@@ -3,10 +3,15 @@ import { Input } from "@chakra-ui/react";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import styled from "styled-components";
 import { useState } from "react";
+import { useDestroyAccount } from "../../hooks/account/useDestroy";
+import { useAccount } from "../../hooks/account/useAccount";
 
 export const AccountDeleteLayout = ({ title }: { title: string }) => {
+  const { DestroyAccount } = useDestroyAccount();
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
+  const { account } = useAccount();
+
   return (
     <Content>
       <Head>
@@ -23,7 +28,9 @@ export const AccountDeleteLayout = ({ title }: { title: string }) => {
           }
           sx={inputStyle}
         />
-        <DeleteButton>アカウントを削除</DeleteButton>
+        <DeleteButton onClick={() => DestroyAccount(account.id, password)}>
+          アカウントを削除
+        </DeleteButton>
       </InputArea>
     </Content>
   );

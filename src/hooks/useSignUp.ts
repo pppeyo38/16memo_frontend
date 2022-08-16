@@ -16,7 +16,7 @@ export const useSignUp = () => {
       .post("/signup", data)
       .then((response) => {
         console.log(response);
-        navigate("/login");
+        navigate("/");
       })
       .catch((error) => console.log(error));
   };
