@@ -167,6 +167,7 @@ const SliderWrap = styled.div<{ bg: string }>`
     height: 25px;
     min-height: 25px;
     padding: 3px 9px;
+    line-height: 1.18;
   }
 `;
 
