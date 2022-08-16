@@ -13,11 +13,9 @@ export const useLogin = () => {
   const login = (data: Data) => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
-        console.log("--- ログイン成功 ---");
         navigate("/");
       })
       .catch((error) => {
-        console.log("--- ログイン失敗 ---");
         console.log(error);
       });
   };

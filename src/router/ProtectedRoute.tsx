@@ -29,14 +29,14 @@ export const ProtectedRoute: FC = () => {
 
   return (
     <Div100vh id="Div100vh">
-      {currentUser ? (
+      {currentUser === undefined ? (
+        <Loading />
+      ) : (
         <>
           {isDesktop && <LogoWhite />}
           {isHeader && <Header isDesktop={isDesktop} />}
           <Outlet />
         </>
-      ) : (
-        <Loading />
       )}
     </Div100vh>
   );

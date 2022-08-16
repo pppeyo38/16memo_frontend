@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom";
 import { client } from "../lib/axios";
+import { useLogin } from "./useLogin";
 
 export type Data = {
   email: string;
@@ -8,15 +8,13 @@ export type Data = {
 };
 
 export const useSignUp = () => {
-  const navigate = useNavigate();
+  const { login } = useLogin();
 
   const signup = async (data: Data) => {
-    console.log(data);
     await client
       .post("/signup", data)
-      .then((response) => {
-        console.log(response);
-        navigate("/");
+      .then(async (response) => {
+        response && (await login(data));
       })
       .catch((error) => console.log(error));
   };
