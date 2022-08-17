@@ -141,6 +141,10 @@ const SettingModal = styled.section`
   z-index: 100;
   width: 100%;
   background: white;
+
+  ${({ theme }) => theme.media.desktop`
+    width: 600px;
+  `}
 `;
 
 const Head = styled.div`
