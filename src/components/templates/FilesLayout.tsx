@@ -120,7 +120,6 @@ const Head = styled.div`
 
 const FilesWrap = styled.div<{ height: string }>`
   width: 400px;
-  /* height: calc(100vh - 145px); */
   height: ${(props) => props.height};
   margin-top: 15px;
   padding-bottom: 20px;
