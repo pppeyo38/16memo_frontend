@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { use100vh } from "react-div-100vh";
 import { Memo } from "../../types/memo";
 import { usePostMemos } from "../../hooks/memos/usePostMemo";
 import { usePutMemo } from "../../hooks/memos/usePutMemo";
@@ -20,19 +21,32 @@ export const MemoCreateLayout: FC<Props> = (props) => {
   const { SendPutMemo } = usePutMemo();
   const [openedModal, setOpenedModal] = useState(false);
   const navigate = useNavigate();
+  const height = use100vh();
+
+  const [fileError, setFileError] = useState<boolean>(false);
+  const [tagError, setTagError] = useState<boolean>(false);
+
+  const onCheckBlank = () => {
+    newMemo.tagName.length === 0 && setTagError(true);
+    newMemo.fileName.length === 0 && setFileError(true);
+    return newMemo.tagName.length === 0 || newMemo.fileName.length === 0;
+  };
+
+  const onClickComplete = (isNew: boolean, newMemo: Memo) => {
+    const flag = onCheckBlank();
+    if (!flag) {
+      isNew ? SendPostMemo(newMemo) : SendPutMemo(newMemo, newMemo.id!);
+    } else {
+      console.log("--- 入力エラー ---");
+    }
+  };
 
   return (
     <>
-      <Content>
+      <Content h={height ? `${height}px` : "100vh"}>
         <Head>
           <ReturnArrow onClick={() => navigate(-1)} color={"#161616"} />
-          <CompleteButton
-            onClick={
-              isNew
-                ? () => SendPostMemo(newMemo)
-                : () => SendPutMemo(newMemo, newMemo.id!)
-            }
-          >
+          <CompleteButton onClick={() => onClickComplete(isNew, newMemo)}>
             完了
           </CompleteButton>
         </Head>
@@ -40,7 +54,14 @@ export const MemoCreateLayout: FC<Props> = (props) => {
           <ColorEdit>色を編集</ColorEdit>
           <ColorCode># {newMemo.colorCode}</ColorCode>
         </Color>
-        <MemoForm newMemo={newMemo} setNewMemo={setNewMemo} />
+        <MemoForm
+          newMemo={newMemo}
+          setNewMemo={setNewMemo}
+          fileError={fileError}
+          setFileError={setFileError}
+          tagError={tagError}
+          setTagError={setTagError}
+        />
       </Content>
       {openedModal && (
         <ColorSetting
@@ -53,9 +74,9 @@ export const MemoCreateLayout: FC<Props> = (props) => {
   );
 };
 
-const Content = styled.div`
+const Content = styled.div<{ h: string }>`
   width: 100%;
-  height: 100%;
+  height: ${(props) => props.h};
   overflow: hidden;
   background: white;
 
