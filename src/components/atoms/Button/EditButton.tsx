@@ -1,17 +1,22 @@
 import styled from "styled-components";
 
 type Props = {
+  color: string;
   onClick: () => void;
 };
 
-export const EditButton = ({ onClick }: Props) => {
-  return <Button onClick={onClick}>編集</Button>;
+export const EditButton = ({ color, onClick }: Props) => {
+  return (
+    <Button textColor={color} onClick={onClick}>
+      編集
+    </Button>
+  );
 };
 
-const Button = styled.button`
+const Button = styled.button<{ textColor: string }>`
   width: 40px;
   height: 35px;
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.textColor};
   font-size: 16px;
   font-family: ${(props) => props.theme.fontFamily.Noto};
 `;
