@@ -37,7 +37,7 @@ const GlobalStyle = createGlobalStyle`
   #Div100vh {
     width: 100vw;
     overflow: hidden;
-    background-image: radial-gradient(#9B9B9B 3%, #F2F2F2 3%);
+    background-image: radial-gradient(#9B9B9B 5%, #F2F2F2 6%);
     background-size: 20px 20px;
     background-repeat: repeat;
 

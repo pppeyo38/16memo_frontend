@@ -32,7 +32,7 @@ export const SearchLayout: FC<Props> = (props) => {
             <ReturnArrow onClick={() => onBack()} color={"#161616"} />
           )}
         </Head>
-        <Title>{isResult ? `${searchTag}` : "検索"}</Title>
+        <Title>{isResult ? `#${searchTag}` : "検索"}</Title>
         {!isResult ? (
           <SearchForm
             searchTag={searchTag}
