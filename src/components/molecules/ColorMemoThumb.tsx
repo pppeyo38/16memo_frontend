@@ -21,7 +21,10 @@ export const ColorMemoThumb: FC<Props> = (props) => {
       <MemoThumb isDelete={isDelete} onClick={() => !isDelete && onClickMemo()}>
         <ColorCodeBox {...props}>
           <WhiteBox>
-            <h2>{content.tagName}</h2>
+            <h2>
+              <span>#</span>
+              {content.tagName}
+            </h2>
             <p>#{content.colorCode}</p>
           </WhiteBox>
         </ColorCodeBox>
@@ -63,6 +66,9 @@ const WhiteBox = styled.div`
     color: ${(props) => props.theme.colors.black};
     font-size: 16px;
     font-family: ${(props) => props.theme.fontFamily.Noto};
+    span {
+      font-family: ${(props) => props.theme.fontFamily.Roboto};
+    }
   }
   p {
     line-height: 1.15;
