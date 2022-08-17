@@ -19,6 +19,7 @@ export const ResetPwlayout = () => {
         <Stack spacing={"26px"} w={"340px"} mt={"65px"}>
           <Text>アカウントに登録したメールアドレスを入力してください。</Text>
           <Input
+            type="email"
             variant="white"
             size="md"
             style={{ width: "340px" }}

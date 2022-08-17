@@ -44,6 +44,7 @@ export const LoginLayout = () => {
         </Stack>
         <Stack width="fit-content" spacing="13px" m="13px auto 0">
           <Input
+            type="email"
             variant="white"
             size="md"
             style={{ width: "340px" }}

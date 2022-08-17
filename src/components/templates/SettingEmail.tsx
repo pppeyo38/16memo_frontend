@@ -40,6 +40,7 @@ export const SettingEmail = ({ data }: Props) => {
       <InputArea>
         <InputGroup sx={{ width: "340px" }}>
           <Input
+            type="email"
             value={email}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               changeValue(e.target.value)
