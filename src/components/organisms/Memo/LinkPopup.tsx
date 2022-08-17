@@ -13,6 +13,7 @@ export const LinkPopup = ({ url, isOpenLink, onClose }: Props) => {
       isOpen={isOpenLink}
       onClose={onClose}
       proposalText={"外部サイトに移動しますか？"}
+      subtext={url}
     >
       <LinkButton href={url} target="_blank" rel="noopener noreferrer">
         移動する

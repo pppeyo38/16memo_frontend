@@ -7,6 +7,7 @@ import { HeaderControl } from "../hooks/HeaderControl";
 import { Loading } from "../components/pages/Loading";
 import { Header } from "../components/organisms/Header";
 import { LogoWhite } from "../components/atoms/LogoWhite";
+import { PCMenu } from "../components/organisms/PCMenu";
 
 export const ProtectedRoute: FC = () => {
   const { currentUser } = useAuth();
@@ -33,9 +34,18 @@ export const ProtectedRoute: FC = () => {
         <Loading />
       ) : (
         <>
-          {isDesktop && <LogoWhite />}
-          {isHeader && <Header isDesktop={isDesktop} />}
-          <Outlet />
+          {isDesktop ? (
+            <>
+              <LogoWhite />
+              <PCMenu />
+              <Outlet />
+            </>
+          ) : (
+            <>
+              {isHeader && <Header isDesktop={isDesktop} />}
+              <Outlet />
+            </>
+          )}
         </>
       )}
     </Div100vh>

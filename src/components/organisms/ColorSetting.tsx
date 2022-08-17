@@ -114,7 +114,7 @@ export const ColorSetting: FC<Props> = memo((props) => {
           data={conversionData}
         />
         <Palettes>
-          <ColorPalette color={"#d9d9d9"} />
+          <ColorPalette color={currentColor} />
           <ColorPalette color={colorValues.hex} />
         </Palettes>
         <ColorPicker format={"hex"} value={hex} onChange={handleChange} />
@@ -141,6 +141,10 @@ const SettingModal = styled.section`
   z-index: 100;
   width: 100%;
   background: white;
+
+  ${({ theme }) => theme.media.desktop`
+    width: 600px;
+  `}
 `;
 
 const Head = styled.div`

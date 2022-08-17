@@ -21,4 +21,5 @@ const Button = styled.button`
   font-family: ${(props) => props.theme.fontFamily.Noto};
   font-weight: ${(props) => props.theme.fontWeight.regular};
   color: ${(props) => props.theme.colors.black};
+  background-color: ${(props) => props.theme.colors.lightGray};
 `;

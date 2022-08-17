@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { useSignOut } from "../../hooks/account/useSignOut";
 import { useSignOutPopup } from "../../hooks/popup/useSignOutPopup";
 import { SignOutPopup } from "./Auth/SignOutPopup";
-import { Box, DrawerContent } from "@chakra-ui/react";
 import styled from "styled-components";
+import drawerBg from "../../images/menuDrawerBg.svg";
 
 export const PCMenu = () => {
   const { SignOut } = useSignOut();
@@ -55,7 +55,7 @@ const MenuList = styled.ul`
   height: 100vh;
   margin: 0 auto;
   padding: 139px 0 0 48px;
-  background-image: url(/src/images/menuDrawerBg.svg);
+  background-image: url(${drawerBg});
   background-repeat: no-repeat;
 
   * + * {

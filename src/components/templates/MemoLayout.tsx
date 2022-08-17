@@ -45,6 +45,11 @@ export const MemoLayout: FC<Props> = (props) => {
   const cmyk = setRGBtoCMYK(rgb);
   const hsv = setRGBtoHSV(rgb);
 
+  const brightness = Math.floor(
+    rgb.red * 0.299 + rgb.green * 0.587 + rgb.blue * 0.114
+  );
+  const textColor = brightness >= 140 ? "#161616" : "#FFFFFF";
+
   const backMemosFile = () => {
     if (memoData.getData.uid) {
       navigate(`/${memoContent.fileName}`);
@@ -60,11 +65,11 @@ export const MemoLayout: FC<Props> = (props) => {
   const onCloseLink = () => setIsOpenLink(false);
 
   return (
-    <Display bg={memoContent.colorCode}>
+    <Display textColor={textColor} bg={memoContent.colorCode}>
       <Content>
         <Head>
-          <ReturnArrow onClick={() => backMemosFile()} color={"white"} />
-          {canEdit && <EditButton onClick={handleClick} />}
+          <ReturnArrow onClick={() => backMemosFile()} color={textColor} />
+          {canEdit && <EditButton color={textColor} onClick={handleClick} />}
         </Head>
         <Main>
           <MemoInfo>
@@ -88,10 +93,14 @@ export const MemoLayout: FC<Props> = (props) => {
             </CodeListItem>
           </CodeList>
           <ActionIcons>
-            <CommentIcon onClick={onOpen} color={"white"} />
-            <LinkIcon onClick={() => setIsOpenLink(true)} color={"white"} />
+            {memoContent.comment && (
+              <CommentIcon onClick={onOpen} color={textColor} />
+            )}
+            {memoContent.url && (
+              <LinkIcon onClick={() => setIsOpenLink(true)} color={textColor} />
+            )}
             {canEdit && (
-              <TrashIcon onClick={() => onOpenTrash()} color={"white"} />
+              <TrashIcon onClick={() => onOpenTrash()} color={textColor} />
             )}
           </ActionIcons>
         </Main>
@@ -115,10 +124,11 @@ export const MemoLayout: FC<Props> = (props) => {
   );
 };
 
-const Display = styled.div<{ bg: string }>`
+const Display = styled.div<{ bg: string; textColor: string }>`
   width: 100%;
   height: 100%;
   overflow: hidden;
+  color: ${(props) => props.textColor};
   background-color: ${(props) => `#${props.bg}`};
 
   ${({ theme }) => theme.media.desktop`
@@ -151,14 +161,12 @@ const MemoHeadingWrap = styled.div`
 `;
 
 const MemoHeading = styled.h1`
-  color: ${(props) => props.theme.colors.white};
   font-family: ${(props) => props.theme.fontFamily.Noto};
   font-size: 24px;
   font-weight: ${(props) => props.theme.fontWeight.bold};
 `;
 
 const ColorCode = styled.h1`
-  color: ${(props) => props.theme.colors.white};
   font-family: ${(props) => props.theme.fontFamily.Roboto};
   font-size: 24px;
   font-weight: ${(props) => props.theme.fontWeight.medium};
@@ -166,7 +174,6 @@ const ColorCode = styled.h1`
 
 const CodeList = styled.ul`
   margin-top: 26px;
-  color: ${(props) => props.theme.colors.white};
   font-size: 15px;
   font-family: ${(props) => props.theme.fontFamily.Roboto};
 `;
