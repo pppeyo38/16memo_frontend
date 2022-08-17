@@ -1,4 +1,5 @@
 import type { FC } from "react";
+import { use100vh } from "react-div-100vh";
 import { useSearchMemos } from "../../hooks/memos/useSearchMemos";
 import { ColorThumb } from "../molecules/ColorThumb";
 import styled from "styled-components";
@@ -12,6 +13,8 @@ export const SearchResult: FC<Props> = (props) => {
   const { tagName } = props;
   const { memosData, memosLoading, memosError } = useSearchMemos(tagName);
   const reversedData = memosData.map((_, i, a) => a[a.length - 1 - i]);
+  const height = use100vh();
+  const tabPanelsHeight = height ? `${height * 0.8}px` : "calc(100vh - 190px)";
 
   return (
     <>
@@ -31,7 +34,7 @@ export const SearchResult: FC<Props> = (props) => {
           </Tab>
         </TabList>
 
-        <TabPanels sx={TabPanelsStyle}>
+        <TabPanels sx={{ ...TabPanelsStyle, height: tabPanelsHeight }}>
           <TabPanel sx={TabPanelStyle}>
             {memosData.map((memo, index) => (
               <Wrapper key={index}>
@@ -84,7 +87,6 @@ const TabPanelStyle = {
 
 const TabPanelsStyle = {
   width: "340px",
-  height: "calc(100vh - 190px)",
   overflowY: "scroll",
-  paddingTop: "15px",
+  padding: "15px 0 25px",
 };

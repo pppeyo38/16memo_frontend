@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { use100vh } from "react-div-100vh";
 import { CheckboxGroup, useDisclosure } from "@chakra-ui/react";
 import { memosDataType } from "../../hooks/memos/useGetMemos";
 import { useDestroyMemo } from "../../hooks/memos/useDestroyMemo";
@@ -30,6 +31,7 @@ export const MemosFileLayout: FC<Props> = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isDelete, setIsDelete] = useState(false);
   const [checkedItems, setCheckedItems] = useState<string[]>([]);
+  const height = use100vh();
 
   const onClickCancelButton = () => {
     setIsDelete(!isDelete);
@@ -69,7 +71,9 @@ export const MemosFileLayout: FC<Props> = (props) => {
           <Loading />
         ) : (
           <>
-            <MemosWrap>
+            <MemosWrap
+              height={height ? `${height * 0.8}px` : "calc(100vh - 145px)"}
+            >
               <CheckboxGroup>
                 {memosList &&
                   memosList.memos.map((memo, index) => (
@@ -130,7 +134,7 @@ const ArrowWrap = styled.div`
   margin-bottom: 25px;
 `;
 
-const MemosWrap = styled.div`
+const MemosWrap = styled.div<{ height: string }>`
   width: 400px;
   height: calc(100vh - 145px);
   margin-top: 15px;

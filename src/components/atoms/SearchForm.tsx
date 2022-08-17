@@ -63,7 +63,7 @@ const SearchIcon = styled.div`
 const SearchInputForm = styled.input`
   width: 100%;
   height: 100%;
-  padding: 8px 18px 8px 37px;
+  padding: 7px 18px 8px 37px;
   color: ${(props) => props.theme.colors.black};
   background-color: ${(props) => props.theme.colors.white};
   font-family: ${(props) => props.theme.fontFamily.Noto};
