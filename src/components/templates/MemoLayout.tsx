@@ -93,8 +93,12 @@ export const MemoLayout: FC<Props> = (props) => {
             </CodeListItem>
           </CodeList>
           <ActionIcons>
-            <CommentIcon onClick={onOpen} color={textColor} />
-            <LinkIcon onClick={() => setIsOpenLink(true)} color={textColor} />
+            {memoContent.comment && (
+              <CommentIcon onClick={onOpen} color={textColor} />
+            )}
+            {memoContent.url && (
+              <LinkIcon onClick={() => setIsOpenLink(true)} color={textColor} />
+            )}
             {canEdit && (
               <TrashIcon onClick={() => onOpenTrash()} color={textColor} />
             )}

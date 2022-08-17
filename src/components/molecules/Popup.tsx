@@ -51,6 +51,9 @@ const TxtWrapper = styled.div`
     font-weight: ${(props) => props.theme.fontWeight.medium};
   }
   span {
+    display: block;
+    text-align: center;
+    width: 230px;
     margin-top: 5px;
     font-size: 12px;
   }
