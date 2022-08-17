@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { SearchForm } from "../atoms/SearchForm";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
+import { TwitterShare } from "../atoms/Icon/TwitterShare";
 import { SearchResult } from "../organisms/SearchResult";
-import shareIcon from "../../images/shareIcon.svg";
-import { TwitterShareButton, TwitterIcon } from "react-share";
 
 type Props = {
   isResult: boolean;
@@ -32,7 +31,10 @@ export const SearchLayout: FC<Props> = (props) => {
             <ReturnArrow onClick={() => onBack()} color={"#161616"} />
           )}
         </Head>
-        <Title>{isResult ? `#${searchTag}` : "検索"}</Title>
+        <Title>
+          {isResult ? `#${searchTag}` : "検索"}
+          {isResult && <TwitterShare tagName={searchTag} />}
+        </Title>
         {!isResult ? (
           <SearchForm
             searchTag={searchTag}
@@ -68,6 +70,8 @@ const Head = styled.div`
 const Title = styled.h1`
   width: 340px;
   margin-bottom: 13px;
+  display: flex;
+  justify-content: space-between;
   color: ${(props) => props.theme.colors.black};
   font-family: ${(props) => props.theme.fontFamily.Noto};
   font-size: 24px;
