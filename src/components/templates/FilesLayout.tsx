@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import { use100vh } from "react-div-100vh";
 import { filesDataType } from "../../hooks/files/useGetFiles";
 import { useDestroyFiles } from "../../hooks/files/useDestroyFiles";
 import { useTrash } from "../../hooks/popup/useTrash";
@@ -26,6 +27,7 @@ export const FilesLayout: FC<Props> = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isDelete, setIsDelete] = useState(false);
   const [checkedItems, setCheckedItems] = useState<string[]>([]);
+  const height = use100vh();
 
   const onClickCancelButton = () => {
     setIsDelete(!isDelete);
@@ -58,7 +60,9 @@ export const FilesLayout: FC<Props> = (props) => {
       {filesData.loading ? (
         <Loading />
       ) : (
-        <FilesWrap>
+        <FilesWrap
+          height={height ? `${height * 0.8}px` : "calc(100vh - 145px)"}
+        >
           <CheckboxGroup value={checkedItems}>
             {filesList &&
               filesList.map((file, index) => (
@@ -114,9 +118,10 @@ const Head = styled.div`
   justify-content: space-between;
 `;
 
-const FilesWrap = styled.div`
+const FilesWrap = styled.div<{ height: string }>`
   width: 400px;
-  height: calc(100vh - 145px);
+  /* height: calc(100vh - 145px); */
+  height: ${(props) => props.height};
   margin-top: 15px;
   padding-bottom: 20px;
   display: flex;
