@@ -4,6 +4,7 @@ import { use100vh } from "react-div-100vh";
 import { Memo } from "../../types/memo";
 import { usePostMemos } from "../../hooks/memos/usePostMemo";
 import { usePutMemo } from "../../hooks/memos/usePutMemo";
+import { useHexToRgb } from "../../hooks/color/useHexToRgb";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { ColorSetting } from "../organisms/ColorSetting";
 import { MemoForm } from "../organisms/Memo/MemoForm";
@@ -25,6 +26,15 @@ export const MemoCreateLayout: FC<Props> = (props) => {
 
   const [fileError, setFileError] = useState<boolean>(false);
   const [tagError, setTagError] = useState<boolean>(false);
+
+  const { setHextoRGB } = useHexToRgb();
+  const rgb = setHextoRGB(newMemo.colorCode);
+  const brightness = Math.floor(
+    rgb.red * 0.299 + rgb.green * 0.587 + rgb.blue * 0.114
+  );
+  const textColor = brightness >= 140 ? "#161616" : "#FFFFFF";
+  const subTextColor =
+    brightness >= 140 ? "rgba(64, 63, 63, 0.5)" : "rgba(214, 214, 214, 0.5)";
 
   const onCheckBlank = () => {
     newMemo.tagName.length === 0 && setTagError(true);
@@ -51,8 +61,8 @@ export const MemoCreateLayout: FC<Props> = (props) => {
           </CompleteButton>
         </Head>
         <Color bg={newMemo.colorCode} onClick={() => setOpenedModal(true)}>
-          <ColorEdit>色を編集</ColorEdit>
-          <ColorCode># {newMemo.colorCode}</ColorCode>
+          <ColorEdit textColor={textColor}>色を編集</ColorEdit>
+          <ColorCode textColor={subTextColor}>#{newMemo.colorCode}</ColorCode>
         </Color>
         <MemoForm
           newMemo={newMemo}
@@ -114,18 +124,19 @@ const Color = styled.div<{ bg: string }>`
   `}
 `;
 
-const ColorEdit = styled.h1`
+const ColorEdit = styled.h1<{ textColor: string }>`
   line-height: 1.45;
-  color: ${(props) => props.theme.colors.white};
+  margin-bottom: 2px;
+  color: ${(props) => props.textColor};
   font-family: ${(props) => props.theme.fontFamily.Noto};
   font-weight: ${(props) => props.theme.fontWeight.bold};
   font-size: 24px;
 `;
 
-const ColorCode = styled.h2`
+const ColorCode = styled.h2<{ textColor: string }>`
   line-height: 1.18;
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.textColor};
   font-family: ${(props) => props.theme.fontFamily.Roboto};
-  font-weight: ${(props) => props.theme.fontWeight.medium};
+  font-weight: ${(props) => props.theme.fontWeight.regular};
   font-size: 16px;
 `;
