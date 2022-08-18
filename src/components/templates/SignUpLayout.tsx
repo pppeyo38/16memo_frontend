@@ -16,6 +16,7 @@ const initialData: Data = {
 export const SignUpLayout = () => {
   const { signup } = useSignUp();
   const [data, setData] = useState<Data>(initialData);
+  const [error, setError] = useState<string>("");
   const navigate = useNavigate();
 
   const onChangeData = (type: string, data: string) => {
@@ -32,7 +33,12 @@ export const SignUpLayout = () => {
           <IromemoIcon />
           <Heading>アカウントを作成</Heading>
         </Stack>
-        <Stack width="fit-content" spacing="13px" m="13px auto 0">
+        <Stack
+          width="fit-content"
+          spacing="13px"
+          m="13px auto 0"
+          position="relative"
+        >
           <Input
             type="email"
             variant="white"
@@ -66,9 +72,15 @@ export const SignUpLayout = () => {
               onChangeData("nickname", e.target.value);
             }}
           />
+          {error.length !== 0 && <ErrorMessage>{error}</ErrorMessage>}
         </Stack>
-        <Stack spacing="13px" alignItems="center" mt="26px">
-          <PrimaryButton disabled={false} onClick={() => signup(data)}>
+        <Stack spacing="13px" alignItems="center" mt="42px">
+          <PrimaryButton
+            disabled={
+              data.email === "" || data.password === "" || data.nickname === ""
+            }
+            onClick={() => signup(data, setError)}
+          >
             アカウントを作成
           </PrimaryButton>
           <StrokeButton onClick={() => navigate("/login")}>
@@ -106,6 +118,13 @@ const GridStyle = styled.section`
 
 const Container = styled.section`
   margin-top: 70px;
+`;
+
+const ErrorMessage = styled.p`
+  position: absolute;
+  bottom: -24px;
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.red};
 `;
 
 const Heading = styled.h1`
