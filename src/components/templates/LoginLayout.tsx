@@ -20,6 +20,7 @@ const initialData: Data = {
 export const LoginLayout = () => {
   const { login } = useLogin();
   const [data, setData] = useState<Data>(initialData);
+  const [error, setError] = useState<string>("");
   const navigate = useNavigate();
 
   const onChangeMail = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +34,7 @@ export const LoginLayout = () => {
   };
 
   const onClickLogin = () => {
-    login(data);
+    login(data, setError);
   };
 
   return (
@@ -66,7 +67,7 @@ export const LoginLayout = () => {
             value={data.password}
             onChange={onChangePw}
           />
-          <ErrorMessage>エラー</ErrorMessage>
+          {error.length !== 0 && <ErrorMessage>{error}</ErrorMessage>}
         </Stack>
         <Stack spacing="13px" alignItems="center" mt="42px">
           <PrimaryButton
