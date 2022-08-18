@@ -58,7 +58,7 @@ const CloseButton = styled.button`
   span {
     display: block;
     width: 26px;
-    height: 1px;
+    height: 1.5px;
     border-radius: 50%;
     background-color: ${(props) => props.theme.colors.black};
 
