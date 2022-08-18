@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { use100vh } from "react-div-100vh";
 import { usePostFile } from "../../hooks/files/usePostFIle";
 import { ReturnArrow } from "../atoms/Icon/ReturnArrow";
 import { Input } from "@chakra-ui/react";
@@ -9,19 +10,21 @@ export const FileAddLayout: FC = () => {
   const navigate = useNavigate();
   const { SendPostFile } = usePostFile();
   const [newFileName, setNewFileName] = useState<string>("");
+  const height = use100vh();
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewFileName(e.target.value);
   };
 
   return (
-    <Content>
+    <Content height={height ? `${height}px` : "100vh"}>
       <Inner>
         <FormHead>
           <ReturnArrow onClick={() => navigate("/")} color={"#161616"} />
         </FormHead>
         <Form>
           <Input
+            w="340px"
             variant="filled"
             placeholder="ファイル名を入力"
             bg={"white"}
@@ -37,15 +40,15 @@ export const FileAddLayout: FC = () => {
   );
 };
 
-const Content = styled.div`
-  height: 100vh;
+const Content = styled.div<{ height: string }>`
+  height: ${(props) => props.height};
   position: relative;
   background: ${(props) => props.theme.colors.white};
 `;
 
 const Inner = styled.div`
-  width: 100vw;
-  height: 98vh;
+  width: 100%;
+  height: 98%;
   position: absolute;
   bottom: 0;
   padding: 25px 25px 100px;
