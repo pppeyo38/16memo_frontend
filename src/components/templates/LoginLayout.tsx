@@ -42,7 +42,12 @@ export const LoginLayout = () => {
         <Stack alignItems="center" mb="39px">
           <IromemoIcon />
         </Stack>
-        <Stack width="fit-content" spacing="13px" m="13px auto 0">
+        <Stack
+          width="fit-content"
+          spacing="13px"
+          m="13px auto 0"
+          position="relative"
+        >
           <Input
             type="email"
             variant="white"
@@ -61,11 +66,9 @@ export const LoginLayout = () => {
             value={data.password}
             onChange={onChangePw}
           />
-          <InputHelper to={"/password_reset"}>
-            パスワードを忘れた方はこちら
-          </InputHelper>
+          <ErrorMessage>エラー</ErrorMessage>
         </Stack>
-        <Stack spacing="13px" alignItems="center" mt="26px">
+        <Stack spacing="13px" alignItems="center" mt="42px">
           <PrimaryButton
             onClick={onClickLogin}
             disabled={data.email === "" || data.password === ""}
@@ -75,6 +78,9 @@ export const LoginLayout = () => {
           <StrokeButton onClick={() => navigate("/signup")}>
             アカウントを作成
           </StrokeButton>
+          <InputHelper to={"/password_reset"}>
+            パスワードを忘れた方はこちら
+          </InputHelper>
         </Stack>
       </Container>
     </GridStyle>
@@ -107,6 +113,13 @@ const GridStyle = styled.section`
 
 const Container = styled.section`
   margin-top: 70px;
+`;
+
+const ErrorMessage = styled.p`
+  position: absolute;
+  bottom: -24px;
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.red};
 `;
 
 const InputHelper = styled(Link)`

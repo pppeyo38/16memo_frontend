@@ -1,6 +1,7 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../FirebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 
 type Data = {
   email: string;
@@ -9,6 +10,7 @@ type Data = {
 
 export const useLogin = () => {
   const navigate = useNavigate();
+  const [error, setError] = useState<string>("");
 
   const login = (data: Data) => {
     signInWithEmailAndPassword(auth, data.email, data.password)
@@ -16,7 +18,8 @@ export const useLogin = () => {
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        setError(error.code);
+        return error;
       });
   };
 
