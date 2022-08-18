@@ -50,14 +50,6 @@ export const MemoLayout: FC<Props> = (props) => {
   );
   const textColor = brightness >= 140 ? "#161616" : "#FFFFFF";
 
-  const backMemosFile = () => {
-    if (memoData.getData.uid) {
-      navigate(`/${memoContent.fileName}`);
-    } else {
-      navigate("/");
-    }
-  };
-
   const handleClick = () => {
     navigate(`/memo/${memoContent.id}/edit`);
   };
@@ -68,7 +60,7 @@ export const MemoLayout: FC<Props> = (props) => {
     <Display textColor={textColor} bg={memoContent.colorCode}>
       <Content>
         <Head>
-          <ReturnArrow onClick={() => backMemosFile()} color={textColor} />
+          <ReturnArrow onClick={() => navigate(-1)} color={textColor} />
           {canEdit && <EditButton color={textColor} onClick={handleClick} />}
         </Head>
         <Main>
