@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
+import { useHexToRgb } from "../../hooks/color/useHexToRgb";
 import { MemoType } from "../../hooks/memos/useSearchMemos";
 import styled from "styled-components";
 
@@ -11,13 +12,22 @@ type Props = {
 
 export const ColorThumb: FC<Props> = (props) => {
   const { memoId, content, canEdit } = props;
+  const { setHextoRGB } = useHexToRgb();
+  const rgb = setHextoRGB(content.colorCode);
+
+  const brightness = Math.floor(
+    rgb.red * 0.299 + rgb.green * 0.587 + rgb.blue * 0.114
+  );
+  const textColor = brightness >= 140 ? "#161616" : "#FFFFFF";
 
   return (
     <StyledMemoWrapper
       to={`/memo/${memoId}`}
       state={{ state: content, editMode: canEdit }}
     >
-      <StyledMemo bg={content.colorCode}># {content.colorCode}</StyledMemo>
+      <StyledMemo bg={content.colorCode} text={textColor}>
+        # {content.colorCode}
+      </StyledMemo>
     </StyledMemoWrapper>
   );
 };
@@ -26,13 +36,14 @@ const StyledMemoWrapper = styled(Link)`
   display: inline-block;
   width: 165px;
 `;
-const StyledMemo = styled.div<{ bg: string }>`
+
+const StyledMemo = styled.div<{ bg: string; text: string }>`
   display: flex;
   align-items: center;
   width: 100%;
   height: 60px;
   background-color: ${(props) => `#${props.bg}`};
-  color: ${(props) => props.theme.colors.black};
+  color: ${(props) => props.text};
   padding-left: 13px;
   font-family: ${(props) => props.theme.fontFamily.Noto};
   font-size: 16px;

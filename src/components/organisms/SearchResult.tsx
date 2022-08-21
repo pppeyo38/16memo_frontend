@@ -88,5 +88,5 @@ const TabPanelStyle = {
 const TabPanelsStyle = {
   width: "340px",
   overflowY: "scroll",
-  padding: "15px 0 25px",
+  padding: "15px 0 30px",
 };
