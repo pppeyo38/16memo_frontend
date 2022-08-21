@@ -67,7 +67,7 @@ export const MemoLayout: FC<Props> = (props) => {
           <MemoInfo>
             <MemoHeadingWrap>
               <MemoHeading># {memoContent.tagName}</MemoHeading>
-              <ColorCode># {memoContent.colorCode}</ColorCode>
+              <ColorCode># {memoContent.colorCode.toUpperCase()}</ColorCode>
             </MemoHeadingWrap>
           </MemoInfo>
           <CodeList>

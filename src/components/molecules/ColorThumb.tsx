@@ -26,7 +26,7 @@ export const ColorThumb: FC<Props> = (props) => {
       state={{ state: content, editMode: canEdit }}
     >
       <StyledMemo bg={content.colorCode} text={textColor}>
-        # {content.colorCode}
+        # {content.colorCode.toUpperCase()}
       </StyledMemo>
     </StyledMemoWrapper>
   );
@@ -45,7 +45,7 @@ const StyledMemo = styled.div<{ bg: string; text: string }>`
   background-color: ${(props) => `#${props.bg}`};
   color: ${(props) => props.text};
   padding-left: 13px;
-  font-family: ${(props) => props.theme.fontFamily.Noto};
+  font-family: ${(props) => props.theme.fontFamily.Roboto};
   font-size: 16px;
   font-weight: ${(props) => props.theme.fontWeight.regular};
   border-bottom-right-radius: 13px;

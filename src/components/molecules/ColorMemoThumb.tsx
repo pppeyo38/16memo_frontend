@@ -25,7 +25,7 @@ export const ColorMemoThumb: FC<Props> = (props) => {
               <span>#</span>
               {content.tagName}
             </h2>
-            <p>#{content.colorCode}</p>
+            <p>#{content.colorCode.toUpperCase()}</p>
           </WhiteBox>
         </ColorCodeBox>
       </MemoThumb>

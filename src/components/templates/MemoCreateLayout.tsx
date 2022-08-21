@@ -62,7 +62,9 @@ export const MemoCreateLayout: FC<Props> = (props) => {
         </Head>
         <Color bg={newMemo.colorCode} onClick={() => setOpenedModal(true)}>
           <ColorEdit textColor={textColor}>色を編集</ColorEdit>
-          <ColorCode textColor={subTextColor}>#{newMemo.colorCode}</ColorCode>
+          <ColorCode textColor={subTextColor}>
+            #{newMemo.colorCode.toUpperCase()}
+          </ColorCode>
         </Color>
         <MemoForm
           newMemo={newMemo}
