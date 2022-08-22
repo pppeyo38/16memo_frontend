@@ -24,7 +24,7 @@ export const usePutMemo = () => {
     };
     console.log(sendData);
     await client.put(`memos/${id}`, sendData).then(() => {
-      navigate(`/memo/${id}`);
+      navigate(`/memo/${id}`, { replace: true });
     });
   };
 

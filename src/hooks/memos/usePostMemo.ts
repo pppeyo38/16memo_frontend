@@ -22,7 +22,7 @@ export const usePostMemos = () => {
     };
     console.log(sendData);
     await client.post("memos", sendData).then((response) => {
-      navigate(`/memo/${response.data.id}`);
+      navigate(`/memo/${response.data.id}`, { replace: true });
     });
   };
 
